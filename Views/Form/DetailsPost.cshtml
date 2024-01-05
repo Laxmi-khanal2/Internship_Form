@@ -1,0 +1,31 @@
+﻿@using InternshipForm.ViewModel
+@model InternshipFormViewModel
+
+<h3> Internship Form</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        @Html.LabelFor(x => x.OfficalUse.Internship_For, new { @class = "" })
+
+        @Html.TextBoxFor(x => x.OfficalUse.Internship_For, new { @class = "form-control" })
+        <!-- Add any additional Bootstrap styling or validation messages here -->
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(x => x.OfficalUse.Intern_Id, new { @class = "" })
+
+
+        @Html.TextBoxFor(x => x.OfficalUse.Intern_Id, new { @class = "form-control" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(x => x.OfficalUse.Duration_of_Internship, new { @class="" })
+
+
+        @Html.TextBoxFor(x => x.OfficalUse.Duration_of_Internship, new { @class = "form-control", type = "" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(x=>x.OfficalUse.Authorized_Signature)
+        @Html.TextBoxFor(x=>x.OfficalUse.Authorized_Signature, new { @class = "form-control"})
+    </div>
+</div>
+                <
