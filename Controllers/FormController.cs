@@ -76,6 +76,8 @@ namespace InternshipForm.Controllers
             model.References.Phone = 98235696;
             model.References.Signature = "Texas College";
 
+            model.certiLice = new CertiLice();
+            model.certiLice.certilice = "";
 
 
             return View(model);

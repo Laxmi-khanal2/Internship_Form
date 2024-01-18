@@ -1,31 +1,208 @@
 ﻿@using InternshipForm.ViewModel
 @model InternshipFormViewModel
 
-<h3> Internship Form</h3>
+<style>
 
-<div class="row">
-    <div class="col-md-6">
-        @Html.LabelFor(x => x.OfficalUse.Internship_For, new { @class = "" })
+    .dotunderline {
+        border-style: none;
+        background-color: white;
+        border-bottom: 1px dashed #000;
+        /* max-width:max-content; */
+        width: 100px;
+        display: inline-block;
+    }
 
-        @Html.TextBoxFor(x => x.OfficalUse.Internship_For, new { @class = "form-control" })
-        <!-- Add any additional Bootstrap styling or validation messages here -->
-    </div>
-    <div class="col-md-6">
-        @Html.LabelFor(x => x.OfficalUse.Intern_Id, new { @class = "" })
+    .MainHeading {
+        background-color: black !important;
+        color: white !important;
+    }
+</style>
+<br />
+<h3 class=" text-center"> Internship Form</h3>
+<br />
+
+@* <form action=""> *@
+
+<button class="float-end MainHeading" >
+    <strong> Official Use </strong>
+    </button>
+<table style="width:100%" class="table table-hover table-bordered">
+   
+    <tr>
+        <td>@Html.LabelFor(x => x.OfficalUse.Internship_For, new { @class = "" })</td>
+        <td> <span class="dotunderline">@Model.OfficalUse.Internship_For</span></td>
+        <td>
+            @Html.LabelFor(x => x.OfficalUse.Intern_Id, new { @class = "" })
+        </td>
+        <td><span class="dotunderline">@Model.OfficalUse.Intern_Id</span></td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(x => x.OfficalUse.Duration_of_Internship, new { @class="" })</td>
+        <td>  <span class="dotunderline">@Model.OfficalUse.Duration_of_Internship</span> </td>
+        <td>
+            @Html.LabelFor(x=>x.OfficalUse.Authorized_Signature)
+        </td>
+        <td><span class="dotunderline">@Model.OfficalUse.Authorized_Signature</span></td>
 
 
-        @Html.TextBoxFor(x => x.OfficalUse.Intern_Id, new { @class = "form-control" })
-    </div>
+    </tr>
+</table>
+<div class="container">
+    <table style="width:100%"  class="table " >
 
-    <div class="col-md-6">
-        @Html.LabelFor(x => x.OfficalUse.Duration_of_Internship, new { @class="" })
 
 
-        @Html.TextBoxFor(x => x.OfficalUse.Duration_of_Internship, new { @class = "form-control", type = "" })
-    </div>
-    <div class="col-md-6">
-        @Html.LabelFor(x=>x.OfficalUse.Authorized_Signature)
-        @Html.TextBoxFor(x=>x.OfficalUse.Authorized_Signature, new { @class = "form-control"})
-    </div>
+
+
+        <tr>
+            <th class="MainHeading" colspan="6"> Personal Information </th>
+
+        </tr>
+        <tr>
+            <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.FirstName </span> <br />  @Html.LabelFor(x=>x.PersonalInformation.FirstName)</td>
+            <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.MiddleName </span> <br />  @Html.LabelFor(x=>x.PersonalInformation.MiddleName)</td>
+            <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+
+        </tr>
+
+        <tr>
+            <td> <span class="dotunderline">@Model.PersonalInformation.ProvienceId </span> <br />  @Html.LabelFor(x=>x.PersonalInformation.ProvienceId)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.DistrictId </span> <br />  @Html.LabelFor(x=>x.PersonalInformation.DistrictId)</td>
+            <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.MuniId</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.MuniId)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.Tole</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.Tole)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.Ward</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.Ward)</td>
+
+
+        </tr>
+        <tr>
+
+            <td>@Html.LabelFor(x=>x.PersonalInformation.HomePhoneNumber)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.HomePhoneNumber </span>
+
+            <td>@Html.LabelFor(x=>x.PersonalInformation.Mobile)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.Mobile </span>
+
+            <td>@Html.LabelFor(x=>x.PersonalInformation.CitizenshipNo)</td>
+            <td>
+                <span class="dotunderline">@Model.PersonalInformation.CitizenshipNo</span>
+                        @*  <td> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+                <td> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+                <td> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+                *@
+        </tr>
+        <tr>
+            <td> @Html.LabelFor(x=>x.PersonalInformation.Email)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.Email </span></td>
+            <td>  @Html.LabelFor(x=>x.PersonalInformation.HasLicence)</td>
+            <td> <span class="dotunderline">@Model.PersonalInformation.HasLicence </span> </td>
+            @*  <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+            <td colspan="2"> <span class="dotunderline">@Model.PersonalInformation.LastName</span> <br />  @Html.LabelFor(x=>x.PersonalInformation.LastName)</td>
+            *@
+        </tr>
+
+
+    </table>
 </div>
-                <
+<br/>
+
+<table style="width:100%" class="table table-bordered">
+    <tr>
+        <th class="MainHeading" colspan="6"> Education </th>
+
+    </tr>
+    <tr>
+
+        <th colspan="2"> @Html.Label("School/CollegeName")</th>
+
+        <th>@Html.Label("Location") </th>
+        <th>@Html.Label("StartYear") </th>
+        <th>@Html.Label("CompletionYear")</th>
+        <th>@Html.Label("Major")</th>
+
+    </tr>
+    @for (int i = 0; i < Model.Education.Count; i++)
+    {
+
+
+        <tr>
+            <td colspan="2"> <span> @Model.Education[i].School_CollegeName </span> </td>
+            <td> <span> @Model.Education[i].Location </span></td>
+            <td> <span> @Model.Education[i].StartYear </span></td>
+            <td> <span> @Model.Education[i].CompletionYear </span></td>
+            <td> <span> @Model.Education[i].Major    </span></td>
+
+            
+        </tr>
+    }
+
+   
+</table>
+
+<table>
+    <tr>
+        <td> @Html.LabelFor(x=>x.certiLice.certilice)</td>  <td> <span class="dotunderline"> @Model.certiLice.certilice</span></></td>
+    </tr>
+</table>
+
+<br/>
+<table style="width:100%" class="table table-bordered">
+    <tr>
+        <th class="MainHeading" colspan="6"> Guardian Details </th>
+
+    </tr>
+    <tr>
+        <th colspan="2">@Html.Label("Name") </th>
+        <th>@Html.Label("Relation") </th>
+        <th>@Html.Label("Address") </th>
+        <th>@Html.Label("Phone No")</th>
+        <th>@Html.Label("Signature")</th>
+
+    </tr>
+    <tr>
+        <td colspan="2"> <span>@Model.GuardianDetails.Name </span></td>
+        <td> <span>@Model.GuardianDetails.Relation </span></td>
+        <td> <span>@Model.GuardianDetails.Address</span></td>
+        <td> <span>@Model.GuardianDetails.PhoneNumber  </span></td>
+        <td> <span> @Model.GuardianDetails.Signature </span></td>
+    </tr>
+</table>
+
+<table style="width:100%" class="table table-bordered">
+    <tr> <th  colspan="6" class="MainHeading">  REFERENCES</th></tr>
+
+    <tr>
+        <th>@Html.Label("Name") </th>
+        <th>@Html.Label("Position") </th>
+        <th colspan="2">@Html.Label("College/Company") </th>
+        <th>@Html.Label("Phone ")</th>
+        <th>@Html.Label("Signature")</th>
+
+    </tr>
+
+    <tr>
+        <td> <span>@Model.References.Name </span></td>
+        <td> <span>@Model.References.Positions </span></td>
+        <td colspan="2"> <span>@Model.References.College_Company </span></td>
+        <td> <span>@Model.References.Phone </span></td>
+        <td> <span>@Model.References.Signature </span></td>
+    </tr>
+</table>
+<div>
+    <p> I hereby declare that all the information provided in this internship application form is true, accurate,and complete to the best of my knowledge and belif. I will fully obey the rules and regulation of the company and i understand that any false or misleading information provided may result in the rejection of my application or termination of my internship. </p>
+
+</div>
+<br/>
+
+    <div class="row justify-content-between">
+        <div class="col-md-10">
+            <input type="text" /><br />
+            <label class="">Intern Signature</label>
+        </div>
+
+        <div class="col-md-2">
+            <label for="avatar">Profile picture:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+        </div>
+    </div>
+
+
