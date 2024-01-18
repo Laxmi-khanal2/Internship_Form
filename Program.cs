@@ -8,6 +8,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer());
 var app = builder.Build();
 
+
+//var builder = WebApplication.CreateBuilder(args);
+
+//builder.Services.AddDbContext<ApplicationDBContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

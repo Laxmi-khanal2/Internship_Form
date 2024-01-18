@@ -11,6 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.3.2" />
+    <PackageReference Include="jQuery" Version="3.7.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
       <PrivateAssets>all</PrivateAssets>
