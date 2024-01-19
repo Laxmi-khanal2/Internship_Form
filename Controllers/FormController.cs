@@ -1,7 +1,9 @@
-﻿using InternshipForm.Data;
+﻿using Azure.Core;
+using InternshipForm.Data;
 using InternshipForm.Models;
 using InternshipForm.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace InternshipForm.Controllers
 {
@@ -24,6 +26,14 @@ namespace InternshipForm.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult CreatePost(InternshipFormViewModel model)
+        {
+            //InternshipFormViewModel model = new InternshipFormViewModel();
+            //model.Education = new List<Education> { new Education() };
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult DetailsPost()
         {
@@ -34,7 +44,7 @@ namespace InternshipForm.Controllers
             model.OfficalUse.Intern_Id = 0;
             model.OfficalUse.Duration_of_Internship = " 3 Months";
             model.OfficalUse.Authorized_Signature = "";
-          
+
 
 
             model.PersonalInformation = new PersonalInformation();
@@ -50,7 +60,7 @@ namespace InternshipForm.Controllers
             model.PersonalInformation.Mobile = 982287564;
             model.PersonalInformation.CitizenshipNo = "abc";
             model.PersonalInformation.HasLicence = false;
-            
+
 
 
             model.Education = new List<Education>
@@ -60,7 +70,7 @@ namespace InternshipForm.Controllers
 
 
             };
-            model.GuardianDetails=new GuardianDetails();
+            model.GuardianDetails = new GuardianDetails();
 
             model.GuardianDetails.Name = "Bhuwan Khanal";
             model.GuardianDetails.Relation = "Father";
@@ -82,37 +92,60 @@ namespace InternshipForm.Controllers
 
             return View(model);
         }
-
-
+        
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CreatePost(InternshipFormViewModel model)
+
+        //public IActionResult CreatePost(OfficalUse o)
         //{
-        //    if (ModelState.IsValid)
+        //    if (Request.HttpMethod == "POST")
         //    {
-        //       var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
-        //        _context.SaveChanges();
-        //    //    var PersonalId = personalInfo.Entity.Id;
-        //    //    model.Education.PersonalID = PersonalId;
-        //    //    model.GuardianDetails.PersonalID = PersonalId;
-        //    //    model.References.PersonalID = PersonalId;
-        //    //    SaveEducation(model.Education);
+        //        OfficalUse or = new OfficalUse();
+        //        using (SqlCommand con = new SqlCommand(" Server=DESKTOP-UH9VVUU\\SQLEXPRESS;Database=Registrationform ; TrustServerCertificate= True; integrated Security=True"))
+        //        {
+        //            using (SqlCommand cmd = new SqlCommand("stored procedure of official use ", con))
+        //            {
+        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("", o.Internship_For);
+        //                cmd.Parameters.AddWithValue("", o.Intern_Id);
+        //                cmd.Parameters.AddWithValue("", o.)
+
+
+
+        //            }
+        //        }
+        //        return View();
         //    }
-        //    return View(model);
-        //}
 
-        //private Education SaveEducation(Education model)
-        //{
-        //    _context.Education.Add(model);
-        //    _context.SaveChanges();
-        //    return model;
-        //}
-        //private Education SaveGuardian(Education model)
-        //{
-        //    _context.Education.Add(model);
-        //    _context.SaveChanges();
-        //    return model;
-        //}
+
+            //[HttpPost]
+            //[ValidateAntiForgeryToken]
+            //public IActionResult CreatePost(InternshipFormViewModel model)
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //       var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
+            //        _context.SaveChanges();
+            //    //    var PersonalId = personalInfo.Entity.Id;
+            //    //    model.Education.PersonalID = PersonalId;
+            //    //    model.GuardianDetails.PersonalID = PersonalId;
+            //    //    model.References.PersonalID = PersonalId;
+            //    //    SaveEducation(model.Education);
+            //    }
+            //    return View(model);
+            //}
+
+            //private Education SaveEducation(Education model)
+            //{
+            //    _context.Education.Add(model);
+            //    _context.SaveChanges();
+            //    return model;
+            //}
+            //private Education SaveGuardian(Education model)
+            //{
+            //    _context.Education.Add(model);
+            //    _context.SaveChanges();
+            //    return model;
+            //}
+        }
+
     }
-
-}
