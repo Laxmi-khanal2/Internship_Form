@@ -1,5 +1,4 @@
-﻿
-@model PersonalInformation
+﻿@model PersonalInformation
 @{
     ViewData["Title"] = "PersonalInformations";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
@@ -7,7 +6,7 @@
 
 <style>
     .MainHeading {
-        background-color:cornflowerblue !important;
+        background-color: cornflowerblue !important;
         color: white !important;
     }
 
@@ -17,126 +16,157 @@
         margin-left: 1rem;
     }
 
-    .text-red{
-        color:red;
+    .text-red {
+        color: red;
+    }
+    .card {
+        box-shadow: 5 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 60%;
     }
 </style>
-<form id="form1">   
-<table style="width:100%" class="table table-hover">
+<body>
+<div class="card">
 
-    <tr>
-        <th class="MainHeading" colspan="6"> Personal Information </th>
+<form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
+    <table style="width:100%" class="table table-hover">
 
-    </tr>
-</table>
-<div class="row">
-    <div class="col-md-4">
-        @Html.LabelFor(x => x.FirstName)
-        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.FirstName,"" ,new{@class= "text-red"})
-    </div>
+        <tr>
+            <th class="MainHeading" colspan="6"> Personal Information </th>
 
-    <div class="col-md-4">
-        @Html.LabelFor(X => X.MiddleName)
-        @Html.TextBoxFor(x => x.MiddleName,new { @class = "form-control" })
-    </div>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-md-4" >
+            @Html.LabelFor(x => x.FirstName)
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-red" })
+        </div>
 
-
-    <div class="col-md-4">
-        @Html.LabelFor(X => X.LastName)
-        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", type = "string" })
-    </div>
-
-    <br />
+        <div class="col-md-4" id="mn1">
+            @Html.LabelFor(X => X.MiddleName)
+            @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control" })
+        </div>
 
 
-    <div class="col-md-2">
-        @Html.LabelFor(X => X.ProvienceId)
-        @Html.TextBoxFor(x => x.ProvienceId, new { @class = "form-control", type = "string" })
-    </div>
+        <div class="col-md-4" id="ln1">
+            @Html.LabelFor(X => X.LastName)
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-red" })
+        </div>
 
-
-    <div class="col-md-3">
-        @Html.LabelFor(X => X.DistrictId)
-        @Html.TextBoxFor(x => x.DistrictId, new { @class = "form-control", type = "string" })
-    </div>
-    <div class="col-md-3">
-        @Html.LabelFor(X => X.MuniId)
-        @Html.TextBoxFor(x => x.MuniId, new { @class = "form-control", type = "" })
-    </div>
-    <div class="col-md-2">
-        @Html.LabelFor(X => X.Tole)
-        @Html.TextBoxFor(x => x.Tole, new { @class = "form-control" })
-    </div>
-    <div class="col-md-2">
-        @Html.LabelFor(X => X.Ward)
-        @Html.TextBoxFor(x => x.Ward, new { @class = "form-control", type = "number" })
-    </div>
-    <br />
-
-    <div class="col-md-4">
-
-        @Html.LabelFor(X => X.HomePhoneNumber)
-        @Html.TextBoxFor(x => x.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
-    </div>
-
-    <div class="col-md-4">
-        @Html.LabelFor(X => X.Mobile)
-        @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
-    </div>
-
-    <div class="col-md-4">
-
-        @Html.LabelFor(X => X.CitizenshipNo)
-        @Html.TextBoxFor(x => x.CitizenshipNo, new { @class = "form-control" })
-    </div>
-    <br />
-
-
-    <div class="col-md-6">
-        @Html.LabelFor(X => X.Email)
-        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Enter your Email" })
-    </div>
-
-    <div class="col-md-6">
         <br />
-        @Html.LabelFor(X => X.HasLicence)
-        @Html.CheckBoxFor(x => x.HasLicence, new { @class = "form-check-input" })
+
+
+        <div class="col-md-2" id="provience1">
+            @Html.LabelFor(X => X.ProvienceId)
+            @Html.TextBoxFor(x => x.ProvienceId, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.ProvienceId, "", new { @class = "text-red" })
+        </div>
+
+
+        <div class="col-md-3" id="district1">
+            @Html.LabelFor(X => X.DistrictId)
+            @Html.TextBoxFor(x => x.DistrictId, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.DistrictId, "", new { @class = "text-red" })
+        </div>
+        <div class="col-md-3" id=" muni1">
+            @Html.LabelFor(X => X.MuniId)
+            @Html.TextBoxFor(x => x.MuniId, new { @class = "form-control", type = "" })
+            @Html.ValidationMessageFor(x => x.MuniId, "", new { @class = "text-red" })
+        </div>
+        <div class="col-md-2" id=" tole1">
+            @Html.LabelFor(X => X.Tole)
+            @Html.TextBoxFor(x => x.Tole, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Tole, "", new { @class = "text-red" })
+        </div>
+        <div class="col-md-2" id=" =ward1">
+            @Html.LabelFor(X => X.Ward)
+            @Html.TextBoxFor(x => x.Ward, new { @class = "form-control", type = "number" })
+        </div>
+        <br />
+
+        <div class="col-md-4" >
+
+            @Html.LabelFor(X => X.HomePhoneNumber)
+            @Html.TextBoxFor(x => x.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
+            @Html.ValidationMessageFor(x => x.HomePhoneNumber, "", new { @class = "text-red" })
+        </div>
+
+        <div class="col-md-4" >
+            @Html.LabelFor(X => X.Mobile)
+            @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
+            @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "text-red" })
+        </div>
+
+        <div class="col-md-4" id=" citizen">
+
+            @Html.LabelFor(X => X.CitizenshipNo)
+            @Html.TextBoxFor(x => x.CitizenshipNo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.CitizenshipNo, "", new { @class = "text-red" })
+        </div>
+        <br />
+
+
+        <div class="col-md-6" id=" =email">
+            @Html.LabelFor(X => X.Email)
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Enter your Email" })
+            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-red" })
+        </div>
+
+        <div class="col-md-6" id="haslicience">
+            <br />
+            @Html.LabelFor(X => X.HasLicence)
+            @Html.CheckBoxFor(x => x.HasLicence, new { @class = "form-check-input" })
 
 
 
 
+        </div>
     </div>
-</div>
-<br/>
+    <br />
 
-<div class="form-group">
-    <input type="submit" value="Submit" class="btn" />
-</div>
+    <div class="form-group">
+        <input type="submit" id="submitBtn" value="submit" class="btn  bg-primary" />
+    </div>
 </form>
-<script src="~/plugins/jquery/jquery.min.js"></script> 
-<script>
-    $(document).ready(function () {
+</div>
 
-        $(".btn").click(function (e) {
-            debugger;
-            //Serialize the form datas.
-            var valdata = $("#form1").serialize();
-            console.log(valdata);
-            //to get alert popup
-            
-            $.ajax({
-                url: "/PersonalInformations/PersonalInformationDetails",
-                type: "POST",
-                dataType: 'json',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data: valdata,
-                success: function (response) {
-                    debugger;
-                    console.log("Hello");
-                    console.log(response);
-                }
-            });
-        });
-    });
+
+
+
+    @* <script src="~/plugins/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ *@
+<script>
+    // $(document).ready(function () {
+
+
+    //     $("#submitBtn").click(function (e) {
+    //         e.preventDefault();
+    //        if ($("#form1").valid()) {
+    //         var valdata = $("#form1").serialize();
+    //         alert(valdata);
+
+
+    //         $.ajax({
+    //             url: "/PersonalInformations/PersonalInformationDetails",
+    //             type: "POST",
+    //             dataType: 'json',
+    //             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //             data: valdata,
+
+    //             success: function (data) {
+    //                 alert('success');
+    //             }, error: function (data) {
+    //                 alert("Error");
+    //             }
+    //         });
+    //        }
+
+    //     });
+
+    // });
 </script>
+</body>

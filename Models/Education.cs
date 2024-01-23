@@ -8,19 +8,27 @@ namespace InternshipForm.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "School/College Name")]
-        public string  School_CollegeName { get; set; }
+        [Required(ErrorMessage =" Required")]
+        public string ? School_CollegeName { get; set; }
         [Display(Name = "Location")]
-        public string Location { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public string? Location { get; set; }
         [Display(Name = "Start Year")]
+        [Required(ErrorMessage = " Required")]
+
         public int StartYear { get; set; }
         [Display(Name = "Completion Year")]
+        [Required(ErrorMessage = "  Required")]
+
         public int CompletionYear { get; set; }
         [Display(Name = "Major")]
-        public string Major { get; set; }
+        [Required(ErrorMessage = "  Required")]
 
-        [ForeignKey(nameof(PersonalInformation))]
-        public int PersonalID { get; set; }
-        public PersonalInformation PersonalInformation { get; set; }
+        public string?  Major { get; set; }
+
+        //[ForeignKey(nameof(PersonalInformation))]
+        //public int PersonalID { get; set; }
+        //public PersonalInformation PersonalInformation { get; set; }
 
     }
 }

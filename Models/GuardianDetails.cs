@@ -7,15 +7,19 @@ namespace InternshipForm.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Relation { get; set; }
-        public string Address { get; set; }
-        public int PhoneNumber { get; set; }
-        public string Signature { get; set; }
+        [Required(ErrorMessage ="Required")]
+        public string? Name { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public string? Relation { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public string? Address { get; set; }
+        public long PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public string ?  Signature { get; set; }
 
-        [ForeignKey(nameof(PersonalInformation))]
-        public int PersonalID { get; set; }
-        public PersonalInformation PersonalInformation { get; set; }
+        //[ForeignKey(nameof(PersonalInformation))]
+        //public int PersonalID { get; set; }
+        //public PersonalInformation PersonalInformation { get; set; }
 
     }
 }

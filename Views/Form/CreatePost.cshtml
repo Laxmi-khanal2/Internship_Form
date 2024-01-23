@@ -7,8 +7,8 @@
 }
 <style>
     .MainHeading {
-        background-color: black!important;
-        color: white!important;
+        background-color: black !important;
+        color: white !important;
     }
 
     .form-check-input {
@@ -16,12 +16,16 @@
         margin-top: 0.3rem;
         margin-left: 1rem;
     }
+
+    .text-red {
+        color: red;
+    }
 </style>
 
 
 <h3 class=" text-center"> Internship Form</h3>
 <br />
-<form action="">
+<form method="post" enctype="multipart/form-data" asp-controller="Form" asp-action="CreatePost">
     @*      <div class="accordion" id="accordionExample">
     <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
@@ -31,8 +35,8 @@
     </h2>
     <div id="officialUse" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
     <div class="accordion-body">  *@
-  @*   <div class=" MainHeading">
-       <strong> Official Use </strong>  
+    @*   <div class=" MainHeading">
+    <strong> Official Use </strong>
     </div> *@
     <table style="width:100%" class="table table-hover">
 
@@ -40,12 +44,13 @@
             <th class="MainHeading" colspan="6"> Official Use </th>
 
         </tr>
-        </table>
+    </table>
     <div class="row">
         <div class="col-md-6">
             @Html.LabelFor(x => x.OfficalUse.Internship_For, new { @class = "" })
 
             @Html.TextBoxFor(x => x.OfficalUse.Internship_For, new { @class = "form-control" })
+
             <!-- Add any additional Bootstrap styling or validation messages here -->
         </div>
         <div class="col-md-6">
@@ -65,6 +70,7 @@
             @Html.LabelFor(x => x.OfficalUse.Authorized_Signature)
             @Html.TextBoxFor(x => x.OfficalUse.Authorized_Signature, new { @class = "form-control" })
         </div>
+                 
     </div>
     @*     <div class="accordion" id="accordionExample">
     <div class="accordion-item">
@@ -76,7 +82,7 @@
     <div id="personalInformation" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
     <div class="accordion-body"> *@
 
-        <br/>
+    <br />
     <table style="width:100%" class="table table-hover">
 
         <tr>
@@ -84,22 +90,25 @@
 
         </tr>
     </table>
-    
+
     <div class="row">
         <div class="col-md-4">
             @Html.LabelFor(x => x.PersonalInformation.FirstName)
             @Html.TextBoxFor(x => x.PersonalInformation.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.FirstName, "", new { @class = "text-red" })
         </div>
 
         <div class="col-md-4">
             @Html.LabelFor(X => X.PersonalInformation.MiddleName)
             @Html.TextBoxFor(x => x.PersonalInformation.MiddleName, new { @class = "form-control" })
+
         </div>
 
 
         <div class="col-md-4">
             @Html.LabelFor(X => X.PersonalInformation.LastName)
             @Html.TextBoxFor(x => x.PersonalInformation.LastName, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.LastName, "", new { @class = "text-red" })
         </div>
 
         <br />
@@ -108,16 +117,19 @@
         <div class="col-md-2">
             @Html.LabelFor(X => X.PersonalInformation.ProvienceId)
             @Html.TextBoxFor(x => x.PersonalInformation.ProvienceId, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.ProvienceId, "", new { @class = "text-red" })
         </div>
 
 
         <div class="col-md-3">
             @Html.LabelFor(X => X.PersonalInformation.DistrictId)
             @Html.TextBoxFor(x => x.PersonalInformation.DistrictId, new { @class = "form-control", type = "string" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.DistrictId, "", new { @class = "text-red" })
         </div>
         <div class="col-md-3">
             @Html.LabelFor(X => X.PersonalInformation.MuniId)
             @Html.TextBoxFor(x => x.PersonalInformation.MuniId, new { @class = "form-control", type = "" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.MuniId, "", new { @class = "text-red" })
         </div>
         <div class="col-md-2">
             @Html.LabelFor(X => X.PersonalInformation.Tole)
@@ -138,12 +150,14 @@
         <div class="col-md-4">
             @Html.LabelFor(X => X.PersonalInformation.Mobile)
             @Html.TextBoxFor(x => x.PersonalInformation.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.Mobile, "", new { @class = "text-red" })
         </div>
 
         <div class="col-md-4">
 
             @Html.LabelFor(X => X.PersonalInformation.CitizenshipNo)
             @Html.TextBoxFor(x => x.PersonalInformation.CitizenshipNo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.CitizenshipNo, "", new { @class = "text-red" })
         </div>
         <br />
 
@@ -151,12 +165,14 @@
         <div class="col-md-6">
             @Html.LabelFor(X => X.PersonalInformation.Email)
             @Html.TextBoxFor(x => x.PersonalInformation.Email, new { @class = "form-control", placeholder = "Enter your Email" })
+            @Html.ValidationMessageFor(x => x.PersonalInformation.Email, "", new { @class = "text-red" })
         </div>
 
         <div class="col-md-6">
             <br />
             @Html.LabelFor(X => X.PersonalInformation.HasLicence)
-            @Html.CheckBoxFor(x => x.PersonalInformation.HasLicence, new { @class = "form-check-input"  })
+            @Html.CheckBoxFor(x => x.PersonalInformation.HasLicence, new { @class = "form-check-input" })
+
 
 
 
@@ -179,7 +195,7 @@
     <div id="education" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
     <div class="accordion-body"> *@
 
-        <br/>
+    <br />
     <table style="width:100%" class="table table-hover">
 
         <tr>
@@ -216,12 +232,28 @@
 
 
                 <tr>
-                    <td> @Html.TextBoxFor(X => X.Education[i].School_CollegeName)</td>
+                    <td>
+                            @Html.TextBoxFor(X => X.Education[i].School_CollegeName)
+                            @Html.ValidationMessageFor(x => x.Education[i].School_CollegeName, "", new { @class = "text-red" })
+                    </td>
 
-                    <td>@Html.TextBoxFor(X => X.Education[i].Location) </td>
-                    <td>@Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "", type = "number" }) </td>
-                    <td>@Html.TextBoxFor(X => X.Education[i].CompletionYear, new { @class = "", type = "number" })</td>
-                    <td>@Html.TextBoxFor(X => X.Education[i].Major)</td>
+
+                    <td>
+                            @Html.TextBoxFor(X => X.Education[i].Location)
+                            @Html.ValidationMessageFor(x => x.Education[i].Location, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                            @Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "", type = "number" })
+                            @Html.ValidationMessageFor(x => x.Education[i].StartYear, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                            @Html.TextBoxFor(X => X.Education[i].CompletionYear, new { @class = "", type = "number" })
+                            @Html.ValidationMessageFor(x => x.Education[i].CompletionYear, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                            @Html.TextBoxFor(X => X.Education[i].Major)
+                            @Html.ValidationMessageFor(x => x.Education[i].Major, "", new { @class = "text-red" })
+                    </td>
                     <td>
                             @*   <button type="button" class="deletebtn" title="Remove row">Delete</button> *@
 
@@ -234,24 +266,24 @@
 
     </table>
     <button class="btn btn-md btn-primary" id="newbtn" type="button"> Add </button>
-    <br/>
+    <br />
     <div>
-        @Html.LabelFor(x => x.certiLice.certilice) 
+        @Html.LabelFor(x => x.certiLice.certilice)
         @Html.TextAreaFor(x => x.certiLice.certilice, new { @class = "form-control" })
     </div>
 
 
     @* div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guardianDetails" aria-expanded="true" aria-controls="collapseOne">
-        <strong> Guardian Details </strong>
-        </button>
-        </h2>
-        <div id="guardianDetails" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body"> *@
-     <br/>
-     <br/>
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guardianDetails" aria-expanded="true" aria-controls="collapseOne">
+    <strong> Guardian Details </strong>
+    </button>
+    </h2>
+    <div id="guardianDetails" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+    <div class="accordion-body"> *@
+    <br />
+    <br />
     <table style="width:100%" class="table table-hover">
 
         <tr>
@@ -259,37 +291,52 @@
 
         </tr>
     </table>
-                    <table style="width:100%" class="table table-bordered">
-                        <tr colspan="6"></tr>
-                        <tr>
-                            <th>@Html.Label("Name") </th>
-                            <th>@Html.Label("Relation") </th>
-                            <th>@Html.Label("Address") </th>
-                            <th>@Html.Label("Phone No")</th>
-                            <th>@Html.Label("Signature")</th>
+    <table style="width:100%" class="table table-bordered">
+        <tr colspan="6"></tr>
+        <tr>
+            <th>@Html.Label("Name") </th>
+            <th>@Html.Label("Relation") </th>
+            <th>@Html.Label("Address") </th>
+            <th>@Html.Label("Phone No")</th>
+            <th>@Html.Label("Signature")</th>
 
-                        </tr>
-                        <tr>
-                            <td> @Html.TextBoxFor(x => x.GuardianDetails.Name)</td>
-                            <td> @Html.TextBoxFor(x => x.GuardianDetails.Relation)</td>
-                            <td> @Html.TextBoxFor(x => x.GuardianDetails.Address)</td>
-                            <td> @Html.TextBoxFor(x => x.GuardianDetails.PhoneNumber, new { @class = "", type = "number" })</td>
-                            <td> @Html.TextBoxFor(x => x.GuardianDetails.Signature)</td>
-                        </tr>
-                    </table>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.GuardianDetails.Name)
+                @Html.ValidationMessageFor(x => x.GuardianDetails.Name, "", new { @class = "text-red" })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.GuardianDetails.Relation)
+                @Html.ValidationMessageFor(x => x.GuardianDetails.Relation, "", new { @class = "text-red" })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.GuardianDetails.Address)
+                @Html.ValidationMessageFor(x => x.GuardianDetails.Address, "", new { @class = "text-red" })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.GuardianDetails.PhoneNumber, new { @class = "", type = "number" })
+                @Html.ValidationMessageFor(x => x.GuardianDetails.PhoneNumber, "", new { @class = "text-red" })
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.GuardianDetails.Signature)
+                @Html.ValidationMessageFor(x => x.GuardianDetails.Signature, "", new { @class = "text-red" })
+            </td>
+        </tr>
+    </table>
 
 
     @*     <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#references" aria-expanded="true" aria-controls="collapseOne">
-                    <strong> References</strong>
-                </button>
-            </h2>
-            <div id="references" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body"> *@
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#references" aria-expanded="true" aria-controls="collapseOne">
+    <strong> References</strong>
+    </button>
+    </h2>
+    <div id="references" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+    <div class="accordion-body"> *@
 
-                   <br/>
+    <br />
     <table style="width:100%" class="table table-hover">
 
         <tr>
@@ -297,24 +344,24 @@
 
         </tr>
     </table>
-                    <table style="width:100%" class="table table-bordered">
-                        <tr colspan="6">
+    <table style="width:100%" class="table table-bordered">
+        <tr colspan="6">
 
-                            <th>@Html.Label("Name") </th>
-                            <th>@Html.Label("Position") </th>
-                            <th>@Html.Label("College/Company") </th>
-                            <th>@Html.Label("Phone ")</th>
-                            <th>@Html.Label("Signature")</th>
+            <th>@Html.Label("Name") </th>
+            <th>@Html.Label("Position") </th>
+            <th>@Html.Label("College/Company") </th>
+            <th>@Html.Label("Phone ")</th>
+            <th>@Html.Label("Signature")</th>
 
-                        </tr>
-                        <tr>
-                            <td> @Html.TextBoxFor(x => x.References.Name)</td>
-                            <td> @Html.TextBoxFor(x => x.References.Positions)</td>
-                            <td> @Html.TextBoxFor(x => x.References.College_Company)</td>
-                            <td> @Html.TextBoxFor(x => x.References.Phone, new { @class = "", type = "number" })</td>
-                            <td> @Html.TextBoxFor(x => x.References.Signature)</td>
-                        </tr>
-                    </table>
+        </tr>
+        <tr>
+            <td> @Html.TextBoxFor(x => x.References.Name)</td>
+            <td> @Html.TextBoxFor(x => x.References.Positions)</td>
+            <td> @Html.TextBoxFor(x => x.References.College_Company)</td>
+            <td> @Html.TextBoxFor(x => x.References.Phone, new { @class = "", type = "number" })</td>
+            <td> @Html.TextBoxFor(x => x.References.Signature)</td>
+        </tr>
+    </table>
 
 
     <div>
@@ -331,10 +378,10 @@
             <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
         </div>
     </div>
-    <br/>
+    <br />
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn bg-primary" />
-        </div>
+        <input type="submit" id="submitBtn" value="submit" class="btn  bg-primary" />
+    </div>
 </form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -407,10 +454,6 @@
         });
 
 
-        $.ajax({
-            type : 'POST'
-            URL: 
-        })
     });
 
 

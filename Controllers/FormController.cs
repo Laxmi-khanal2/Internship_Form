@@ -29,8 +29,11 @@ namespace InternshipForm.Controllers
         [HttpPost]
         public IActionResult CreatePost(InternshipFormViewModel model)
         {
-            //InternshipFormViewModel model = new InternshipFormViewModel();
-            //model.Education = new List<Education> { new Education() };
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("CreatePost");
+            }
+            
             return View(model);
         }
 

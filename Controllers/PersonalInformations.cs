@@ -38,29 +38,9 @@ namespace InternshipForm.Controllers
                 return RedirectToAction("PersonalInformationsDetails");
             }
         
-            return Json(personalInformation);
+            return View(personalInformation);
 
         }
 
-
-
-
-        public IActionResult CreateForm()
-        {
-            return View();
-        }
-     
-
-
-        [HttpPost]
-        public IActionResult CreateForm(PersonalInformation personalInformation)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("PersonalInformationsDetails");
-            }
-            return Json (personalInformation);
-
-        }
     }
 }
