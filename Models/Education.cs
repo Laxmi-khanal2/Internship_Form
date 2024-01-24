@@ -14,11 +14,11 @@ namespace InternshipForm.Models
         [Required(ErrorMessage = "Required")]
         public string? Location { get; set; }
         [Display(Name = "Start Year")]
-        [Required(ErrorMessage = " Required")]
+       
 
         public int StartYear { get; set; }
         [Display(Name = "Completion Year")]
-        [Required(ErrorMessage = "  Required")]
+        
 
         public int CompletionYear { get; set; }
         [Display(Name = "Major")]

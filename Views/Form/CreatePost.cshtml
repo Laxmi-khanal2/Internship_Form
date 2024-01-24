@@ -5,6 +5,13 @@
     ViewData["Title"] = "Create Post";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
+<link href="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+      rel="stylesheet" type="text/css" />
+<link href="~/plugins/jquery-ui/jquery-ui.structure.css" rel="stylesheet" />
+<link href="~/plugins/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="~/plugins/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+<link href="~/plugins/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />
+<link href="~/plugins/jquery-ui/jquery-ui.structure.css" rel="stylesheet" />
 <style>
     .MainHeading {
         background-color: black !important;
@@ -20,6 +27,7 @@
     .text-red {
         color: red;
     }
+
 </style>
 
 
@@ -70,7 +78,7 @@
             @Html.LabelFor(x => x.OfficalUse.Authorized_Signature)
             @Html.TextBoxFor(x => x.OfficalUse.Authorized_Signature, new { @class = "form-control" })
         </div>
-                 
+
     </div>
     @*     <div class="accordion" id="accordionExample">
     <div class="accordion-item">
@@ -233,7 +241,7 @@
 
                 <tr>
                     <td>
-                            @Html.TextBoxFor(X => X.Education[i].School_CollegeName)
+                            @Html.TextBoxFor(X => X.Education[i].School_CollegeName, new { @class = "" })
                             @Html.ValidationMessageFor(x => x.Education[i].School_CollegeName, "", new { @class = "text-red" })
                     </td>
 
@@ -243,12 +251,12 @@
                             @Html.ValidationMessageFor(x => x.Education[i].Location, "", new { @class = "text-red" })
                     </td>
                     <td>
-                            @Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "", type = "number" })
-                            @Html.ValidationMessageFor(x => x.Education[i].StartYear, "", new { @class = "text-red" })
+                            @Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "datepicker" })
+                            @* @Html.ValidationMessageFor(x => x.Education[i].StartYear, "", new { @class = "text-red" }) *@
                     </td>
                     <td>
-                            @Html.TextBoxFor(X => X.Education[i].CompletionYear, new { @class = "", type = "number" })
-                            @Html.ValidationMessageFor(x => x.Education[i].CompletionYear, "", new { @class = "text-red" })
+                            @Html.TextBoxFor(X => X.Education[i].CompletionYear, new { @class = "datepicker" })
+                          @*   @Html.ValidationMessageFor(x => x.Education[i].CompletionYear, "", new { @class = "text-red" }) *@
                     </td>
                     <td>
                             @Html.TextBoxFor(X => X.Education[i].Major)
@@ -372,11 +380,12 @@
             <input type="text" /><br />
             <label class="">Intern Signature</label>
         </div>
-
         <div class="col-md-2">
             <label for="avatar">Profile picture:</label>
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+            <input type="file" id="photo" name="avatar" accept="image/png, image/jpeg" />
+            <img id="photoPreview" alt="Preview" style="max-width: 50%; display: none;" />
         </div>
+
     </div>
     <br />
     <div class="form-group">
@@ -384,82 +393,110 @@
     </div>
 </form>
 
+
+<script src="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        var x = 1;
-        $("#newbtn").click(function () {
 
-            var educationContainer = $("#tableEducation tr:first").clone();
-            var removeButton = '<button class="btn btn-md btn-primary deletebtn" type="button" title="Remove row">Delete</button>';
+    <script type="text/javascript" >
 
-            var fieldCount = $("#tableEducation").children().length;
-            console.log(fieldCount);
+        $(document).ready(function () {
+            var x = 1;
+            $("#newbtn").click(function () {
 
-            educationContainer.find("input").each(function () {
+                var educationContainer = $("#tableEducation tr:first").clone();
+                var removeButton = '<button class="btn btn-md btn-primary deletebtn" type="button" title="Remove row">Delete</button>';
 
-                $(this).val('');
-                var oldName = $(this).attr("name");
-                console.log(oldName);
+                var fieldCount = $("#tableEducation").children().length;
+                console.log(fieldCount);
 
-                var newName = oldName.replace(0, fieldCount);
+                educationContainer.find("input").each(function () {
 
-                $(this).attr("name", newName);
+                    $(this).val('');
+                    var oldName = $(this).attr("name");
+                    console.log(oldName);
 
-                // $(this).attr({
-                //     'id': function (_, id) {
-                //         return id + x
-                //     },
-                //     'name': function (_, name) {
-                //         return name + x
-                //     },
-                //     'value': ''
+                    var newName = oldName.replace(0, fieldCount);
 
-                // });
+                    $(this).attr("name", newName);
+                });
+                educationContainer.find("td:last").append(removeButton);
+                educationContainer.appendTo("#tableEducation");
+                x++;
 
             });
-            educationContainer.find("td:last").append(removeButton);
-            educationContainer.appendTo("#tableEducation");
-            x++;
+            $(document).on('click', 'button.deletebtn', function () {
+                $(this).closest('tr').remove();
 
-        });
-        $(document).on('click', 'button.deletebtn', function () {
-            $(this).closest('tr').remove();
+                $('#tableEducation').children().each(function (index) {
 
-            $('#tableEducation').children().each(function (index) {
-
-                $(this).find('td input').each(function () {
+                    $(this).find('td input').each(function () {
 
 
-                    // var oldName = $(this).attr("name");
-                    var oldName = $(this).attr("name");
+                        // var oldName = $(this).attr("name");
+                        var oldName = $(this).attr("name");
 
-                    var newName = oldName.replace(/\[\d+\]/, '[' + index + ']');
-                    $(this).attr("name", newName);
+                        var newName = oldName.replace(/\[\d+\]/, '[' + index + ']');
+                        $(this).attr("name", newName);
+
+
+                    });
 
 
                 });
-
-
+               
             });
-            // $(this).parent().parent().remove();
-            // if ($("#tableEducation.tbody").children().children().length == 0) {
-            //     $("tableEducation:tbody").append(educationContainer);
-            // }
-            // return false;
+            // for english calender
+            // $(".datepicker").datepicker({
+            //     dateFormat: "dd-mm-yy",
+            //     changemonth: true,
+            //     changeyear: true
+            // });
+            //for nepali calender
+            window.onload = function () {
+                var mainInput = document.getElementsByClassName("datepicker");
+                mainInput.nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYearCount: 10
+                });
+            };
+        
+
+      
+        $("#photo").change(function () {
+            
+            var fileInput = this;
+            var file = fileInput.files[0];
+
+            if (file) {
+                
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                   
+                    $("#photoPreview").attr("src", e.target.result);
+               
+                    $("#photoPreview").show();
+                };
+                reader.readAsDataURL(file);
+            }
         });
-
-
     });
 
 
-
-
-
+   
 </script>
+     
+
+
+
 
 

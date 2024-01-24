@@ -4,6 +4,7 @@ using InternshipForm.Models;
 using InternshipForm.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Drawing;
 
 namespace InternshipForm.Controllers
 {
@@ -95,7 +96,9 @@ namespace InternshipForm.Controllers
 
             return View(model);
         }
-        
+       
+
+
         //[HttpPost]
 
         //public IActionResult CreatePost(OfficalUse o)
@@ -120,35 +123,35 @@ namespace InternshipForm.Controllers
         //    }
 
 
-            //[HttpPost]
-            //[ValidateAntiForgeryToken]
-            //public IActionResult CreatePost(InternshipFormViewModel model)
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //       var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
-            //        _context.SaveChanges();
-            //    //    var PersonalId = personalInfo.Entity.Id;
-            //    //    model.Education.PersonalID = PersonalId;
-            //    //    model.GuardianDetails.PersonalID = PersonalId;
-            //    //    model.References.PersonalID = PersonalId;
-            //    //    SaveEducation(model.Education);
-            //    }
-            //    return View(model);
-            //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult CreatePost(InternshipFormViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //       var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
+        //        _context.SaveChanges();
+        //    //    var PersonalId = personalInfo.Entity.Id;
+        //    //    model.Education.PersonalID = PersonalId;
+        //    //    model.GuardianDetails.PersonalID = PersonalId;
+        //    //    model.References.PersonalID = PersonalId;
+        //    //    SaveEducation(model.Education);
+        //    }
+        //    return View(model);
+        //}
 
-            //private Education SaveEducation(Education model)
-            //{
-            //    _context.Education.Add(model);
-            //    _context.SaveChanges();
-            //    return model;
-            //}
-            //private Education SaveGuardian(Education model)
-            //{
-            //    _context.Education.Add(model);
-            //    _context.SaveChanges();
-            //    return model;
-            //}
-        }
+        //private Education SaveEducation(Education model)
+        //{
+        //    _context.Education.Add(model);
+        //    _context.SaveChanges();
+        //    return model;
+        //}
+        //private Education SaveGuardian(Education model)
+        //{
+        //    _context.Education.Add(model);
+        //    _context.SaveChanges();
+        //    return model;
+        //}
+    }
 
     }
