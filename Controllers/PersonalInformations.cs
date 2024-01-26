@@ -8,10 +8,13 @@ namespace InternshipForm.Controllers
     public class PersonalInformations : Controller
     {
         private readonly ApplicationDBContext _context;
+        //this is the constructor for class personalinformations
         public PersonalInformations(ApplicationDBContext context)
         {
             _context = context;
         }
+
+        // this is method of the class personalInformation which ddefine how the object behaves
         public IActionResult Index()
         {
             return View();

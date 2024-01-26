@@ -28,7 +28,12 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
+        public IActionResult DataTable()
+        {
+            var data = EmployeeData.GiveMeData();
+            return Json(new {draw =1, recordsTotal = data.Count,recordsFiltered = data.Count,data = data});
 
+        }
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
         //{

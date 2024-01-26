@@ -11,6 +11,7 @@ namespace InternshipForm.Controllers
     public class FormController : Controller
     {
         private readonly ApplicationDBContext _context;
+        // creating the constructor for class form controller
         public FormController(ApplicationDBContext context)
         {
             _context = context;
