@@ -11,6 +11,7 @@ namespace InternshipForm
             
             employeeList.Add(new Employee
             {
+                ID = 1,
                 Name = "Ram",
                 Position = "Software Engineer",
                 Age = 30,
@@ -19,7 +20,7 @@ namespace InternshipForm
 
             employeeList.Add(new Employee
             {
-              
+              ID= 2,
                 Name = "Shyam",
                 Position = "HR Manager",
                 Age = 35,
@@ -129,7 +130,7 @@ namespace InternshipForm
 
     public class Employee
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public int Age { get; set; }

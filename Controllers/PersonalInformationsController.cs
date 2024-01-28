@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InternshipForm.Controllers
 {
-    public class PersonalInformations : Controller
+    public class PersonalInformationsController : Controller
     {
         private readonly ApplicationDBContext _context;
         //this is the constructor for class personalinformations
-        public PersonalInformations(ApplicationDBContext context)
+        public PersonalInformationsController(ApplicationDBContext context)
         {
             _context = context;
         }
