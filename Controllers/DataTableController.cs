@@ -8,10 +8,23 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
-        public IActionResult EmployeeList()
+        [HttpPost]
+        public IActionResult EmployeeList(int draw, int start, int length)
         {
-            var data = EmployeeData.GiveMeData();
-            return Json(new { data = data });
+            var allData = EmployeeData.GiveMeData();
+            var data = allData.Skip(start).Take(length).ToList();
+
+            var response = new
+            {
+
+                draw = draw,
+                recordsTotal = allData.Count,
+                recordsFiltered = allData.Count,
+                data = data
+            };
+
+         return Json( response );
         }
+      
     }
 }

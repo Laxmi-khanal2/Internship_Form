@@ -10,7 +10,7 @@
 
 <div class="container">
     <div style="width:90%; margin:0 auto;">
-        <table id="myTable" class="display" width="100%" cellspacing="0">
+        <table id="myTable" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -37,7 +37,9 @@
     $('#myTable').DataTable({
         "paging": true,
         "pageLength": 5,
-        "lengthMenu": [5, 10, 15, 20, 25],
+         "processing": true,
+         "serverSide": true,
+        "lengthMenu": [2,5, 10, 15],
         "ajax": {
             "url": "/DataTable/EmployeeList",
             "type": "POST",
