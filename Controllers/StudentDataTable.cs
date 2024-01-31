@@ -1,31 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace InternshipForm.Controllers
 {
-    public class DataTableController : Controller
+    public class StudentDataTable : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult EmployeeList(int draw, int start, int length)
+        public IActionResult StudentList(int draw, int start, int length )
         {
-            var allData = EmployeeData.GiveMeData();
+            var allData = StudentsData.GiveData();
             var data = allData.Skip(start).Take(length).ToList();
 
             var response = new
             {
-
                 draw = draw,
                 recordsTotal = allData.Count,
                 recordsFiltered = allData.Count,
                 data = data
             };
+            return Json( response );
 
-            return Json(response);
         }
+
     }
 }
-

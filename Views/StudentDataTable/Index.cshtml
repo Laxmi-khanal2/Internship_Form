@@ -1,12 +1,8 @@
-﻿@model List<Employee>
-@{
-    ViewData["Title"] = "Data Table of Employee";
-    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
-}
+﻿@model List<Students>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
-<h2>Employee Data</h2>
+<h2>Students Data</h2>
 
 <div class="container">
     <div style="width:90%; margin:0 auto;">
@@ -15,13 +11,11 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Age</th>
-                    <th>Office</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>PhoneNumber</th>
                 </tr>
             </thead>
-
-
         </table>
     </div>
 </div>
@@ -31,17 +25,16 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
 
-
 <script>
 
     $('#myTable').DataTable({
         "paging": true,
         "pageLength": 5,
-         "processing": true,
-         "serverSide": true,
-        "lengthMenu": [2,5, 10, 15],
+        // "processing": true,
+        "serverSide": true,
+        "lengthMenu": [2, 5, 10],
         "ajax": {
-            "url": "/DataTable/EmployeeList",
+            "url": "/StudentDataTable/StudentList",
             "type": "POST",
 
             "error": function (xhr, error, thrown) {
@@ -57,9 +50,9 @@
 
             { data: "id", "name": "ID", "autoWidth": true },
             { data: "name", "name": "Name", "autoWidth": true },
-            { data: "position", "name": "Position", "autoWidth": true },
-            { data: "age", "name": "Age", "autoWidth": true },
-            { data: "office", "name": "Office", "autoWidth": true }
+            { data: "address", "name": "Address", "autoWidth": true },
+            { data: "email", "name": "Email" ,"autoWidth": true },
+            { data: "phone", "name": "Phone", "autoWidth": true }
         ]
     });
 
