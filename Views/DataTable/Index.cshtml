@@ -34,12 +34,78 @@
 
 <script>
 
-    $('#myTable').DataTable({
+
+    $('#myTable thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#myTable thead ');
+
+
+    var table = $('#myTable').DataTable({
+      
+     
         "paging": true,
         "pageLength": 5,
-         "processing": true,
-         "serverSide": true,
-        "lengthMenu": [2,5, 10, 15],
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [2, 5, 10, 15],
+        "orderCellsTop": true,
+       
+        initComplete: function () {
+            var api = this.api();
+
+            // For each column
+            api
+            
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.display th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.display th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+
+                            // Store cursor position as a data attribute
+                            $(this).data('cursor-position', this.selectionStart);
+
+                        })
+                   
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
+
+                            $(this).trigger('change');
+                            var cursorPosition = $(this).data('cursor-position');
+                            $(this).focus()[0].setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    
         "ajax": {
             "url": "/DataTable/EmployeeList",
             "type": "POST",
@@ -53,6 +119,7 @@
 
             "searchable": false
         }],
+        // table ko header haru ko column
         "columns": [
 
             { data: "id", "name": "ID", "autoWidth": true },
@@ -61,7 +128,11 @@
             { data: "age", "name": "Age", "autoWidth": true },
             { data: "office", "name": "Office", "autoWidth": true }
         ]
-    });
+             
 
+
+
+
+    });
 
 </script> 

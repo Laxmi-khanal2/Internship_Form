@@ -34,10 +34,13 @@ namespace InternshipForm.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult PersonalInformationDetails(PersonalInformation personalInformation)
          {
             if (ModelState.IsValid)
             {
+                _context.PersonalInformation.Add(personalInformation);
+                _context.SaveChanges();
                 return RedirectToAction("PersonalInformationsDetails");
             }
         

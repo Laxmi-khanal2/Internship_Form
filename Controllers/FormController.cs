@@ -97,7 +97,7 @@ namespace InternshipForm.Controllers
 
             return View(model);
         }
-       
+
 
 
         //[HttpPost]
@@ -124,35 +124,35 @@ namespace InternshipForm.Controllers
         //    }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CreatePost(InternshipFormViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //       var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
-        //        _context.SaveChanges();
-        //    //    var PersonalId = personalInfo.Entity.Id;
-        //    //    model.Education.PersonalID = PersonalId;
-        //    //    model.GuardianDetails.PersonalID = PersonalId;
-        //    //    model.References.PersonalID = PersonalId;
-        //    //    SaveEducation(model.Education);
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(InternshipFormViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
+                _context.SaveChanges();
+                //    var PersonalId = personalInfo.Entity.Id;
+                //    model.Education.PersonalID = PersonalId;
+                //    model.GuardianDetails.PersonalID = PersonalId;
+                //    model.References.PersonalID = PersonalId;
+                //    SaveEducation(model.Education);
+            }
+            return View(model);
+        }
 
-        //private Education SaveEducation(Education model)
-        //{
-        //    _context.Education.Add(model);
-        //    _context.SaveChanges();
-        //    return model;
-        //}
-        //private Education SaveGuardian(Education model)
-        //{
-        //    _context.Education.Add(model);
-        //    _context.SaveChanges();
-        //    return model;
-        //}
+        private Education SaveEducation(Education model)
+        {
+            _context.Education.Add(model);
+            _context.SaveChanges();
+            return model;
+        }
+        private Education SaveGuardian(Education model)
+        {
+            _context.Education.Add(model);
+            _context.SaveChanges();
+            return model;
+        }
     }
 
-    }
+}

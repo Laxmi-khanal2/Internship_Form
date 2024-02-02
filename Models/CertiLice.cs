@@ -6,6 +6,6 @@ namespace InternshipForm.Models
     {
         public int id { get; set; }
         [Display (Name = "Other Training, Certification or Licience held:")]
-        public string certilice { get; set; }
+        public string ?certilice { get; set; }
     }
 }

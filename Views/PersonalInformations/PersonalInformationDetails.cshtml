@@ -26,7 +26,7 @@
     }
 </style>
 <body>
-<div class="card">
+<div class="">
 
 <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
     <table style="width:100%" class="table table-hover">
@@ -90,13 +90,13 @@
 
             @Html.LabelFor(X => X.HomePhoneNumber)
             @Html.TextBoxFor(x => x.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
-            @Html.ValidationMessageFor(x => x.HomePhoneNumber, "", new { @class = "text-red" })
+      @*       @Html.ValidationMessageFor(x => x.HomePhoneNumber, "", new { @class = "text-red" }) *@
         </div>
 
         <div class="col-md-4" >
             @Html.LabelFor(X => X.Mobile)
             @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
-            @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "text-red" })
+          @*   @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "text-red" }) *@
         </div>
 
         <div class="col-md-4" id=" citizen">

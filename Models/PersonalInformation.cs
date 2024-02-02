@@ -22,7 +22,7 @@ namespace InternshipForm.Models
         public string? ProvienceId { get; set; }
         [Display(Name = "District")]
         [Required(ErrorMessage = "District Name is Required")]
-        public string? DistrictId{ get; set; }
+        public string? DistrictId { get; set; }
         [Display(Name = "Muni")]
         [Required(ErrorMessage = "Municipality Name is Required")]
         public string? MuniId { get; set; }
@@ -35,13 +35,13 @@ namespace InternshipForm.Models
         [Display(Name = "Home Phone")]
         [Required(ErrorMessage = "Mobile Number is Required")]
        
-        public long HomePhoneNumber { get; set; }
+        public int HomePhoneNumber { get; set; }
 
 
         [Display(Name = "Mobile")]
         [Required(ErrorMessage = "Mobile Number is Required")]
        
-        public long Mobile { get; set; }
+        public int Mobile { get; set; }
 
 
         [Display(Name = "CitizenshipNo")]
