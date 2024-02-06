@@ -1,0 +1,81 @@
+﻿@model GuardianDetails
+@{
+    ViewData["Title"] = "Guardian Details";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<style>
+    .MainHeading {
+        background-color: cornflowerblue !important;
+        color: white !important;
+    }
+
+    .form-check-input {
+        position: absolute;
+        margin-top: 0.3rem;
+        margin-left: 1rem;
+    }
+
+    .text-red {
+        color: red;
+    }
+
+    .card {
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 80%;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+    .card-header {
+        background-color: cornflowerblue;
+        color: white;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header MainHeading">
+        Guardian Details
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="GuardianDetails">
+            <table style="width:100%" class="table table-hover"></table>
+            <table style="width:100%" class="table table-bordered">
+                <tr>
+                    <th>@Html.Label("Name")</th>
+                    <th>@Html.Label("Relation")</th>
+                    <th>@Html.Label("Address")</th>
+                    <th>@Html.Label("Phone No")</th>
+                    <th>@Html.Label("Signature")</th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(x => x.Name)
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Relation)
+                        @Html.ValidationMessageFor(x => x.Relation, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Address)
+                        @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "" })
+                        @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-red" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Signature)
+                        @Html.ValidationMessageFor(x => x.Signature, "", new { @class = "text-red" })
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
+                <a href="@Url.Action("GuardianDetailsDataTable", "PersonalInformations")" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

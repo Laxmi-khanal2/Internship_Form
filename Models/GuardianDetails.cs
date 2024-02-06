@@ -13,7 +13,7 @@ namespace InternshipForm.Models
         public string? Relation { get; set; }
         [Required(ErrorMessage = "Required")]
         public string? Address { get; set; }
-        public long PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
         [Required(ErrorMessage = "Required")]
         public string ?  Signature { get; set; }
 

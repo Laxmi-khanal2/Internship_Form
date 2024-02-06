@@ -1,4 +1,10 @@
 ﻿@model PersonalInformation
+
+@{
+    ViewData["Title"] = "PersonalInformationsDataTable";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
 <h2>PersonalInformationData</h2>
@@ -82,11 +88,11 @@
 
 
            {
-                "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/PersonalInformationDataTableController/Edit/' + full.Id + '">Edit</a>'; }
+                "render": function (data, type, row, meta) { return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>'; }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.Id + "'); >Delete</a>";
+                    return '<a class="btn btn-danger" href="/PersonalInformationDataTable/Delete?id=' + row.id + '">Delete</a>';;
                 }
             },
 

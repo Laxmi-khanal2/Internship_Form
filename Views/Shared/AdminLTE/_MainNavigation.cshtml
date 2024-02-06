@@ -76,14 +76,21 @@
                     <a asp-controller="PersonalInformations" asp-action="PersonalInformationDetails" class="nav-link @Url.MakeActiveClass("PersonalInformations","PersonalInformationDetails")">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Personal Information
+                           Create Information
                         </p>
                     </a>
-                <li class="nav-item">
-                    <a asp-controller="DataTable" asp-action="Index" class="nav-link @Url.MakeActiveClass("DataTable","Index")">
+                    <a asp-controller="PersonalInformations" asp-action="GuardianDetails" class="nav-link @Url.MakeActiveClass("PersonalInformations","GuardianDetails")">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                           Data Table
+                           Guardian Details
+                        </p>
+                    </a>
+                    </li>
+                <li class="nav-item">
+                    <a asp-controller="PersonalInformationDataTable" asp-action="PersonalInformationDataTable" class="nav-link @Url.MakeActiveClass("PersonalInformationDataTable","PersonalInformationDataTable")">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                      Details
                         </p>
                     </a>
 

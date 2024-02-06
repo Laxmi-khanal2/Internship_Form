@@ -1,52 +1,27 @@
-﻿@model PersonalInformation
+﻿
+
+@model PersonalInformation
+
 @{
     ViewData["Title"] = "PersonalInformations";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
-<style>
-    .MainHeading {
-        background-color: cornflowerblue !important;
-        color: white !important;
-    }
 
-    .form-check-input {
-        position: absolute;
-        margin-top: 0.3rem;
-        margin-left: 1rem;
-    }
+<body>
+    <div class="">
 
-    .text-red {
-        color: red;
-    }
-
-    .card {
-        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 80%;
-        margin: auto;
-        margin-top: 50px;
-        padding: 20px;
-    }
-
-    .card-header {
-        background-color: cornflowerblue;
-        color: white;
-    }
-</style>
-
-<div class="card">
-    <div class="card-header MainHeading" colspan="6">
-        Personal Information
-    </div>
-    <div class="card-body">
-        <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
+        <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformationDataTable" asp-action="Delete">
             <table style="width:100%" class="table table-hover">
 
-               
+                <tr>
+                    <th class="MainHeading" colspan="6"> Personal Information </th>
+
+                </tr>
             </table>
             <div class="row">
                 <div class="col-md-4">
+                    @Html.HiddenFor(x => x.Id)
                     @Html.LabelFor(x => x.FirstName)
                     @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-red" })
@@ -134,13 +109,10 @@
                 </div>
             </div>
             <br />
-
             <div class="form-group">
-                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
-                <a href="@Url.Action("PersonalInformationDataTable", "PersonalInformationDataTable")" class="btn btn-primary">Back to List</a>
-                <a href="@Url.Action("GuardianDetails","PersonalInformations")" class="btn btn-primary"> Next</a>
+                <input type="submit" id="submitBtn" value="Delete" class="btn btn-primary" />
+                <a asp-action="PersonalInformationDataTable">Back to List</a>
             </div>
-
         </form>
     </div>
-</div>
+</body>

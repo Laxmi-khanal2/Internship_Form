@@ -16,11 +16,11 @@ namespace InternshipForm.Models
         [Display(Name = "Start Year")]
        
 
-        public int StartYear { get; set; }
+        public long StartYear { get; set; }
         [Display(Name = "Completion Year")]
         
 
-        public int CompletionYear { get; set; }
+        public long CompletionYear { get; set; }
         [Display(Name = "Major")]
         [Required(ErrorMessage = "  Required")]
 

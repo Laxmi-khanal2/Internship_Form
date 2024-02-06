@@ -1,0 +1,87 @@
+﻿@model GuardianDetails
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+<h2> Guardian Details</h2>
+
+<div class="container">
+    <div style="width:90%; margin:0 auto;">
+        <table id="myTable" class="display" cellspacing="0" width="100%">
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Relation</th>
+                    <th>Address</th>
+                    <th>PhoneNumber </th>
+                    <th>Signature</th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+
+
+<script>
+    $('#myTable').DataTable({
+
+        "paging": true,
+        "pageLength": 5,
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [2, 4, 6],
+
+
+        "ajax": {
+            "url": "/PersonalInformations/LoadData",
+            "type": "POST",
+            "dataType": "Json",
+
+            "error": function (xhr, error, thrown) {
+                console.log("DataTables error:", error);
+            }
+        },
+        "columnDefs": [{
+            "targets": [0],
+
+            "searchable": false
+        }],
+
+        // table ko header haru ko column
+
+        "columns": [
+            { data: "id", "name": "ID", "autoWidth": true },
+            { data: "name", "name": "Name", "autoWidth": true },
+            { data: "relation", "name": "Relation", "autoWidth": true },
+            { data: "address", "name": "Address", "autoWidth": true },
+            { data: "phoneNumber", "name": "PhoneNumber", "autoWidth": true },
+            { data: "signature", "name": "Signature", "autoWidth": true },
+           
+
+
+            // {
+            //     "render": function (data, type, row, meta) { return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>'; }
+            // },
+            // {
+            //     data: null, render: function (data, type, row) {
+            //         return '<a class="btn btn-danger" href="/PersonalInformationDataTable/Delete?id=' + row.id + '">Delete</a>';;
+            //     }
+            // },
+
+
+        ]
+
+
+
+
+    });
+
+</script>
