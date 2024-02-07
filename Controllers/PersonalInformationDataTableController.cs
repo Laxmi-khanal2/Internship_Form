@@ -108,8 +108,8 @@ namespace InternshipForm.Controllers
                 throw;
             }
         }
-    
-      [HttpPost]
+
+        [HttpPost]
         public IActionResult Delete(PersonalInformation personal)
         {
             try
@@ -140,5 +140,53 @@ namespace InternshipForm.Controllers
 
 
         }
+        // DataTable of GuardianDetails
+        [HttpGet]
+        public IActionResult GuardianDetailsDataTable()
+        {
+            return View();
+        }
+
+        public IActionResult LoadDataofGuardian(int draw, int start, int length)
+
+        {
+
+            var allData = _context.GuardianDetails.ToList();
+            var data = allData.Skip(start).Take(length).ToList();
+
+            var response = new
+            {
+                draw = draw,
+                recordsTotal = allData.Count,
+                recordsFiltered = allData.Count,
+                data = data,
+
+            };
+
+
+
+            return Json(response);
+
+        }
+        //datatable of Education
+        public IActionResult EducationDataTable()
+        {
+            return View();
+        }
+        public IActionResult LoadDataOfEducation(int draw, int start, int length)
+        {
+            var allData = _context.Education.ToList();
+            var data = allData.Skip(start).Take(length).ToList();
+
+            var response = new
+            {
+                draw = draw,
+                recordsTotal = allData.Count,
+                recordsFiltered = allData.Count,
+                data = data,
+
+            };
+             return Json(response);
+         }
     }
 }

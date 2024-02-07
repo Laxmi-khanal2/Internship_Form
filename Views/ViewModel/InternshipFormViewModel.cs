@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternshipForm.ViewModel
 {
+    
     public class InternshipFormViewModel
     {
         [Key]

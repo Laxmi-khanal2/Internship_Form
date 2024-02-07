@@ -1,0 +1,82 @@
+﻿@model List<Education>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+<h2> Education DataTable</h2>
+
+<div style="width:90%;margin:0 auto;">
+    <table id="myTable" class="display" cellspacing="0" width="100%">
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>SchoolorCollegeName </th>
+                <th>Location</th>
+                <th>StartYear</th>
+                <th>CompletionYear</th>
+                <th>Major</th>
+
+            </tr>
+        </thead>
+    </table>
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+<script>
+    $('#myTable').DataTable({
+
+        "paging": true,
+        "pageLength": 5,
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [2, 4, 6],
+
+
+        "ajax": {
+            "url": "/PersonalInformationDataTable/LoadDataOfEducation",
+            "type": "POST",
+            "dataType": "Json",
+
+            "error": function (xhr, error, thrown) {
+                console.log("DataTables error:", error);
+            }
+        },
+        "columnDefs": [{
+            "targets": [0],
+
+            "searchable": false
+        }],
+
+        // table ko header haru ko column
+
+        "columns": [
+            { data: "id", "name": "ID", "autoWidth": true },
+            { data: "schoolorCollegeName", "SchoolorCollegeName": "Name", "autoWidth": true },
+            { data: "location", "name": "Location", "autoWidth": true },
+            { data: "startYear", "name": "StartYear", "autoWidth": true },
+            { data: "completionYear", "name": "CompletionYear", "autoWidth": true },
+            { data: "major", "name": "Major", "autoWidth": true },
+
+
+
+            // {
+            //     "render": function (data, type, row, meta) { return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>'; }
+            // },
+            // {
+            //     data: null, render: function (data, type, row) {
+            //         return '<a class="btn btn-danger" href="/PersonalInformationDataTable/Delete?id=' + row.id + '">Delete</a>';;
+            //     }
+            // },
+
+
+        ]
+
+
+
+
+    });
+
+</script>

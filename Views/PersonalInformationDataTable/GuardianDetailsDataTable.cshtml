@@ -5,7 +5,7 @@
 
 <h2> Guardian Details</h2>
 
-<div class="container">
+<div class="">
     <div style="width:90%; margin:0 auto;">
         <table id="myTable" class="display" cellspacing="0" width="100%">
             <thead>
@@ -17,7 +17,7 @@
                     <th>Address</th>
                     <th>PhoneNumber </th>
                     <th>Signature</th>
-                    
+
                 </tr>
             </thead>
         </table>
@@ -41,7 +41,7 @@
 
 
         "ajax": {
-            "url": "/PersonalInformations/LoadData",
+            "url": "/PersonalInformationDataTable/LoadDataofGuardian",
             "type": "POST",
             "dataType": "Json",
 
@@ -64,7 +64,7 @@
             { data: "address", "name": "Address", "autoWidth": true },
             { data: "phoneNumber", "name": "PhoneNumber", "autoWidth": true },
             { data: "signature", "name": "Signature", "autoWidth": true },
-           
+
 
 
             // {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using InternshipForm.ViewModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
@@ -9,22 +10,23 @@ namespace InternshipForm.Models
         public int Id { get; set; }
         [Display(Name = "School/College Name")]
         [Required(ErrorMessage =" Required")]
-        public string ? School_CollegeName { get; set; }
+        public string ? SchoolorCollegeName { get; set; }
         [Display(Name = "Location")]
         [Required(ErrorMessage = "Required")]
         public string? Location { get; set; }
         [Display(Name = "Start Year")]
        
 
-        public long StartYear { get; set; }
+        public DateTime? StartYear { get; set; }
         [Display(Name = "Completion Year")]
         
 
-        public long CompletionYear { get; set; }
+        public DateTime?  CompletionYear { get; set; }
         [Display(Name = "Major")]
         [Required(ErrorMessage = "  Required")]
 
         public string?  Major { get; set; }
+  
 
         //[ForeignKey(nameof(PersonalInformation))]
         //public int PersonalID { get; set; }

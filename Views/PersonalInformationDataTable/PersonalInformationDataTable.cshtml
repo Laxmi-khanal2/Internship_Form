@@ -7,9 +7,9 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
-<h2>PersonalInformationData</h2>
+<h2>Information</h2>
 
-<div class="container">
+<div class="">
     <div style="width:90%; margin:0 auto;">
         <table id="myTable" class="display" cellspacing="0" width="100%">
             <thead>
@@ -88,7 +88,8 @@
 
 
            {
-                "render": function (data, type, row, meta) { return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>'; }
+                "render": function (data, type, row, meta) { 
+                    return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>'; }
             },
             {
                 data: null, render: function (data, type, row) {

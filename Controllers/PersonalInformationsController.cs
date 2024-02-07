@@ -61,34 +61,40 @@ namespace InternshipForm.Controllers
             }
             return View(guardianDetails);
         }
-        // Data table for guardian details
+        
 
+        //Education Controller
         [HttpGet]
-        public IActionResult GuardianDetailsDataTable ()
+        public IActionResult Education()
         {
-            return View();
+
+            var model = new List<Education> { new Education() };
+
+
+            return View(model);
         }
-
-        public IActionResult LoadData(int draw, int start, int length)
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Education(List<Education> model)
         {
-
-            var allData = _context.GuardianDetails.ToList();
-            var data = allData.Skip(start).Take(length).ToList();
-
-            var response = new
+            if (ModelState.IsValid)
             {
-                draw = draw,
-                recordsTotal = allData.Count,
-                recordsFiltered = allData.Count,
-                data = data,
+                
+                foreach (var education in model)
+                {
+                    _context.Education.Add(education);
+                }
+                _context.SaveChanges();
 
-            };
+               
 
 
+                return RedirectToAction("Education");
+            }
 
-            return Json(response);
-
+            return View(model);
         }
+
+      
     }
 }

@@ -12,6 +12,6 @@ namespace InternshipForm.Data
         public DbSet<Education> Education { get; set; }
         public DbSet<GuardianDetails> GuardianDetails { get; set; }
         public DbSet<References> References { get; set; }
-        public DbSet<InternshipForm.ViewModel.InternshipFormViewModel> InternshipFormViewModel { get; set; } = default!;
+        //public DbSet<InternshipForm.ViewModel.InternshipFormViewModel> InternshipFormViewModel { get; set; } = default!;
     }
 }

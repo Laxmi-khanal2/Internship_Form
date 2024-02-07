@@ -70,8 +70,8 @@ namespace InternshipForm.Controllers
 
             model.Education = new List<Education>
             {
-                new Education() {School_CollegeName="Jaya Multiple Campus", Location="Makalbari",StartYear= 2018 , CompletionYear =2020  , Major="Management"},
-                new Education(){School_CollegeName ="Texas College of Management and It", Location ="Shipal", StartYear = 2021, CompletionYear = 2024, Major="BIT"},
+                new Education() {SchoolorCollegeName="Jaya Multiple Campus", Location="Makalbari",StartYear= new DateTime(1/1/2018) , CompletionYear = new DateTime(1/1/2018)   , Major="Management"},
+                new Education(){SchoolorCollegeName ="Texas College of Management and It", Location ="Shipal", StartYear =  new DateTime(1/1/2018) , CompletionYear =  new DateTime(1/1/2018) , Major="BIT"},
 
 
             };
