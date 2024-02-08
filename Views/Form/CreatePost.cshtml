@@ -360,7 +360,7 @@
         <tr>
             <td> @Html.TextBoxFor(x => x.References.Name)</td>
             <td> @Html.TextBoxFor(x => x.References.Positions)</td>
-            <td> @Html.TextBoxFor(x => x.References.College_Company)</td>
+            <td> @Html.TextBoxFor(x => x.References.CollegeorCompany)</td>
             <td> @Html.TextBoxFor(x => x.References.Phone, new { @class = "", type = "number" })</td>
             <td> @Html.TextBoxFor(x => x.References.Signature)</td>
         </tr>
@@ -404,6 +404,7 @@
     <script type="text/javascript" >
 
         $(document).ready(function () {
+            
             var x = 1;
             $("#newbtn").click(function () {
 

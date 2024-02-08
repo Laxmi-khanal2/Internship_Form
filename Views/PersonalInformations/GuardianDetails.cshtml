@@ -40,7 +40,7 @@
     </div>
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="GuardianDetails">
-            <table style="width:100%" class="table table-hover"></table>
+     
             <table style="width:100%" class="table table-bordered">
                 <tr>
                     <th>@Html.Label("Name")</th>
@@ -75,6 +75,7 @@
             <div class="form-group">
                 <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
                 <a href="@Url.Action("GuardianDetailsDataTable", "PersonalInformationDataTable")" class="btn btn-primary">Back to List</a>
+                <a href="@Url.Action("References", "PersonalInformations")" class="btn btn-primary float-right"> Next</></a>
             </div>
         </form>
     </div>

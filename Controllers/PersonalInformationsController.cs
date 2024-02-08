@@ -23,7 +23,9 @@ namespace InternshipForm.Controllers
         [HttpGet]
         public IActionResult PersonalInformationDetails()
         {
-            return View();
+            PersonalInformation personalInformation = new PersonalInformation();
+
+            return View(personalInformation);
         }
       
 
@@ -35,8 +37,13 @@ namespace InternshipForm.Controllers
             if (ModelState.IsValid)
             {
                 _context.PersonalInformation.Add(personalInformation);
-                _context.SaveChanges();
-                return RedirectToAction("PersonalInformationsDetails");
+              var result=  _context.SaveChanges();
+                if(result!=null)
+                {
+                    personalInformation.isSubmitted = true;
+                }
+                //return RedirectToAction("PersonalInformationDetails");
+             
             }
         
             return View(personalInformation);
@@ -95,6 +102,22 @@ namespace InternshipForm.Controllers
             return View(model);
         }
 
-      
+        [HttpGet]
+        public IActionResult References()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult References(References references)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.References.Add(references);
+                _context.SaveChanges();
+                return RedirectToAction("References");
+            }
+            return View(references);
+        }
     }
 }

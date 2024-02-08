@@ -33,6 +33,9 @@
         background-color: cornflowerblue;
         color: white;
     }
+    .float-right{
+        float: right;
+    }
 </style>
 
 <div class="card">
@@ -40,7 +43,7 @@
         Personal Information
     </div>
     <div class="card-body">
-        <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
+        <form id="myForm" method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
             <table style="width:100%" class="table table-hover">
 
                
@@ -136,11 +139,42 @@
             <br />
 
             <div class="form-group">
-                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
+                <input data-boolean="@Model.isSubmitted" type="submit" id="submitBtn" value="Submit" class="btn btn-primary"   />
                 <a href="@Url.Action("PersonalInformationDataTable", "PersonalInformationDataTable")" class="btn btn-primary">Back to List</a>
-                <a href="@Url.Action("Education","PersonalInformations")" class="btn btn-primary"> Next</a>
+                <a href="@Url.Action("Education","PersonalInformations")" class="btn btn-primary float-right" id="nextBtn"> Next</a>
             </div>
 
         </form>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+
+
+<script>
+    $(document).ready(function () {
+        function validateBeforeNext() {
+            debugger;
+            var isFormSubmitted = $("#submitBtn").data("boolean");
+
+            if (isFormSubmitted) {
+                window.location.replace('/PersonalInformations/Education');
+            } else {
+               
+                // $("#nextBtn").click(function (event) {
+                //     event.preventDefault();
+                //     validateBeforeNext();
+                // });
+                alert("Please submit the form before proceeding.");
+            }
+        }
+
+        $("#nextBtn").click(function (event) {
+            event.preventDefault();
+            validateBeforeNext();
+        });
+    });
+</script>
+

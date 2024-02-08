@@ -8,12 +8,12 @@ namespace InternshipForm.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(PersonalInformation))]
-        public int PersonalID { get; set; }
-        public PersonalInformation PersonalInformation { get; set; }
+        //[ForeignKey(nameof(PersonalInformation))]
+        //public int PersonalID { get; set; }
+        //public PersonalInformation PersonalInformation { get; set; }
         public  string Name { get; set; }
         public string Positions { get; set; }
-        public string College_Company { get; set; }
+        public string CollegeorCompany { get; set; }
         public int Phone { get; set; }
         public string Signature { get; set; }
     }

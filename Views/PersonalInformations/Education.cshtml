@@ -46,18 +46,13 @@
         background-color: cornflowerblue;
         color: white;
     }
-
-    .arrow {
-        border: solid black;
-        border-width: 0 3px 3px 0;
-        display: inline-block;
-        padding: 3px;
+    .float-right{
+        float: right;
     }
-
-    .right {
-        transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
+    .float-left{
+        float: left;
     }
+   
 </style>
 
 <div class="card">
@@ -118,16 +113,18 @@
                 </tbody>
 
             </table>
-            <button class="btn btn-md btn-primary " id="newbtn" type="button"> Add </button>
+            <button class=" fa-sharp fa-solid fa-plus" id="newbtn" type="button">  </button>
             <br />
-
-            <br />
+            <br/>
+            
             <div class="form-group">
-                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" /></br>
-                <a href="@Url.Action("PersonalInformationDetails", "PersonalInformations")"<i class="fa-solid fa-angle-left"></i></a>
+                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
+                <a href="@Url.Action("EducationDataTable", "PersonalInformationDataTable")" class="btn btn-primary">Back to List</></a>
+                <br/>
+               @*  <a href="@Url.Action("PersonalInformationDetails", "PersonalInformations")" class="btn btn-primary float-left">Back</></a> *@
                
-                <a href="@Url.Action("EducationDataTable", "PersonalInformationDataTable")"<i class="btn btn Primary">Back to List</i></a>
-                <a href="@Url.Action("GuardianDetails", "PersonalInformations")" <i class="fa-solid fa-angle-right"></i></a>
+          
+                <a href="@Url.Action("GuardianDetails", "PersonalInformations")"  class="btn btn-primary float-right"> Next</></a>
             </div>
 </form>     
     </div>

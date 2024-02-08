@@ -73,13 +73,13 @@ namespace InternshipForm.Controllers
                     _context.Entry(personal).State = EntityState.Modified;
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PersonalInformationDataTable");
 
                 }
-                else
-                {
-                    return NotFound();
-                }
+                //else
+                //{
+                //    return NotFound();
+                //}
 
                 return View(personal);
             }
@@ -121,15 +121,15 @@ namespace InternshipForm.Controllers
                     _context.Entry(personal).State = EntityState.Deleted;
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PersonalInformationDataTable");
 
                 }
-                else
-                {
-                    return NotFound();
-                }
+                //else
+                //{
+                //    return NotFound();
+                //}
 
-                return View(personal);
+                //return View(personal);
             }
             catch (Exception)
             {

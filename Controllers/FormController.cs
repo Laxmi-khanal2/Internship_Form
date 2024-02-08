@@ -87,7 +87,7 @@ namespace InternshipForm.Controllers
 
             model.References.Name = "References";
             model.References.Positions = "";
-            model.References.College_Company = "Texas College of Management and IT";
+            model.References.CollegeorCompany = "Texas College of Management and IT";
             model.References.Phone = 98235696;
             model.References.Signature = "Texas College";
 

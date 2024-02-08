@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
 {
@@ -54,8 +55,8 @@ namespace InternshipForm.Models
         public string? Email { get; set; }
         [Display(Name = "Do you have Driving  Licience")]
         public bool HasLicence { get; set; }
-        
-
+        [NotMapped]
+        public bool isSubmitted { get; set; } = false;
 
 
     }
