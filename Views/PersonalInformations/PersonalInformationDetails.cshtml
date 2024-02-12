@@ -33,7 +33,8 @@
         background-color: cornflowerblue;
         color: white;
     }
-    .float-right{
+
+    .float-right {
         float: right;
     }
 </style>
@@ -42,104 +43,104 @@
     <div class="card-header MainHeading" colspan="6">
         Personal Information
     </div>
-    <div class="card-body">
+    <div class="card-body ">
         <form id="myForm" method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="PersonalInformationDetails">
             <table style="width:100%" class="table table-hover">
-
-               
             </table>
-            <div class="row">
-                <div class="col-md-4">
-                    @Html.LabelFor(x => x.FirstName)
-                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-red" })
-                </div>
+            <div class="form-main">
+                <div class="row form-input">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.FirstName)
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-red" })
+                    </div>
 
-                <div class="col-md-4" id="mn1">
-                    @Html.LabelFor(X => X.MiddleName)
-                    @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control" })
-                </div>
-
-
-                <div class="col-md-4" id="ln1">
-                    @Html.LabelFor(X => X.LastName)
-                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", type = "string" })
-                    @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-red" })
-                </div>
-
-                <br />
+                    <div class="col-md-4" id="mn1">
+                        @Html.LabelFor(X => X.MiddleName)
+                        @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control" })
+                    </div>
 
 
-                <div class="col-md-2" id="provience1">
-                    @Html.LabelFor(X => X.ProvienceId)
-                    @Html.TextBoxFor(x => x.ProvienceId, new { @class = "form-control", type = "string" })
-                    @Html.ValidationMessageFor(x => x.ProvienceId, "", new { @class = "text-red" })
-                </div>
+                    <div class="col-md-4" id="ln1">
+                        @Html.LabelFor(X => X.LastName)
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", type = "string" })
+                        @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-red" })
+                    </div>
 
-
-                <div class="col-md-3" id="district1">
-                    @Html.LabelFor(X => X.DistrictId)
-                    @Html.TextBoxFor(x => x.DistrictId, new { @class = "form-control", type = "string" })
-                    @Html.ValidationMessageFor(x => x.DistrictId, "", new { @class = "text-red" })
-                </div>
-                <div class="col-md-3" id=" muni1">
-                    @Html.LabelFor(X => X.MuniId)
-                    @Html.TextBoxFor(x => x.MuniId, new { @class = "form-control", type = "" })
-                    @Html.ValidationMessageFor(x => x.MuniId, "", new { @class = "text-red" })
-                </div>
-                <div class="col-md-2" id=" tole1">
-                    @Html.LabelFor(X => X.Tole)
-                    @Html.TextBoxFor(x => x.Tole, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.Tole, "", new { @class = "text-red" })
-                </div>
-                <div class="col-md-2" id=" =ward1">
-                    @Html.LabelFor(X => X.Ward)
-                    @Html.TextBoxFor(x => x.Ward, new { @class = "form-control", type = "number" })
-                </div>
-                <br />
-
-                <div class="col-md-4">
-
-                    @Html.LabelFor(X => X.HomePhoneNumber)
-                    @Html.TextBoxFor(x => x.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
-                    @*       @Html.ValidationMessageFor(x => x.HomePhoneNumber, "", new { @class = "text-red" }) *@
-                </div>
-
-                <div class="col-md-4">
-                    @Html.LabelFor(X => X.Mobile)
-                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
-                    @*   @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "text-red" }) *@
-                </div>
-
-                <div class="col-md-4" id=" citizen">
-
-                    @Html.LabelFor(X => X.CitizenshipNo)
-                    @Html.TextBoxFor(x => x.CitizenshipNo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.CitizenshipNo, "", new { @class = "text-red" })
-                </div>
-                <br />
-
-
-                <div class="col-md-6" id=" =email">
-                    @Html.LabelFor(X => X.Email)
-                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Enter your Email" })
-                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-red" })
-                </div>
-
-                <div class="col-md-6" id="haslicience">
                     <br />
-                    @Html.LabelFor(X => X.HasLicence)
-                    @Html.CheckBoxFor(x => x.HasLicence, new { @class = "form-check-input" })
+
+
+                    <div class="col-md-2" id="provience1">
+                        @Html.LabelFor(X => X.ProvienceId)
+                        @Html.TextBoxFor(x => x.ProvienceId, new { @class = "form-control", type = "string" })
+                        @Html.ValidationMessageFor(x => x.ProvienceId, "", new { @class = "text-red" })
+                    </div>
+
+
+                    <div class="col-md-3" id="district1">
+                        @Html.LabelFor(X => X.DistrictId)
+                        @Html.TextBoxFor(x => x.DistrictId, new { @class = "form-control", type = "string" })
+                        @Html.ValidationMessageFor(x => x.DistrictId, "", new { @class = "text-red" })
+                    </div>
+                    <div class="col-md-3" id=" muni1">
+                        @Html.LabelFor(X => X.MuniId)
+                        @Html.TextBoxFor(x => x.MuniId, new { @class = "form-control", type = "" })
+                        @Html.ValidationMessageFor(x => x.MuniId, "", new { @class = "text-red" })
+                    </div>
+                    <div class="col-md-2" id=" tole1">
+                        @Html.LabelFor(X => X.Tole)
+                        @Html.TextBoxFor(x => x.Tole, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Tole, "", new { @class = "text-red" })
+                    </div>
+                    <div class="col-md-2" id=" =ward1">
+                        @Html.LabelFor(X => X.Ward)
+                        @Html.TextBoxFor(x => x.Ward, new { @class = "form-control", type = "number" })
+                    </div>
+                    <br />
+
+                    <div class="col-md-4">
+
+                        @Html.LabelFor(X => X.HomePhoneNumber)
+                        @Html.TextBoxFor(x => x.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
+                        @*       @Html.ValidationMessageFor(x => x.HomePhoneNumber, "", new { @class = "text-red" }) *@
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(X => X.Mobile)
+                        @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
+                        @*   @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "text-red" }) *@
+                    </div>
+
+                    <div class="col-md-4" id=" citizen">
+
+                        @Html.LabelFor(X => X.CitizenshipNo)
+                        @Html.TextBoxFor(x => x.CitizenshipNo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.CitizenshipNo, "", new { @class = "text-red" })
+                    </div>
+                    <br />
+
+
+                    <div class="col-md-6" id=" =email">
+                        @Html.LabelFor(X => X.Email)
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Enter your Email" })
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-red" })
+                    </div>
+
+                    <div class="col-md-6" id="haslicience">
+                        <br />
+                        @Html.LabelFor(X => X.HasLicence)
+                        @Html.CheckBoxFor(x => x.HasLicence, new { @class = "form-check-input" })
 
 
 
 
+                    </div>
                 </div>
             </div>
             <br />
 
             <div class="form-group">
-                <input data-boolean="@Model.isSubmitted" type="submit" id="submitBtn" value="Submit" class="btn btn-primary"   />
+                <input data-boolean="@Model.isSubmitted" type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
                 <a href="@Url.Action("PersonalInformationDataTable", "PersonalInformationDataTable")" class="btn btn-primary">Back to List</a>
                 <a href="@Url.Action("Education","PersonalInformations")" class="btn btn-primary float-right" id="nextBtn"> Next</a>
             </div>
@@ -153,28 +154,5 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
 
 
-<script>
-    $(document).ready(function () {
-        function validateBeforeNext() {
-            debugger;
-            var isFormSubmitted = $("#submitBtn").data("boolean");
 
-            if (isFormSubmitted) {
-                window.location.replace('/PersonalInformations/Education');
-            } else {
-               
-                // $("#nextBtn").click(function (event) {
-                //     event.preventDefault();
-                //     validateBeforeNext();
-                // });
-                alert("Please submit the form before proceeding.");
-            }
-        }
-
-        $("#nextBtn").click(function (event) {
-            event.preventDefault();
-            validateBeforeNext();
-        });
-    });
-</script>
 

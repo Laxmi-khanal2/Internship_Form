@@ -17,9 +17,9 @@ namespace InternshipForm.Models
         [Required(ErrorMessage = "Required")]
         public string ?  Signature { get; set; }
 
-        //[ForeignKey(nameof(PersonalInformation))]
-        //public int PersonalID { get; set; }
-        //public PersonalInformation PersonalInformation { get; set; }
+        [ForeignKey(nameof(PersonalInformation))]
+        public int InternId { get; set; }
+        public PersonalInformation PersonalInformation { get; set; }
 
     }
 }

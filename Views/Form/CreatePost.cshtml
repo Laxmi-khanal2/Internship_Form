@@ -46,7 +46,7 @@
     @*   <div class=" MainHeading">
     <strong> Official Use </strong>
     </div> *@
-    <table style="width:100%" class="table table-hover">
+     <table style="width:100%" class="table table-hover">
 
         <tr>
             <th class="MainHeading" colspan="6"> Official Use </th>
@@ -79,7 +79,7 @@
             @Html.TextBoxFor(x => x.OfficalUse.Authorized_Signature, new { @class = "form-control" })
         </div>
 
-    </div>
+    </div> 
     @*     <div class="accordion" id="accordionExample">
     <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
@@ -219,7 +219,7 @@
             <tr>
                 <th> @Html.Label("School/CollegeName")</th>
 
-                <th>@Html.Label("Location") </th>
+                <th>@Html.Label("Address") </th>
                 <th>@Html.Label("StartYear") </th>
                 <th>@Html.Label("CompletionYear")</th>
                 <th>@Html.Label("Major")</th>
@@ -236,14 +236,14 @@
 
                 <tr>
                     <td>
-                            @Html.TextBoxFor(X => X.Education[i].SchoolorCollegeName, new { @class = "" })
-                            @Html.ValidationMessageFor(x => x.Education[i].SchoolorCollegeName, "", new { @class = "text-red" })
+                            @Html.TextBoxFor(X => X.Education[i].SchoolOrCollegeName, new { @class = "" })
+                            @Html.ValidationMessageFor(x => x.Education[i].SchoolOrCollegeName, "", new { @class = "text-red" })
                     </td>
 
 
                     <td>
-                            @Html.TextBoxFor(X => X.Education[i].Location)
-                            @Html.ValidationMessageFor(x => x.Education[i].Location, "", new { @class = "text-red" })
+                            @Html.TextBoxFor(X => X.Education[i].Address)
+                            @Html.ValidationMessageFor(x => x.Education[i].Address, "", new { @class = "text-red" })
                     </td>
                     <td>
                             @Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "datepicker" })
@@ -386,6 +386,7 @@
     <div class="form-group">
         <input type="submit" id="submitBtn" value="submit" class="btn  bg-primary" />
     </div>
+
 </form>
 
 

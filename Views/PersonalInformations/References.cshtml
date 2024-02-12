@@ -36,14 +36,13 @@
 </style>
 <div class="card">
     <div class=" card-header MainHeading">
-
         References
     </div>
     <div class="card-body">
 
         <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="References">
-            <table style="width:100%" class="table table-hover">
-            </table>
+            <div class="table-responsive">
+            
             <table style="width:100%" class="table table-bordered">
                 <tr>
 
@@ -66,7 +65,8 @@
 
             <div class="form-group">
                 <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
-                <a href="@Url.Action("References", "PersonalInformations")" class="btn btn-primary float-right"> Next</></a>
+              @*   <a href="@Url.Action("References", "PersonalInformations")" class="btn btn-primary float-right"> Next</></a>
+           *@  </div>
             </div>
         </form>
 

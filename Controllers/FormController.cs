@@ -5,6 +5,8 @@ using InternshipForm.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Drawing;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InternshipForm.Controllers
 {
@@ -29,15 +31,111 @@ namespace InternshipForm.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreatePost(InternshipFormViewModel model)
+        {
+            //if (ModelState.IsValid)
+            {
+                var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
+                _context.SaveChanges();
+                // SQL code of education model
+                foreach (var education in model.Education)
+                {
+                    education.InternId = personalinformation.Entity.InternId;
+                    _context.Education.Add(education);
+                }
+                _context.SaveChanges();
+                //sql code of guardian details model
+                var guardiandetails = _context.GuardianDetails.Add(model.GuardianDetails);
+
+                guardiandetails.Entity.InternId = personalinformation.Entity.InternId;
+                _context.SaveChanges();
+                //sql code of references model
+                var references = _context.References.Add(model.References);
+                references.Entity.InternId = personalinformation.Entity.InternId;
+                _context.SaveChanges();
+
+                return RedirectToAction("CreatePost");
+            }
+
+            return View(model);
+        }
+        //action method for create page 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            InternshipFormViewModel model = new InternshipFormViewModel();
+            model.Education = new List<Education> { new Education() };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(InternshipFormViewModel model)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("CreatePost");
+                var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
+                _context.SaveChanges();
+                // SQL code of education model
+                foreach (var education in model.Education)
+                {
+                    education.InternId = personalinformation.Entity.InternId;
+                    _context.Education.Add(education);
+                }
+                _context.SaveChanges();
+                //sql code of guardian details model
+                var guardiandetails = _context.GuardianDetails.Add(model.GuardianDetails);
+
+                guardiandetails.Entity.InternId = personalinformation.Entity.InternId;
+                _context.SaveChanges();
+                //sql code of references model
+                var references = _context.References.Add(model.References);
+                references.Entity.InternId = personalinformation.Entity.InternId;
+                _context.SaveChanges();
+
+                return RedirectToAction("Create");
             }
-            
+
             return View(model);
         }
+
+        //  action controller datatable
+        [HttpGet]
+        public IActionResult Details()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult LoadData(int draw, int start, int length)
+        {
+            var query = _context.PersonalInformation.Skip(start).Take(length);
+            var data = query.ToList();
+
+            // Total record count for pagination
+            var recordsTotal = _context.PersonalInformation.Count();
+
+            // Filtered record count for custom filtering (if required)
+            var recordsFiltered = recordsTotal; // You might need to adjust this based on your filter criteria
+
+            // Prepare the response
+            var response = new
+            {
+                draw = draw,
+                recordsTotal = recordsTotal,
+                recordsFiltered = recordsFiltered,
+                data = data
+            };
+
+            return Json(response);
+        }
+
+
+
+
+
+
 
         [HttpGet]
         public IActionResult DetailsPost()
@@ -70,8 +168,8 @@ namespace InternshipForm.Controllers
 
             model.Education = new List<Education>
             {
-                new Education() {SchoolorCollegeName="Jaya Multiple Campus", Location="Makalbari",StartYear= new DateTime(1/1/2018) , CompletionYear = new DateTime(1/1/2018)   , Major="Management"},
-                new Education(){SchoolorCollegeName ="Texas College of Management and It", Location ="Shipal", StartYear =  new DateTime(1/1/2018) , CompletionYear =  new DateTime(1/1/2018) , Major="BIT"},
+                new Education() {SchoolOrCollegeName="Jaya Multiple Campus", Address="Makalbari",StartYear= new DateTime(1/1/2018) , CompletionYear = new DateTime(1/1/2018)   , Major="Management"},
+                new Education(){SchoolOrCollegeName ="Texas College of Management and It", Address ="Shipal", StartYear =  new DateTime(1/1/2018) , CompletionYear =  new DateTime(1/1/2018) , Major="BIT"},
 
 
             };
@@ -100,59 +198,44 @@ namespace InternshipForm.Controllers
 
 
 
-        //[HttpPost]
-
-        //public IActionResult CreatePost(OfficalUse o)
-        //{
-        //    if (Request.HttpMethod == "POST")
-        //    {
-        //        OfficalUse or = new OfficalUse();
-        //        using (SqlCommand con = new SqlCommand(" Server=DESKTOP-UH9VVUU\\SQLEXPRESS;Database=Registrationform ; TrustServerCertificate= True; integrated Security=True"))
-        //        {
-        //            using (SqlCommand cmd = new SqlCommand("stored procedure of official use ", con))
-        //            {
-        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //                cmd.Parameters.AddWithValue("", o.Internship_For);
-        //                cmd.Parameters.AddWithValue("", o.Intern_Id);
-        //                cmd.Parameters.AddWithValue("", o.)
-
-
-
-        //            }
-        //        }
-        //        return View();
-        //    }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(InternshipFormViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
-                _context.SaveChanges();
-                //    var PersonalId = personalInfo.Entity.Id;
-                //    model.Education.PersonalID = PersonalId;
-                //    model.GuardianDetails.PersonalID = PersonalId;
-                //    model.References.PersonalID = PersonalId;
-                //    SaveEducation(model.Education);
-            }
-            return View(model);
-        }
-
-        private Education SaveEducation(Education model)
-        {
-            _context.Education.Add(model);
-            _context.SaveChanges();
-            return model;
-        }
-        private Education SaveGuardian(Education model)
-        {
-            _context.Education.Add(model);
-            _context.SaveChanges();
-            return model;
-        }
+    }
     }
 
-}
+
+
+
+
+    
+
+    //    [HttpPost]
+    //    [ValidateAntiForgeryToken]
+    //    public IActionResult  Create(InternshipFormViewModel model)
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
+    //            _context.SaveChanges();
+    //            //    var PersonalId = personalInfo.Entity.Id;
+    //            //    model.Education.PersonalID = PersonalId;
+    //            //    model.GuardianDetails.PersonalID = PersonalId;
+    //            //    model.References.PersonalID = PersonalId;
+    //            //    SaveEducation(model.Education);
+    //        }
+    //        return View(model);
+    //    }
+
+    //    private Education SaveEducation(Education model)
+    //    {
+    //        _context.Education.Add(model);
+    //        _context.SaveChanges();
+    //        return model;
+    //    }
+    //    private Education SaveGuardian(Education model)
+    //    {
+    //        _context.Education.Add(model);
+    //        _context.SaveChanges();
+    //        return model;
+    //    }
+    //}
+
+

@@ -1,4 +1,4 @@
-﻿@model List<Education>
+﻿@* @model List<Education>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
@@ -15,6 +15,7 @@
                 <th>StartYear</th>
                 <th>CompletionYear</th>
                 <th>Major</th>
+                <th>InternId</th>
 
             </tr>
         </thead>
@@ -59,7 +60,7 @@
             { data: "startYear", "name": "StartYear", "autoWidth": true },
             { data: "completionYear", "name": "CompletionYear", "autoWidth": true },
             { data: "major", "name": "Major", "autoWidth": true },
-
+            { data: "internId", "name": "InternId", "autoWidth": true },
 
 
             // {
@@ -79,4 +80,4 @@
 
     });
 
-</script>
+</script> *@

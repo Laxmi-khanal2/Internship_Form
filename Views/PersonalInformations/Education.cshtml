@@ -61,10 +61,10 @@
     </div>
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" asp-controller="PersonalInformations" asp-action="Education">
+            <div class="table-responsive">
 
-
-            <table style="width:100%" class="table table-bordered">
-                <tr colspan="6">
+                <table style="width:100%" class="table table-bordered">
+                <tr >
                 <thead>
 
 
@@ -85,12 +85,12 @@
                         <tr id="row_@i">
                             <td>
                              
-                                    @Html.TextBoxFor(x => Model[i].SchoolorCollegeName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => Model[i].SchoolorCollegeName, "", new { @class = "text-red" })
+                                    @Html.TextBoxFor(x => Model[i].SchoolOrCollegeName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => Model[i].SchoolOrCollegeName, "", new { @class = "text-red" })
                             </td>
                             <td>
-                                    @Html.TextBoxFor(x => Model[i].Location, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => Model[i].Location, "", new { @class = "text-red" })
+                                    @Html.TextBoxFor(x => Model[i].Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => Model[i].Address, "", new { @class = "text-red" })
                             </td>
                             <td>
                                     @Html.TextBoxFor(x => Model[i].StartYear, new { @class = "form-control datepicker" })
@@ -103,6 +103,9 @@
                             <td>
                                     @Html.TextBoxFor(x => Model[i].Major, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(x => Model[i].Major, "", new { @class = "text-red" })
+                            </td>
+                            <td>
+                              @Html.TextBoxFor(x =>Model[i].Major,new {@class = "form-control"})
                             </td>
                             <td>
                                 <!-- Uncomment this line if you plan to use a delete button -->
@@ -125,6 +128,7 @@
                
           
                 <a href="@Url.Action("GuardianDetails", "PersonalInformations")"  class="btn btn-primary float-right"> Next</></a>
+            </div>
             </div>
 </form>     
     </div>

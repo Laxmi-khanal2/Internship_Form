@@ -37,11 +37,9 @@ namespace InternshipForm.Controllers
             if (ModelState.IsValid)
             {
                 _context.PersonalInformation.Add(personalInformation);
-              var result=  _context.SaveChanges();
-                if(result!=null)
-                {
-                    personalInformation.isSubmitted = true;
-                }
+              _context.SaveChanges();
+              
+               
                 //return RedirectToAction("PersonalInformationDetails");
              
             }
@@ -84,7 +82,7 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Education(List<Education> model)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 
                 foreach (var education in model)

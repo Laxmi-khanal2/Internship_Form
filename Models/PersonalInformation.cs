@@ -6,7 +6,7 @@ namespace InternshipForm.Models
     public class PersonalInformation
     {
         [Key]
-        public int Id { get; set; }
+        public int InternId { get; set; }
         [Display(Name ="First Name")]
 
         [Required (ErrorMessage ="First Name is Required")] 

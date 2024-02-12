@@ -51,7 +51,7 @@ namespace InternshipForm.Controllers
             {
                 PersonalInformation personal = new PersonalInformation();
 
-                personal = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.Id == id select PersonalInformation).FirstOrDefault();
+                personal = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.InternId == id select PersonalInformation).FirstOrDefault();
                 return View(personal);
 
             }
@@ -94,7 +94,7 @@ namespace InternshipForm.Controllers
         {
             try
             {
-                PersonalInformation personal = _context.PersonalInformation.FirstOrDefault(p => p.Id == id);
+                PersonalInformation personal = _context.PersonalInformation.FirstOrDefault(p => p.InternId == id);
 
                 if (personal == null)
                 {
