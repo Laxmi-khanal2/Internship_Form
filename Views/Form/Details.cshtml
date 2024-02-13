@@ -8,17 +8,22 @@
 
 <div class="">
 <div style="width:90%; margin:0 auto;">
-    <table id="myTable" class="display" cellspacing="0" width="100%">
+        <table id="myTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>PersonalInformation</th>
-                <th>Education</th>
-                <th>GuardianDetails</th>
-                <th>References</th>
+                <th>InternId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>HasLicence</th>
+                <th>SchoolOrCollegeName</th>
+                <th>Major</th>
+                <th>Address</th>
+                <th>CollegeorCompany</th>
                
                 <th>Edit</th>
-                <th>Delete</th>
+                <th>Delete</th> 
             </tr>
         </thead>
 
@@ -37,13 +42,13 @@
         "pageLength": 7,
         "processing": true,
         "serverSide": true,
-        "lengthMenu": [2, 4, 6],
+        "lengthMenu": [2,5,10,15,20],
 
 
         "ajax": {
-            "url": "/Details/LoadData",
+            "url": "/Form/GetData",
             "type": "POST",
-            "dataType": "Json",
+            "dataType": "json",
 
             "error": function (xhr, error, thrown) {
                 console.log("DataTables error:", error);
@@ -58,22 +63,26 @@
         // table ko header haru ko column
 
         "columns": [
-            { data: "id", "name": "Id", "autoWidth": true },
-            { data: "personalInformation", "name": "PersonalInformation", "autoWidth": true },
-            { data: "education", "name": "Education", "autoWidth": true },
-            { data: "guardianDetails", "name": "GuardianDetails", "autoWidth": true },
-            { data: "references", "name": "References", "autoWidth": true },
-
+            { data: "internId", "name": "InternId", "autoWidth": true },
+            { data: "firstName", "name": "FirstName", "autoWidth": true },
+            { data: "lastName", "name": "LastName", "autoWidth": true },
+            { data: "mobile", "name": "Mobile", "autoWidth": true },
+            { data: "email", "name": "Email", "autoWidth": true },
+            { data: "hasLicence", "name": "HasLicence", "autoWidth": true, render: function (data, type, row) { return data ? 'Yes' : 'No'; } },
+            { data: "schoolOrCollegeName", "name": "SchoolOrCollegeName", "autoWidth": true },
+            { data: "major", "name": "Major", "autoWidth": true },
+            { data: "address", "name": "Address", "autoWidth": true },
+            { data: "collegeorCompany", "name": "CollegeorCompany", "autoWidth": true },
 
 
             {
                 "render": function (data, type, row, meta) {
-                    return '<a class="btn btn-info" href="/PersonalInformationDataTable/Edit?id=' + row.id + '">Edit</a>';
+                    return '<a class="btn btn-info" href="/Form/Create?Id=' + row.internId + '">Edit</a>';
                 }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return '<a class="btn btn-danger" href="/PersonalInformationDataTable/Delete?id=' + row.id + '">Delete</a>';;
+                    return '<a class="btn btn-danger" href="/Form/Delete?id=' + row.internId + '">Delete</a>';;
                 }
             },
 

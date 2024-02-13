@@ -25,14 +25,22 @@ namespace InternshipForm.Controllers
 
         {
 
-            var allData = _context.PersonalInformation.ToList();
+            var allData = (from PI in _context.PersonalInformation
+                           join E in _context.Education
+                           on PI.InternId equals E.InternId
+                           select new
+                           {
+                               InternId = PI.InternId,
+                               FirstName = PI.FirstName,
+                               LastName = E.SchoolOrCollegeName,
+                               HomePhoneNumber = PI.HomePhoneNumber
+                           });
             var data = allData.Skip(start).Take(length).ToList();
 
             var response = new
             {
                 draw = draw,
-                recordsTotal = allData.Count,
-                recordsFiltered = allData.Count,
+               
                 data = data,
 
             };
