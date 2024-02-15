@@ -234,6 +234,7 @@
 
                                         <tr>
                                             <td>
+                                                @Html.HiddenFor(x=> x.Education[i].Id)
                                                     @Html.TextBoxFor(X => X.Education[i].SchoolOrCollegeName, new { @class = "" })
                                                     @Html.ValidationMessageFor(x => x.Education[i].SchoolOrCollegeName, "", new { @class = "text-red" })
                                             </td>
@@ -293,6 +294,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.HiddenFor(x => x.GuardianDetails.Id)
                                     @Html.TextBoxFor(x => x.GuardianDetails.Name)
                                     @Html.ValidationMessageFor(x => x.GuardianDetails.Name, "", new { @class = "text-red" })
                                 </td>
@@ -339,6 +341,7 @@
 
                                 </tr>
                                 <tr>
+                                    @Html.HiddenFor(x => x.References.Id)
                                     <td> @Html.TextBoxFor(x => x.References.Name)</td>
                                     <td> @Html.TextBoxFor(x => x.References.Positions)</td>
                                     <td> @Html.TextBoxFor(x => x.References.CollegeorCompany)</td>

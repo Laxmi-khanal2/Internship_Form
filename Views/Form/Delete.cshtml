@@ -1,0 +1,272 @@
+﻿@using InternshipForm.ViewModel
+@model InternshipFormViewModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3>Are You Sure You Want To Delete This?</h3>
+ <form method="post" enctype="multipart/form-data" asp-controller="Form" asp-action="Delete"> 
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+            <table style="width:100%" class="table table-hover">
+
+                <tr>
+                    <th class="MainHeading" colspan="6"> Personal Information </th>
+
+                </tr>
+            </table>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    @Html.HiddenFor(x => x.PersonalInformation.InternId)
+                    @Html.LabelFor(x => x.PersonalInformation.FirstName)
+                    @Html.TextBoxFor(x => x.PersonalInformation.FirstName, new { @class = "form-control" })
+                 
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(X => X.PersonalInformation.MiddleName)
+                    @Html.TextBoxFor(x => x.PersonalInformation.MiddleName, new { @class = "form-control" })
+
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(X => X.PersonalInformation.LastName)
+                    @Html.TextBoxFor(x => x.PersonalInformation.LastName, new { @class = "form-control", type = "string" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.LastName, "", new { @class = "text-red" })
+                </div>
+
+                <br />
+
+
+                <div class="col-md-2">
+                    @Html.LabelFor(X => X.PersonalInformation.ProvienceId)
+                    @Html.TextBoxFor(x => x.PersonalInformation.ProvienceId, new { @class = "form-control", type = "string" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.ProvienceId, "", new { @class = "text-red" })
+                </div>
+
+
+                <div class="col-md-3">
+                    @Html.LabelFor(X => X.PersonalInformation.DistrictId)
+                    @Html.TextBoxFor(x => x.PersonalInformation.DistrictId, new { @class = "form-control", type = "string" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.DistrictId, "", new { @class = "text-red" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(X => X.PersonalInformation.MuniId)
+                    @Html.TextBoxFor(x => x.PersonalInformation.MuniId, new { @class = "form-control", type = "" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.MuniId, "", new { @class = "text-red" })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(X => X.PersonalInformation.Tole)
+                    @Html.TextBoxFor(x => x.PersonalInformation.Tole, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(X => X.PersonalInformation.Ward)
+                    @Html.TextBoxFor(x => x.PersonalInformation.Ward, new { @class = "form-control", type = "number" })
+                </div>
+                <br />
+
+                <div class="col-md-4">
+
+                    @Html.LabelFor(X => X.PersonalInformation.HomePhoneNumber)
+                    @Html.TextBoxFor(x => x.PersonalInformation.HomePhoneNumber, new { @class = "form-control", type = "number", placeholder = "Enter Home PhoneNumber" })
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(X => X.PersonalInformation.Mobile)
+                    @Html.TextBoxFor(x => x.PersonalInformation.Mobile, new { @class = "form-control", type = "number", placeholder = "Enter your phone number" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.Mobile, "", new { @class = "text-red" })
+                </div>
+
+                <div class="col-md-4">
+
+                    @Html.LabelFor(X => X.PersonalInformation.CitizenshipNo)
+                    @Html.TextBoxFor(x => x.PersonalInformation.CitizenshipNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.CitizenshipNo, "", new { @class = "text-red" })
+                </div>
+                <br />
+
+
+                <div class="col-md-6">
+                    @Html.LabelFor(X => X.PersonalInformation.Email)
+                    @Html.TextBoxFor(x => x.PersonalInformation.Email, new { @class = "form-control", placeholder = "Enter your Email" })
+                    @Html.ValidationMessageFor(x => x.PersonalInformation.Email, "", new { @class = "text-red" })
+                </div>
+
+                <div class="col-md-6">
+                    <br />
+                    @Html.LabelFor(X => X.PersonalInformation.HasLicence)
+                    @Html.CheckBoxFor(x => x.PersonalInformation.HasLicence, new { @class = "form-check-input" })
+
+                </div>
+
+            </div>
+           
+    </div>
+    </div>
+
+    
+        
+            <table style="width:100%" class="table table-hover">
+
+                <tr>
+                    <th class="MainHeading" colspan="6"> Education </th>
+
+                </tr>
+            </table>
+            <table style="width:100%" class="table table-bordered">
+                <tr colspan="6">
+                <thead>
+
+
+                    <tr>
+                        <th> @Html.Label("School/CollegeName")</th>
+
+                        <th>@Html.Label("Address") </th>
+                        <th>@Html.Label("StartYear") </th>
+                        <th>@Html.Label("CompletionYear")</th>
+                        <th>@Html.Label("Major")</th>
+                        <th> Action</th>
+                    </tr>
+                </thead>
+
+
+
+                <tbody id="tableEducation">
+                        @for (int i = 0; i < Model.Education.Count; i++)
+                        {
+
+
+                        <tr>
+                            <td>
+                                    @Html.HiddenFor(x => x.Education[i].Id)
+                                    @Html.TextBoxFor(X => X.Education[i].SchoolOrCollegeName, new { @class = "" })
+                                    @Html.ValidationMessageFor(x => x.Education[i].SchoolOrCollegeName, "", new { @class = "text-red" })
+                            </td>
+
+
+                            <td>
+                                    @Html.TextBoxFor(X => X.Education[i].Address)
+                                    @Html.ValidationMessageFor(x => x.Education[i].Address, "", new { @class = "text-red" })
+                            </td>
+                            <td>
+                                    @Html.TextBoxFor(X => X.Education[i].StartYear, new { @class = "datepicker" })
+                                    @* @Html.ValidationMessageFor(x => x.Education[i].StartYear, "", new { @class = "text-red" }) *@
+                            </td>
+                            <td>
+                                    @Html.TextBoxFor(X => X.Education[i].CompletionYear, new { @class = "datepicker" })
+                                    @*   @Html.ValidationMessageFor(x => x.Education[i].CompletionYear, "", new { @class = "text-red" }) *@
+                            </td>
+                            <td>
+                                    @Html.TextBoxFor(X => X.Education[i].Major)
+                                    @Html.ValidationMessageFor(x => x.Education[i].Major, "", new { @class = "text-red" })
+                            </td>
+                            <td>
+                                    @*   <button type="button" class="deletebtn" title="Remove row">Delete</button> *@
+
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+
+
+
+            </table>
+
+   
+
+
+  
+        <table style="width:100%" class="table table-hover">
+            <tr>
+                <th class="MainHeading" colspan="6"> Guardian Details </th>
+            </tr>
+        </table>
+        <table style="width:100%" class="table table-bordered">
+            <tr colspan="6"></tr>
+            <tr>
+                <th>@Html.Label("Name") </th>
+                <th>@Html.Label("Relation") </th>
+                <th>@Html.Label("Address") </th>
+                <th>@Html.Label("Phone No")</th>
+                <th>@Html.Label("Signature")</th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(x => x.GuardianDetails.Id)
+                    @Html.TextBoxFor(x => x.GuardianDetails.Name)
+                    @Html.ValidationMessageFor(x => x.GuardianDetails.Name, "", new { @class = "text-red" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.GuardianDetails.Relation)
+                    @Html.ValidationMessageFor(x => x.GuardianDetails.Relation, "", new { @class = "text-red" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.GuardianDetails.Address)
+                    @Html.ValidationMessageFor(x => x.GuardianDetails.Address, "", new { @class = "text-red" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.GuardianDetails.PhoneNumber, new { @class = "", type = "number" })
+                    @Html.ValidationMessageFor(x => x.GuardianDetails.PhoneNumber, "", new { @class = "text-red" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.GuardianDetails.Signature)
+                    @Html.ValidationMessageFor(x => x.GuardianDetails.Signature, "", new { @class = "text-red" })
+                </td>
+            </tr>
+        </table>
+        <
+
+    
+        <div class="form-group">
+            <table style="width:100%" class="table table-hover">
+
+                <tr>
+                    <th class="MainHeading" colspan="6"> References </th>
+
+                </tr>
+            </table>
+            <table style="width:100%" class="table table-bordered">
+                <tr colspan="6">
+
+                    <th>@Html.Label("Name") </th>
+                    <th>@Html.Label("Position") </th>
+                    <th>@Html.Label("College/Company") </th>
+                    <th>@Html.Label("Phone ")</th>
+                    <th>@Html.Label("Signature")</th>
+
+                </tr>
+                <tr>
+                    @Html.HiddenFor(x => x.References.Id)
+                    <td> @Html.TextBoxFor(x => x.References.Name)</td>
+                    <td> @Html.TextBoxFor(x => x.References.Positions)</td>
+                    <td> @Html.TextBoxFor(x => x.References.CollegeorCompany)</td>
+                    <td> @Html.TextBoxFor(x => x.References.Phone, new { @class = "", type = "number" })</td>
+                    <td> @Html.TextBoxFor(x => x.References.Signature)</td>
+                </tr>
+            
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+
+                <a href="@Url.Action("Details", "Form")" class="btn btn-primary">Back to List</a>
+        </div>
+    }
+</div>
+</form>
+
+
+
+
+
+
