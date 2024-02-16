@@ -92,9 +92,9 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(InternshipFormViewModel model)
         {
-            //  if (ModelState.IsValid)
+            //if (ModelState.IsValid)
 
-           // {
+           {
                 if (model.PersonalInformation.InternId == 0)
                 {
 
@@ -168,26 +168,26 @@ namespace InternshipForm.Controllers
 
 
 
-            //   return View(model);
-          //   }
+              return View(model);
+            }
 
 
             //  action controller datatable
             [HttpGet]
             public IActionResult Details()
             {
-            var NameFilterOptions = new List<SelectListItem>
+            var FilterOptions = new List<SelectListItem>
             {
                 new SelectListItem{ Value = "firstName", Text="FirstName"},
-                new SelectListItem{ Value = "middleName", Text="MiddleName"},
-                new SelectListItem{ Value = "lastName", Text="LastName"},
+                new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
+                new SelectListItem{ Value = "email", Text="Email"},
             };
-            ViewData["NameFilter"] = NameFilterOptions;
+            ViewData["Filter"] = FilterOptions;
                 return View();
             }
             [HttpPost]
-            public IActionResult GetData(int draw, int start, int length)
-            {
+            public IActionResult GetData(int draw, int start, int length,string filterValue, string filterType)
+             {
                 var query = from PI in _context.PersonalInformation
                             join E in _context.Education on PI.InternId equals E.InternId
                             join GD in _context.GuardianDetails on PI.InternId equals GD.InternId
@@ -206,8 +206,27 @@ namespace InternshipForm.Controllers
                                 CollegeorCompany = R.CollegeorCompany
                             };
 
-                // Count total records before applying pagination
-                int recordsTotal = query.Count();
+            //filter by name,mobile and email
+            if (!string.IsNullOrEmpty(filterValue) && !string.IsNullOrEmpty(filterType))
+            {
+                if (filterType == "firstName")
+                {
+                    query = query.Where(item => item.FirstName.Contains(filterValue));
+                }
+                else if (filterType == "email")
+                {
+                    query = query.Where(item => item.Email.Contains(filterValue));
+                }
+                if(filterType == "schoolOrCollegeName")
+                {
+                    query = query.Where(item => item.SchoolOrCollegeName.Contains(filterValue));
+                }
+            }
+
+        
+
+        // Count total records before applying pagination
+        int recordsTotal = query.Count();
 
                 // Apply pagination
                 var data = query.Skip(start).Take(length).ToList();
