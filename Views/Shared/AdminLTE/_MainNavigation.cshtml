@@ -62,6 +62,16 @@
 
 
                 </li>
+               
+                <li class="nav-item">
+                    <a asp-controller="Form" asp-action="Create" class="nav-link @Url.MakeActiveClass("Form","Create")">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            Create
+                        </p>
+                    </a>
+                    
+                </li>
                 <li class="nav-item">
                     <a asp-controller="Form" asp-action="Details" class="nav-link @Url.MakeActiveClass("form","Details")">
                         <i class="nav-icon fas fa-edit"></i>
@@ -72,28 +82,14 @@
 
 
                 </li>
-                <li class="nav-item">
-                    <a asp-controller="Form" asp-action="Create" class="nav-link @Url.MakeActiveClass("Form","Create")">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Create
-                        </p>
-                    </a>
-                    @*                     <a asp-controller="PersonalInformations" asp-action="GuardianDetails" class="nav-link @Url.MakeActiveClass("PersonalInformations","GuardianDetails")">
-                    <i class="nav-icon fas fa-edit"></i>
-                    <p>
-                    Guardian Details
-                    </p>
-                    </a> *@
-                </li>
-                <li class="nav-item">
+              @*   <li class="nav-item">
                     <a asp-controller="PersonalInformationDataTable" asp-action="PersonalInformationDataTable" class="nav-link @Url.MakeActiveClass("PersonalInformationDataTable","PersonalInformationDataTable")">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Details
                         </p>
                     </a>
-
+ *@
             
             @* <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

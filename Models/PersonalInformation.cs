@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
 {
-    public class PersonalInformation
+  //interface IPersonalInformation
+  public class PersonalInformation
     {
         [Key]
         public int InternId { get; set; }

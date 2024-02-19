@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
 {
+  //  interface Education : IPersonalInformation
     public class Education
     {
         [Key]

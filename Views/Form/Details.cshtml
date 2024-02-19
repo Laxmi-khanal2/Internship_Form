@@ -22,17 +22,19 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 <h2>Details</h2>
+
 <div class="card">
     <div class="row">
         <div class="col-md-3">
-            <label for="Filter">Filter by Name:</label>
+            <label for="Filter">Filter by Model:</label>
             @Html.DropDownList("Filter", ViewData["Filter"] as IEnumerable<SelectListItem>, "---Select---", new { id = "FilterDropdown", @class = "form-control" })
         </div>
 
         <div class="col-md-3">
-            <label for="FilterTextBox">Search By Name:</label>
+            <label for="FilterTextBox">Search By Value:</label>
             <div class="input-group">
-                <input type="text" id="FilterTextbox" class="form-control" placeholder="Enter Value">
+         
+                  <input type="text" id="FilterTextbox" class="form-control" placeholder="Enter the Value"> 
             </div>
         </div>
     </div>
@@ -68,61 +70,58 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
 <script>
-
-    var table = $('#myTable').DataTable({
-        "paging": true,
-        "pageLength": 12,
-        "processing": true,
-        "serverSide": true,
-        "lengthMenu": [2, 5, 10, 15, 20],
-        "ajax": {
-            "url": "/Form/GetData",
-            "type": "POST",
-            "dataType": "json",
-            "filterValue": "filterValue",
-            "data": function (d) {
-                d.filterValue = $('#FilterTextbox').val();
-                d.filterType = $('#FilterDropdown').val();
-            },
-            "error": function (xhr, error, thrown) {
-                console.log("DataTables error:", error);
-            }
-
-        },
-        "columnDefs": [{
-            "targets": [0],
-            "searchable": false
-        }],
-        "columns": [
-            { data: "internId", "name": "InternId", "autoWidth": true },
-            { data: "firstName", "name": "FirstName", "autoWidth": true },
-            { data: "lastName", "name": "LastName", "autoWidth": true },
-            { data: "mobile", "name": "Mobile", "autoWidth": true },
-            { data: "email", "name": "Email", "autoWidth": true },
-            { data: "hasLicence", "name": "HasLicence", "autoWidth": true, render: function (data, type, row) { return data ? 'Yes' : 'No'; } },
-            { data: "schoolOrCollegeName", "name": "SchoolOrCollegeName", "autoWidth": true },
-            { data: "major", "name": "Major", "autoWidth": true },
-            { data: "address", "name": "Address", "autoWidth": true },
-            { data: "collegeorCompany", "name": "CollegeorCompany", "autoWidth": true },
-            {
-                "render": function (data, type, row, meta) {
-                    return '<a class="btn btn-info" href="/Form/Create?Id=' + row.internId + '">Edit</a>';
-                }
-            },
-            {
-                data: null, render: function (data, type, row) {
-                    return '<a class="btn btn-danger" href="/Form/Delete?Id=' + row.internId + '">Delete</a>';
-                }
-            }
-        ]
-    });
-
     
-    $('#FilterDropdown, #FilterTextbox').on('change keyup', function () {
-        table.ajax.reload();
-    });
+        var table = $('#myTable').DataTable({
+            "paging": true,
+            "pageLength": 12,
+            "processing": true,
+            "serverSide": true,
+            "lengthMenu": [2, 5, 10, 15, 20],
+            "ajax": {
+                "url": "/Form/GetData",
+                "type": "POST",
+                "dataType": "json",
+                
+                "data": function (d) {
+                    d.filterValue = $('#FilterTextbox').val();
+                    d.filterType = $('#FilterDropdown').val();
+                },
+                "error": function (xhr, error, thrown) {
+                    console.log("DataTables error:", error);
+                }
+
+            },
+            
+            "columns": [
+                { data: "internId", "name": "InternId", "autoWidth": true },
+                { data: "firstName", "name": "FirstName", "autoWidth": true },
+                { data: "lastName", "name": "LastName", "autoWidth": true },
+                { data: "mobile", "name": "Mobile", "autoWidth": true },
+                { data: "email", "name": "Email", "autoWidth": true },
+                { data: "hasLicence", "name": "HasLicence", "autoWidth": true, render: function (data, type, row) { return data ? 'Yes' : 'No'; } },
+                { data: "schoolOrCollegeName", "name": "SchoolOrCollegeName", "autoWidth": true },
+                { data: "major", "name": "Major", "autoWidth": true },
+                { data: "address", "name": "Address", "autoWidth": true },
+                { data: "collegeorCompany", "name": "CollegeorCompany", "autoWidth": true },
+                {
+                    "render": function (data, type, row, meta) {
+                        return '<a class="btn btn-info" href="/Form/Create?Id=' + row.internId + '">Edit</a>';
+                    }
+                },
+                {
+                    data: null, render: function (data, type, row) {
+                        return '<a class="btn btn-danger" href="/Form/Delete?Id=' + row.internId + '">Delete</a>';
+                    }
+                }
+            ]
+        });
 
 
+        $('#FilterDropdown, #FilterTextbox').on('change keyup', function () {
+            table.ajax.reload();
+        });
+
+   
 
 
 </script>
