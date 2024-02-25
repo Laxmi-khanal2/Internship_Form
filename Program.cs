@@ -1,9 +1,19 @@
 using InternshipForm.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using InternshipForm.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connString));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDBContext>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var app = builder.Build();

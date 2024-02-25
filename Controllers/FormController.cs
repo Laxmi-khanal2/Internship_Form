@@ -40,7 +40,7 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreatePost(InternshipFormViewModel model)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
                 _context.SaveChanges();
@@ -92,7 +92,7 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(InternshipFormViewModel model)
         {
-            //if (ModelState.IsValid)
+           // if (ModelState.IsValid)
 
             {
                 if (model.PersonalInformation.InternId == 0)
@@ -230,7 +230,7 @@ namespace InternshipForm.Controllers
             {
                 draw = draw,
                 recordsTotal = recordsTotal,
-                recordsFiltered = recordsTotal, // No filtering applied in this example
+                recordsFiltered = recordsTotal, 
 
                 data = data
             };
