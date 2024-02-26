@@ -1,0 +1,99 @@
+﻿@model RegisterUser
+
+
+
+<style>
+    body {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .text-red {
+        color: red;
+    }
+
+    .card {
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 50%;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: beige;
+    }
+</style>
+
+
+
+<div class="card">
+      <form method="post" enctype="multipart/form-data" asp-controller="RegisterUser" asp-action="UserLogin">
+        <p class="container register">
+        <p class="row">
+        <p class="col-md-3 register-left">
+            <h3> Welcome</h3>
+        <p>  You can login from here </p>
+
+        </p>
+        <p class="col-md-9 register-right">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="../RegisterUser/UserRegister" role="tab" aria-controls="home" aria-selected="true">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="../RegisterUser/UserLogin" role="tab" aria-controls="profile" aria-selected="false">Login</a>
+                </li>
+            </ul>
+        <p class="tab-content" id="myTabContent">
+        <p class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <h3 class="register-heading">Login as a Employee</h3>
+        <p class="row register-form">
+        <p class="col-md-6">
+        <p class="form-group">
+                                        @Html.LabelFor(X => X.Email)
+                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
+                                        @Html.ValidationMessageFor(e => e.Email, "", new { @class = "text-red" })
+        </p>
+        <p class="form-group">
+                                        @Html.LabelFor(x => x.Password)
+                                        @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
+            <span id="result"></span>
+                                        @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-red" })
+        </p>
+        <p class="col-md-6">
+
+        </p>
+        </p>
+
+        </p>
+        </p>
+        </p>
+
+        </p>
+        </p>
+
+
+        <input type="submit" id=" sumbitBtn" value="Login" class="btn btn-primary" />
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script>
+
+
+
+    $(function () {
+        var msg = '@ViewData["result"]';
+        if (msg == '1') {
+            alert("User Details Insearted Sucessfully");
+            window.location.href = '@Url.Action("UserLogin", "RegisterUser")';
+
+        }
+    });
+</script>
