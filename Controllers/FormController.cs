@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using System.Security.Claims;
 
 namespace InternshipForm.Controllers
 {
@@ -75,6 +76,17 @@ namespace InternshipForm.Controllers
 
             if (Id > 0)
             {
+            //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //    var userExists = _context.RegisterUser.Any(u => u.InternId == Id);
+
+            //    if (!userExists)
+            //    {
+            //        // Redirect to registration page if user has not registered
+            //        return RedirectToAction("UserRegister", "RegisterUser");
+            //    }
+
+
+
                 model.PersonalInformation = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.InternId == Id select PersonalInformation).FirstOrDefault();
 
                 model.Education = _context.Education.Where(p => p.InternId == Id).ToList();
@@ -85,6 +97,11 @@ namespace InternshipForm.Controllers
                 model.GuardianDetails = (from GuardianDetails in _context.GuardianDetails where GuardianDetails.InternId == Id select GuardianDetails).FirstOrDefault();
                 model.References = (from References in _context.References where References.InternId == Id select References).FirstOrDefault();
             }
+            //else
+            //{
+            //    // User is not authenticated, redirect to login page
+            //    return RedirectToAction("UserLogin", "RegisterUser");
+            //}
             return View(model);
         }
 
@@ -92,285 +109,287 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(InternshipFormViewModel model)
         {
-           // if (ModelState.IsValid)
+            // if (ModelState.IsValid
 
+
+            if (model.PersonalInformation.InternId == 0)
             {
-                if (model.PersonalInformation.InternId == 0)
+
+                var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
+                _context.SaveChanges();
+                // SQL code of education model
+                foreach (var education in model.Education)
                 {
-
-                    var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
-                    _context.SaveChanges();
-                    // SQL code of education model
-                    foreach (var education in model.Education)
-                    {
-                        education.InternId = personalinformation.Entity.InternId;
-                        _context.Education.Add(education);
-                    }
-                    _context.SaveChanges();
-                    //sql code of guardian details model
-
-                    model.GuardianDetails.InternId = personalinformation.Entity.InternId;
-                    _context.GuardianDetails.Add(model.GuardianDetails);
-
-                    _context.SaveChanges();
-                    //sql code of references model
-
-                    model.References.InternId = personalinformation.Entity.InternId;
-                    _context.References.Add(model.References);
-                    _context.SaveChanges();
+                    education.InternId = personalinformation.Entity.InternId;
+                    _context.Education.Add(education);
                 }
+                _context.SaveChanges();
+                //sql code of guardian details model
 
-                else
+                model.GuardianDetails.InternId = personalinformation.Entity.InternId;
+                _context.GuardianDetails.Add(model.GuardianDetails);
 
-                {
-                    ////var existingPersonalInformation = _context.PersonalInformation.Find(model.PersonalInformation.InternId);
-                    //if (existingPersonalInformation != null)
-                    //{
-                    _context.Entry(model.PersonalInformation).State = EntityState.Modified;
-                    // _context.Update(model.PersonalInformation);
-                    //}
+                _context.SaveChanges();
+                //sql code of references model
 
-                    //Update Education
-
-                    foreach (var education in model.Education)
-                    {
-
-                        education.InternId = model.PersonalInformation.InternId;
-
-
-                        _context.Entry(education).State = EntityState.Modified;
-
-                    }
-
-
-                    // Update Guardian Details
-                    model.GuardianDetails.InternId = model.PersonalInformation.InternId;
-
-                    _context.Entry(model.GuardianDetails).State = EntityState.Modified;
-
-                    //UPDATE rEFERENCES
-
-                    model.References.InternId = model.PersonalInformation.InternId;
-                    _context.Entry(model.References).State = EntityState.Modified;
-
-
-                    // Save changes
-                    _context.SaveChanges();
-                }
-
-                return RedirectToAction("Details");
-
+                model.References.InternId = personalinformation.Entity.InternId;
+                _context.References.Add(model.References);
+                _context.SaveChanges();
             }
 
+            else
+
+            {
+                ////var existingPersonalInformation = _context.PersonalInformation.Find(model.PersonalInformation.InternId);
+                //if (existingPersonalInformation != null)
+                //{
+                _context.Entry(model.PersonalInformation).State = EntityState.Modified;
+                // _context.Update(model.PersonalInformation);
+                //}
+
+                //Update Education
+
+                foreach (var education in model.Education)
+                {
+
+                    education.InternId = model.PersonalInformation.InternId;
+
+
+                    _context.Entry(education).State = EntityState.Modified;
+
+                }
+
+
+                // Update Guardian Details
+                model.GuardianDetails.InternId = model.PersonalInformation.InternId;
+
+                _context.Entry(model.GuardianDetails).State = EntityState.Modified;
+
+                //UPDATE rEFERENCES
+
+                model.References.InternId = model.PersonalInformation.InternId;
+                _context.Entry(model.References).State = EntityState.Modified;
+
+
+                // Save changes
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Details");
+
+        
+            
+
+
             return View(model);
-        }
+}
 
 
-        //  action controller datatable
-        [HttpGet]
-        public IActionResult Details()
-        {
-            var FilterOptions = new List<SelectListItem>
+//  action controller datatable
+[HttpGet]
+public IActionResult Details()
+{
+    var FilterOptions = new List<SelectListItem>
             {
                 new SelectListItem{ Value = "firstName", Text="FirstName"},
                 new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
                 new SelectListItem{ Value = "email", Text="Email"},
             };
-            ViewData["Filter"] = FilterOptions;
-            return View();
-        }
-        [HttpPost]
-        public IActionResult GetData(int draw, int start, int length, string filterValue, string filterType)
+    ViewData["Filter"] = FilterOptions;
+    return View();
+}
+[HttpPost]
+public IActionResult GetData(int draw, int start, int length, string filterValue, string filterType)
+{
+    var query = from PI in _context.PersonalInformation
+                join E in _context.Education on PI.InternId equals E.InternId
+                join GD in _context.GuardianDetails on PI.InternId equals GD.InternId
+                join R in _context.References on PI.InternId equals R.InternId
+                select new
+                {
+                    InternId = PI.InternId,
+                    FirstName = PI.FirstName,
+                    LastName = PI.LastName,
+                    Mobile = PI.Mobile,
+                    Email = PI.Email,
+                    HasLicence = PI.HasLicence,
+                    SchoolOrCollegeName = E.SchoolOrCollegeName,
+                    Major = E.Major,
+                    Address = GD.Address,
+                    CollegeorCompany = R.CollegeorCompany
+                };
+
+    //filter by name,mobile and email
+    if (!string.IsNullOrEmpty(filterValue) && !string.IsNullOrEmpty(filterType))
+    {
+        if (filterType == "firstName")
         {
-            var query = from PI in _context.PersonalInformation
-                        join E in _context.Education on PI.InternId equals E.InternId
-                        join GD in _context.GuardianDetails on PI.InternId equals GD.InternId
-                        join R in _context.References on PI.InternId equals R.InternId
-                        select new
-                        {
-                            InternId = PI.InternId,
-                            FirstName = PI.FirstName,
-                            LastName = PI.LastName,
-                            Mobile = PI.Mobile,
-                            Email = PI.Email,
-                            HasLicence = PI.HasLicence,
-                            SchoolOrCollegeName = E.SchoolOrCollegeName,
-                            Major = E.Major,
-                            Address = GD.Address,
-                            CollegeorCompany = R.CollegeorCompany
-                        };
-
-            //filter by name,mobile and email
-            if (!string.IsNullOrEmpty(filterValue) && !string.IsNullOrEmpty(filterType))
-            {
-                if (filterType == "firstName")
-                {
-                    query = query.Where(item => item.FirstName.Contains(filterValue));
-                }
-                else if (filterType == "email")
-                {
-                    query = query.Where(item => item.Email.Contains(filterValue));
-                }
-                if (filterType == "schoolOrCollegeName")
-                {
-                    query = query.Where(item => item.SchoolOrCollegeName.Contains(filterValue));
-                }
-            }
-
-
-
-            // Count total records before applying pagination
-            int recordsTotal = query.Count();
-
-            // Apply pagination
-            var data = query.Skip(start).Take(length).ToList();
-
-            // Prepare the response
-            var response = new
-            {
-                draw = draw,
-                recordsTotal = recordsTotal,
-                recordsFiltered = recordsTotal, 
-
-                data = data
-            };
-
-            return Json(response);
+            query = query.Where(item => item.FirstName.Contains(filterValue));
         }
-
-
-
-
-
-
-        [HttpGet]
-        public IActionResult Delete(int Id)
+        else if (filterType == "email")
         {
+            query = query.Where(item => item.Email.Contains(filterValue));
+        }
+        if (filterType == "schoolOrCollegeName")
+        {
+            query = query.Where(item => item.SchoolOrCollegeName.Contains(filterValue));
+        }
+    }
 
-            try
+
+
+    // Count total records before applying pagination
+    int recordsTotal = query.Count();
+
+    // Apply pagination
+    var data = query.Skip(start).Take(length).ToList();
+
+    // Prepare the response
+    var response = new
+    {
+        draw = draw,
+        recordsTotal = recordsTotal,
+        recordsFiltered = recordsTotal,
+
+        data = data
+    };
+
+    return Json(response);
+}
+
+
+
+
+
+
+[HttpGet]
+public IActionResult Delete(int Id)
+{
+
+    try
+    {
+        InternshipFormViewModel model = new InternshipFormViewModel();
+        model.Education = new List<Education> { new Education() };
+
+        if (Id > 0)
+        {
+            model.PersonalInformation = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.InternId == Id select PersonalInformation).FirstOrDefault();
+
+            model.Education = _context.Education.Where(p => p.InternId == Id).ToList();
+            if (model.Education.Count == 0)
             {
-                InternshipFormViewModel model = new InternshipFormViewModel();
                 model.Education = new List<Education> { new Education() };
-
-                if (Id > 0)
-                {
-                    model.PersonalInformation = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.InternId == Id select PersonalInformation).FirstOrDefault();
-
-                    model.Education = _context.Education.Where(p => p.InternId == Id).ToList();
-                    if (model.Education.Count == 0)
-                    {
-                        model.Education = new List<Education> { new Education() };
-                    }
-                    model.GuardianDetails = (from GuardianDetails in _context.GuardianDetails where GuardianDetails.InternId == Id select GuardianDetails).FirstOrDefault();
-                    model.References = (from References in _context.References where References.InternId == Id select References).FirstOrDefault();
-                }
-                return View(model);
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            model.GuardianDetails = (from GuardianDetails in _context.GuardianDetails where GuardianDetails.InternId == Id select GuardianDetails).FirstOrDefault();
+            model.References = (from References in _context.References where References.InternId == Id select References).FirstOrDefault();
         }
+        return View(model);
+    }
+    catch (Exception ex)
+    {
+        throw;
+    }
+}
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(InternshipFormViewModel model)
-        {
+[HttpPost]
+[ValidateAntiForgeryToken]
+public IActionResult Delete(InternshipFormViewModel model)
+{
 
-            _context.Entry(model.PersonalInformation).State = EntityState.Deleted;
-            _context.SaveChanges();
+    _context.Entry(model.PersonalInformation).State = EntityState.Deleted;
+    _context.SaveChanges();
 
-            foreach (var education in model.Education)
-            {
+    foreach (var education in model.Education)
+    {
 
-                education.InternId = model.PersonalInformation.InternId;
-
-
-                _context.Entry(education).State = EntityState.Deleted;
-
-            }
-            _context.SaveChanges();
+        education.InternId = model.PersonalInformation.InternId;
 
 
-            // Update Guardian Details
+        _context.Entry(education).State = EntityState.Deleted;
 
-            model.GuardianDetails.InternId = model.PersonalInformation.InternId;
-            _context.Entry(model.GuardianDetails).State = EntityState.Deleted;
-            _context.SaveChanges(true);
-            //UPDATE rEFERENCES
-
-            model.References.InternId = model.PersonalInformation.InternId;
-            _context.Entry(model.References).State = EntityState.Deleted;
+    }
+    _context.SaveChanges();
 
 
-            // Save changes
-            _context.SaveChanges();
+    // Update Guardian Details
 
-            return RedirectToAction("Details");
+    model.GuardianDetails.InternId = model.PersonalInformation.InternId;
+    _context.Entry(model.GuardianDetails).State = EntityState.Deleted;
+    _context.SaveChanges(true);
+    //UPDATE rEFERENCES
 
-            return View(model);
-        }
+    model.References.InternId = model.PersonalInformation.InternId;
+    _context.Entry(model.References).State = EntityState.Deleted;
 
 
+    // Save changes
+    _context.SaveChanges();
 
-        public IActionResult DetailsPost()
-        {
-            InternshipFormViewModel model = new InternshipFormViewModel();
-            model.OfficalUse = new OfficalUse();
+    return RedirectToAction("Details");
 
-            model.OfficalUse.Internship_For = "Dot Net";
-            model.OfficalUse.Intern_Id = 0;
-            model.OfficalUse.Duration_of_Internship = " 3 Months";
-            model.OfficalUse.Authorized_Signature = "";
+    return View(model);
+}
 
 
 
-            model.PersonalInformation = new PersonalInformation();
+public IActionResult DetailsPost()
+{
+    InternshipFormViewModel model = new InternshipFormViewModel();
+    model.OfficalUse = new OfficalUse();
 
-            model.PersonalInformation.FirstName = "Laxmi ";
-            model.PersonalInformation.MiddleName = " ";
-            model.PersonalInformation.LastName = " Khanal";
-            model.PersonalInformation.ProvienceId = "Bagamati";
-            model.PersonalInformation.DistrictId = "Kathnmandu";
-            model.PersonalInformation.MuniId = "Kageshwori Manohara";
-            model.PersonalInformation.Ward = 8;
-            model.PersonalInformation.HomePhoneNumber = 9852364;
-            model.PersonalInformation.Mobile = 982287564;
-            model.PersonalInformation.CitizenshipNo = "abc";
-            model.PersonalInformation.HasLicence = false;
+    model.OfficalUse.Internship_For = "Dot Net";
+    model.OfficalUse.Intern_Id = 0;
+    model.OfficalUse.Duration_of_Internship = " 3 Months";
+    model.OfficalUse.Authorized_Signature = "";
 
 
 
-            model.Education = new List<Education>
+    model.PersonalInformation = new PersonalInformation();
+
+    model.PersonalInformation.FirstName = "Laxmi ";
+    model.PersonalInformation.MiddleName = " ";
+    model.PersonalInformation.LastName = " Khanal";
+    model.PersonalInformation.ProvienceId = "Bagamati";
+    model.PersonalInformation.DistrictId = "Kathnmandu";
+    model.PersonalInformation.MuniId = "Kageshwori Manohara";
+    model.PersonalInformation.Ward = 8;
+    model.PersonalInformation.HomePhoneNumber = 9852364;
+    model.PersonalInformation.Mobile = 982287564;
+    model.PersonalInformation.CitizenshipNo = "abc";
+    model.PersonalInformation.HasLicence = false;
+
+
+
+    model.Education = new List<Education>
             {
                 new Education() {SchoolOrCollegeName="Jaya Multiple Campus", Address="Makalbari",StartYear= new DateTime(1/1/2018) , CompletionYear = new DateTime(1/1/2018)   , Major="Management"},
                 new Education(){SchoolOrCollegeName ="Texas College of Management and It", Address ="Shipal", StartYear =  new DateTime(1/1/2018) , CompletionYear =  new DateTime(1/1/2018) , Major="BIT"},
 
 
             };
-            model.GuardianDetails = new GuardianDetails();
+    model.GuardianDetails = new GuardianDetails();
 
-            model.GuardianDetails.Name = "Bhuwan Khanal";
-            model.GuardianDetails.Relation = "Father";
-            model.GuardianDetails.Address = "Dakshindhoka";
-            model.GuardianDetails.PhoneNumber = 986069014;
-            model.GuardianDetails.Signature = "";
+    model.GuardianDetails.Name = "Bhuwan Khanal";
+    model.GuardianDetails.Relation = "Father";
+    model.GuardianDetails.Address = "Dakshindhoka";
+    model.GuardianDetails.PhoneNumber = 986069014;
+    model.GuardianDetails.Signature = "";
 
-            model.References = new References();
+    model.References = new References();
 
-            model.References.Name = "References";
-            model.References.Positions = "";
-            model.References.CollegeorCompany = "Texas College of Management and IT";
-            model.References.Phone = 98235696;
-            model.References.Signature = "Texas College";
+    model.References.Name = "References";
+    model.References.Positions = "";
+    model.References.CollegeorCompany = "Texas College of Management and IT";
+    model.References.Phone = 98235696;
+    model.References.Signature = "Texas College";
 
-            //model.certiLice = new CertiLice();
-            //model.certiLice.certilice = "";
+    //model.certiLice = new CertiLice();
+    //model.certiLice.certilice = "";
 
 
-            return View(model);
-        }
+    return View(model);
+}
 
 
 

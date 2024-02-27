@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
 {
@@ -10,12 +11,12 @@ namespace InternshipForm.Models
 
 
         [Required(ErrorMessage = "Please Enter FirstName")]
-        [Display(Name = "FirstName")]
+        [Display(Name = "First Name")]
         public string? FirstName { get; set; }
 
 
         [Required (ErrorMessage = "Please Enter your LastName")]
-        [Display(Name = "LastName")]
+        [Display(Name = "Last Name")]
         public string? LastName { get; set; }
 
 
@@ -30,7 +31,10 @@ namespace InternshipForm.Models
         [StringLength(50, ErrorMessage = "Password \"{0}\" must have {2} characters", MinimumLength=8)]
         [RegularExpression(@"^([a-zA-Z0-9@*#]{8,15})$", ErrorMessage = "Password must contain: Minimum 8 characters, at least 1 UpperCase Alphabet, 1 LowerCase Alphabet, 1 Number, and 1 Special Character")]
           public string   Password {  get; set; }
-    
+
+        //[ForeignKey(nameof(PersonalInformation))]
+        //public int InternId { get; set; }
+        //public PersonalInformation PersonalInformation { get; set; }
 
     }
 }
