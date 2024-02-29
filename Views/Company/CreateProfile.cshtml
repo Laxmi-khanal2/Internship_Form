@@ -1,0 +1,66 @@
+﻿@model CompanyProfile
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/AdminLTECompany/_Layout.cshtml";
+}
+
+
+<style>
+    .card {
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
+        padding: 20px;
+    }
+</style>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</br>
+<h4 style="text-align:center"><strong>Create Company Profile</strong></h4>
+<div class="card">
+<form method="post" enctype="multipart/form-data" asp-controller="Company" asp-action="CreateProfile">
+    @Html.LabelFor(x=>x.Name)
+    @Html.TextBoxFor(x=>x.Name , new{@class="form-control"})
+
+    @Html.LabelFor(x=>x.Address)
+    @Html.TextBoxFor(x=>x.Address, new{@class="form-control"})
+
+
+    @Html.LabelFor(x=>x.Contact)
+    @Html.TextBoxFor(x=>x.Contact, new{@class="form-control" ,type="number" })
+
+    @Html.LabelFor(x => x.MissionsandValues)
+    <div id="quill" style="height:100px;"></div>
+    @Html.HiddenFor(x => x.MissionsandValues)    
+    @Html.LabelFor(x=>x.Description)
+    <div id="quill-editor" style="height: 300px;"></div>
+    @Html.HiddenFor(x=>x.Description)
+    </br>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js" integrity="sha512-P2W2rr8ikUPfa31PLBo5bcBQrsa+TNj8jiKadtaIrHQGMo6hQM6RdPjQYxlNguwHz8AwSQ28VkBK6kHBLgd/8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow'
+    });
+
+    var quill = new Quill('#quill', {
+        theme: 'snow'
+    });
+    // Update the hidden field with Quill content when the form is submitted
+    document.querySelector('form').addEventListener('submit', function () {
+        var description = document.querySelector('input[name="Description"]');
+        description.value = quill.root.innerHTML;
+
+        var missionsAndValues = document.querySelector('input[name="MissionsandValues"]');
+        missionsAndValues.value = quill.root.innerHTML;
+    });
+   
+</script>
+
+

@@ -1,5 +1,9 @@
 ﻿@using InternshipForm.Helpers;
-
+@using InternshipForm.ViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -38,6 +42,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                 <li class="nav-item ">
                     <a asp-controller="Home" asp-action="Index" class="nav-link @Url.MakeActiveClass("home","index")">
+                   
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Home

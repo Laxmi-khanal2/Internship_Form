@@ -23,6 +23,7 @@ namespace InternshipForm.Controllers
         private readonly ApplicationDBContext _context;
         private readonly IStudentService _student;
         // creating the constructor for class form controller
+        
         public StudentController(ApplicationDBContext context,IStudentService student)
         {
             _context = context;
@@ -32,6 +33,7 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
+       
         [HttpGet]
         public IActionResult CreatePost()
         {
@@ -73,10 +75,17 @@ namespace InternshipForm.Controllers
         }
         //action method for create page 
         [HttpGet]
-        public IActionResult Create(int Id)
+        public IActionResult Create(int? Id)
         {
-            InternshipFormViewModel model = _student.getStudentRecord(Id);
-
+            InternshipFormViewModel model = new InternshipFormViewModel();
+            model.PersonalInformation = new PersonalInformation();
+            model.Education = new List<Education> { new Education() };
+            model.References = new References();
+            model.GuardianDetails = new GuardianDetails();
+            if (Id.Value > 0)
+            {
+                model = _student.getStudentRecord(Id.Value);
+            }
             
             return View(model);
         }
