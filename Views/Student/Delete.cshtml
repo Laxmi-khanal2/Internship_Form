@@ -16,7 +16,7 @@
                         </style>
 
 <h2>Are You Sure You Want To Delete This?</h2>
-<form method="post" enctype="multipart/form-data" asp-controller="Form" asp-action="Delete">
+<form method="post" enctype="multipart/form-data" asp-controller="Student" asp-action="Delete">
     <div>
         <div class="card">
 
@@ -238,7 +238,7 @@
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-danger" />
 
-                <a href="@Url.Action("Details", "Form")" class="btn btn-primary">Back to List</a>
+                    <a href="@Url.Action("Details", "Student")" class="btn btn-primary">Back to List</a>
             </div>
         }
     </div>

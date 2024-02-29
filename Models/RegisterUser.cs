@@ -32,6 +32,8 @@ namespace InternshipForm.Models
         [RegularExpression(@"^([a-zA-Z0-9@*#]{8,15})$", ErrorMessage = "Password must contain: Minimum 8 characters, at least 1 UpperCase Alphabet, 1 LowerCase Alphabet, 1 Number, and 1 Special Character")]
           public string   Password {  get; set; }
 
+
+     
         //[ForeignKey(nameof(PersonalInformation))]
         //public int InternId { get; set; }
         //public PersonalInformation PersonalInformation { get; set; }

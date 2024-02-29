@@ -1,6 +1,8 @@
 ﻿using InternshipForm.Data;
 using InternshipForm.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Policy;
 
 namespace InternshipForm.Controllers
 {
@@ -16,9 +18,10 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
-     [HttpGet]
+        [HttpGet]
         public IActionResult UserRegister()
         {
+           
             RegisterUser registerUser = new RegisterUser();
             return View(registerUser);
         }
@@ -27,11 +30,13 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UserRegister(RegisterUser registerUser)
         {
-           if(ModelState.IsValid)
+
+
+            if (ModelState.IsValid)
             {
                 _context.RegisterUser.Add(registerUser);
                 _context.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
@@ -47,18 +52,22 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UserLogin(RegisterUser registerUser)
         {
-            
-            
-                var user = _context.RegisterUser.FirstOrDefault(x => x.Email == registerUser.Email && x.Password == registerUser.Password);
-                if (user != null)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-               
-                
-                    ModelState.AddModelError("", "Invalid email and password");
-                
-            
+
+
+            var user = _context.RegisterUser.FirstOrDefault(x => x.Email == registerUser.Email && x.Password == registerUser.Password);
+           
+            if (user != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            ModelState.AddModelError("", "Invalid email and password");
+
+              if(user.Email == null)
+            {
+                return RedirectToAction("Email Address is Necessary");
+            }
             return View(registerUser);
         }
     }

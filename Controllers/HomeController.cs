@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace InternshipForm.Controllers
@@ -19,8 +20,9 @@ namespace InternshipForm.Controllers
 
         public IActionResult Index()
         {
+            
 
-           return View();
+            return View();
         }
 
         public IActionResult Privacy()

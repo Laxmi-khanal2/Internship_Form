@@ -89,7 +89,7 @@
         "lengthMenu": [2, 5, 10, 15, 20],
         "bFilter": false,
         "ajax": {
-            "url": "/Form/GetData",
+            "url": "/Student/GetData",
             "type": "POST",
             "dataType": "json",
 
@@ -116,12 +116,12 @@
             { data: "collegeorCompany", "name": "CollegeorCompany", "autoWidth": true },
             {
                 "render": function (data, type, row, meta) {
-                    return '<a class="btn btn-info" href="/Form/Create?Id=' + row.internId + '">Edit</a>';
+                    return '<a class="btn btn-info" href="/Student/Create?Id=' + row.internId + '">Edit</a>';
                 }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return '<a class="btn btn-danger" href="/Form/Delete?Id=' + row.internId + '">Delete</a>';
+                    return '<a class="btn btn-danger" href="/Student/Delete?Id=' + row.internId + '">Delete</a>';
                 }
             }
         ]

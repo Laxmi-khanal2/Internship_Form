@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Data Access\" />
     <Folder Include="NewFolder\" />
-    <Folder Include="Service\Interface\" />
-    <Folder Include="Service\Implementation\" />
   </ItemGroup>
 
   <ItemGroup>
