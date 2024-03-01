@@ -3,6 +3,7 @@ using InternshipForm.Data;
 using InternshipForm.Models;
 using InternshipForm.Service.Interface;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace InternshipForm.Service.Implementation
 {
@@ -15,8 +16,10 @@ namespace InternshipForm.Service.Implementation
             _context = context;
         }
 
-        
-        
+        public int getInternshipForm()
+        {
+            throw new NotImplementedException();
+        }
 
         public int saveCreateCompanyProfile(CompanyProfile company)
         {
@@ -34,6 +37,20 @@ namespace InternshipForm.Service.Implementation
             return company.Id;
         }
 
-        
+        public int saveCreateInternship(CreateInternship create)
+        {
+            try
+            {
+                var addedInternship = _context.CreateInternship.Add(create);
+                _context.SaveChanges();
+            }
+           catch (Exception ex)
+            {
+                // Handle exception appropriately
+                // Logging, error handling, etc.
+                throw ex;
+            }
+            return create.Id;
+        }
     }
 }

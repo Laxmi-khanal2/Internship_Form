@@ -30,37 +30,40 @@
     @Html.LabelFor(x=>x.Contact)
     @Html.TextBoxFor(x=>x.Contact, new{@class="form-control" ,type="number" })
 
-    @Html.LabelFor(x => x.MissionsandValues)
-    <div id="quill" style="height:100px;"></div>
-    @Html.HiddenFor(x => x.MissionsandValues)    
-    @Html.LabelFor(x=>x.Description)
-    <div id="quill-editor" style="height: 300px;"></div>
-    @Html.HiddenFor(x=>x.Description)
-    </br>
+        @Html.LabelFor(x => x.MissionsandValues)
+        <div id="quill" style="height:100px;"></div>
+        @Html.TextAreaFor(x => x.MissionsandValues, new { @class = "form-control", style = "display:none;" })
 
-    <input type="submit" value="Save" class="btn btn-primary" />
-</form>
+        @Html.LabelFor(x => x.Description)
+        <div id="quill-editor" style="height: 300px;"></div>
+        @Html.TextAreaFor(x => x.Description, new { @class = "form-control", style = "display:none;" })
+        </br>
+
+        <input type="submit" id="submitBtn" value="Save" class="btn btn-primary" />
+    </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js" integrity="sha512-P2W2rr8ikUPfa31PLBo5bcBQrsa+TNj8jiKadtaIrHQGMo6hQM6RdPjQYxlNguwHz8AwSQ28VkBK6kHBLgd/8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-    var quill = new Quill('#quill-editor', {
-        theme: 'snow'
-    });
+    $(document).ready(function () {
+        var quill = new Quill('#quill', {
+            theme: 'snow'
+        });
 
-    var quill = new Quill('#quill', {
-        theme: 'snow'
-    });
-    // Update the hidden field with Quill content when the form is submitted
-    document.querySelector('form').addEventListener('submit', function () {
-        var description = document.querySelector('input[name="Description"]');
-        description.value = quill.root.innerHTML;
+        var quilleditor = new Quill('#quill-editor', {
+            theme: 'snow'
+        });
 
-        var missionsAndValues = document.querySelector('input[name="MissionsandValues"]');
-        missionsAndValues.value = quill.root.innerHTML;
+        $('#submitBtn').on('click', function () {
+            var missionAndValues = $('textarea[name="MissionsandValues"]');
+            missionAndValues.val(quill.root.innerHTML);
+
+            var description = $('textarea[name="Description"]');
+            description.val(quilleditor.root.innerHTML);
+        });
     });
-   
 </script>
 
 

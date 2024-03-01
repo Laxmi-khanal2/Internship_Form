@@ -1,0 +1,103 @@
+﻿@model InternshipForm.Models.CreateInternship
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/AdminLTECompany/_Layout.cshtml";
+    var TypeOfInternship = Enum.GetValues(typeof(TypeOfInternship)).Cast<TypeOfInternship>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() });
+    var LocationType = Enum.GetValues(typeof(LocationType)).Cast<LocationType>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() });
+ 
+
+}
+
+<style>
+    .card {
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
+        padding: 20px;
+    }
+</style>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<h4 style="text-align:center"><strong>Create Internship Post</strong></h4>
+<div class="card">
+<form method="post" id="sumbitForm" enctype="multipart/form-data" asp-controller="Company" asp-action="CreateInternship">
+
+  
+
+        <div class="row">
+            <div class=" col-md-6">
+                @Html.LabelFor(x => x.TitleOfInternship)
+                @Html.TextBoxFor(x => x.TitleOfInternship, new { @class = "form-control" })
+            </div>
+            <div class=" col-md-6">
+                @Html.LabelFor(x => x.NameOfCompany)
+                @Html.TextBoxFor(x => x.NameOfCompany, new { @class = "form-control" })
+            </div>
+
+            @Html.LabelFor(x => x.Address)
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+            <div class=" col-md-6">
+
+                @Html.LabelFor(x => x.SelectedType)
+                @Html.DropDownListFor(x => x.SelectedType,TypeOfInternship, "Select Type", new { @class = "form-control" })
+            </div>
+            <div class=" col-md-6">
+
+                @Html.LabelFor(x => x.OfferedSalary)
+                @Html.TextBoxFor(x => x.OfferedSalary, new { @class = "form-control", type = "number" })
+            </div>
+            <div class=" col-md-4">
+                @Html.LabelFor(x => x.Location)
+                @Html.DropDownListFor(x => x.Location, LocationType, "Select Type", new { @class = "form-control" })
+            </div>
+            <div class=" col-md-4">
+                @Html.LabelFor(x => x.Level)
+                @Html.TextBoxFor(x => x.Level, new { @class = "form-control" })
+            </div>
+            <div class=" col-md-4">
+
+                @Html.LabelFor(x => x.Duration)
+                @Html.TextBoxFor(x => x.Duration, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.LabelFor(x => x.JobDescription)
+
+        <div id="quill" style="height:300px;"></div>
+        @Html.HiddenFor(x => x.JobDescription)
+
+        @Html.LabelFor(x => x.Responsiblity)
+        <div id="quill-res" style="height:400px;"></div>
+        @Html.HiddenFor(x => x.Responsiblity)
+
+        <input type="submit" value="Save" id="submitBtn" class="btn btn-primary" />
+    
+</form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js" integrity="sha512-P2W2rr8ikUPfa31PLBo5bcBQrsa+TNj8jiKadtaIrHQGMo6hQM6RdPjQYxlNguwHz8AwSQ28VkBK6kHBLgd/8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+<script>
+    $(document).ready(function () {
+        var quill = new Quill('#quill', {
+            theme: 'snow'
+        });
+
+        var quillRes = new Quill('#quill-res', {
+            theme: 'snow'
+        });
+
+        $('#submitBtn').on('click', function () {
+            
+            var jobDescriptionInput = $('input[name="JobDescription"]');
+            jobDescriptionInput.val(quill.root.innerHTML);
+
+            var responsibilityInput = $('input[name="Responsiblity"]');
+            responsibilityInput.val(quillRes.root.innerHTML);
+        });
+    });
+</script>
+

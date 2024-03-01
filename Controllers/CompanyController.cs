@@ -2,6 +2,7 @@
 using InternshipForm.Models;
 using InternshipForm.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InternshipForm.Controllers
 {
@@ -9,6 +10,9 @@ namespace InternshipForm.Controllers
     {
         private readonly ApplicationDBContext _context;
             private readonly ICompanyService _companyService;
+
+        
+
         public CompanyController(ApplicationDBContext context, ICompanyService companyService)
         {
             _context = context;
@@ -17,6 +21,7 @@ namespace InternshipForm.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
         [HttpGet]
@@ -38,9 +43,28 @@ namespace InternshipForm.Controllers
             return View();
         }
 
-    }
+
+        [HttpGet]
+        public IActionResult CreateInternship()
+        {
+            CreateInternship model = new CreateInternship();
+    
+
+            return View(model);
+        }
 
 
-
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateInternship(CreateInternship create)
+        {
+            var result = _companyService.saveCreateInternship(create);
+            return View();
+        }
+    }  
 }
+
+
+
+
+ 

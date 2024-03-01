@@ -1,4 +1,5 @@
 ﻿@using InternshipForm.Helpers;
+@using InternshipForm.ViewModel
 
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -16,7 +17,7 @@
                 <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-               @*  <a href="#" class="d-block">Laxmi Khanal</a> *@
+                <a href="#" class="d-block">Laxmi Khanal</a>
             </div>
         </div>
 
@@ -37,7 +38,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                 <li class="nav-item ">
-                    <a asp-controller="Company" asp-action="Index" class="nav-link @Url.MakeActiveClass("company","index")">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link @Url.MakeActiveClass("home","index")">
+
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Home
@@ -53,43 +55,21 @@
                 </a>
                 </li> *@
                 <li class="nav-item">
-                    <a asp-controller="Company" asp-action="CreateProfile" class="nav-link @Url.MakeActiveClass("Company","CreateProfile")">
+                    <a asp-controller="Student" asp-action="CreatePost" class="nav-link @Url.MakeActiveClass("Student","CreatePost")">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Create Profile 
+                            CreateForm
                         </p>
                     </a>
 
 
                 </li>
-                 </li> 
-                <li class="nav-item">
-                    <a asp-controller="Company" asp-action="CreateInternship" class="nav-link @Url.MakeActiveClass("Company","CreateInternship")">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Create Internship
-                        </p>
-                    </a>
 
-
-                </li>
-@* 
                 <li class="nav-item">
-                    <a asp-controller="Student" asp-action="Create" class="nav-link @Url.MakeActiveClass("Student","Create")">
+                    <a asp-controller="Student" asp-action="Create" asp-route-id="0" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Create
-                        </p>
-                    </a>
-
-
-                </li> *@
-
-               @*  <li class="nav-item">
-                    <a asp-controller="Student" asp-action="Create" class="nav-link @Url.MakeActiveClass("Student","Create")">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            
                         </p>
                     </a>
 
@@ -98,13 +78,58 @@
                     <a asp-controller="Student" asp-action="Details" class="nav-link @Url.MakeActiveClass("Student","Details")">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                           
+                            DetailsOfForm
                         </p>
                     </a>
 
 
+                </li>
+                @*   <li class="nav-item">
+                <a asp-controller="PersonalInformationDataTable" asp-action="PersonalInformationDataTable" class="nav-link @Url.MakeActiveClass("PersonalInformationDataTable","PersonalInformationDataTable")">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                Details
+                </p>
+                </a>
+                *@
+
+                @* <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                Create
+                <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="./index.html" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Education</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="./index2.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Guardian Details</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="./index3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>References</p>
+                </a>
+                </li>
+                </ul>
                 </li> *@
-               
+            </ul>
+        </nav>
+
+
+      
     </div>
     <!-- /.sidebar -->
 </aside>

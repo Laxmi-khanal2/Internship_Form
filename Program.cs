@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using InternshipForm.Models;
 using InternshipForm.Service.Implementation;
 using InternshipForm.Service.Interface;
+using System.Reflection.Emit;
 
 var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -16,6 +17,7 @@ builder.Services.AddScoped<ICompanyService, CompanyService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
+
 
 
 
