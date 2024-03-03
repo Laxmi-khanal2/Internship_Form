@@ -33,6 +33,26 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
+
+        //View Internship
+        public IActionResult ViewInternship(int? Id)
+        
+     {
+            CreateInternship createInternship = new CreateInternship();
+            createInternship = _context.CreateInternship.FirstOrDefault(i => i.Id == Id);
+
+                //if (createInternship == null)
+                //{
+                //    return NotFound();
+                //}
+
+                return View(createInternship);
+            
+            
+        }
+
+
+
        
         [HttpGet]
         public IActionResult CreatePost()
@@ -82,7 +102,7 @@ namespace InternshipForm.Controllers
             model.Education = new List<Education> { new Education() };
             model.References = new References();
             model.GuardianDetails = new GuardianDetails();
-            if (Id.Value > 0)
+                if (Id.HasValue && Id.Value > 0)
             {
                 model = _student.getStudentRecord(Id.Value);
             }
@@ -108,6 +128,9 @@ namespace InternshipForm.Controllers
                 return View(model);
             
         }
+
+
+        
 
         //  action controller datatable
         [HttpGet]

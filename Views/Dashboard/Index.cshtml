@@ -57,18 +57,8 @@
                         SignIn
                     </button>
                     <div class="dropdown-menu">
-                        @if (ViewData["Filter"] != null && ViewData["Filter"] is IEnumerable<SelectListItem> filterItems)
-                        {
-                            foreach (var item in filterItems)
-                            {
-                                <a class="dropdown-item" href="/RegisterUser/UserRegister">@item.Text</a>
-                            }
-                            <div class="dropdown-divider"></div>
-                        }
-                        else
-                        {
-                            <p>No items found</p> 
-                        }
+                        <a class="dropdown-item" href="@Url.Action("UserRegister", "RegisterUser")">Register as Student</a>
+                        <a class="dropdown-item" href="@Url.Action("CompanyRegister", "RegisterUser")">Register as Company</a>
                     </div>
                 </div>
 

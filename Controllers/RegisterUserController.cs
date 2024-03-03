@@ -70,5 +70,62 @@ namespace InternshipForm.Controllers
             }
             return View(registerUser);
         }
+
+
+        [HttpGet]
+        public IActionResult CompanyRegister()
+
+        {
+            RegisterCompany registerCompany = new RegisterCompany();
+            return View(registerCompany);
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CompanyRegister(RegisterCompany registerCompany)
+        {
+
+
+           if (ModelState.IsValid)
+            {
+                _context.RegisterCompany.Add(registerCompany);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Company");
+            }
+            return View();
+        }
+
+
+        
+        [HttpGet]
+        public IActionResult CompanyLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CompanyLogin(RegisterCompany registerCompany)
+        {
+
+
+            var user = _context.RegisterCompany.FirstOrDefault(x => x.Email == registerCompany.Email && x.Password == registerCompany.Password);
+
+            if (user != null)
+            {
+                return RedirectToAction("Index", "Company");
+            }
+
+
+            ModelState.AddModelError("", "Invalid email and password");
+
+            if (user.Email == null)
+            {
+                return RedirectToAction("Email Address is Necessary");
+            }
+            return View(registerCompany);
+        }
+
     }
 }

@@ -1,0 +1,100 @@
+﻿@model CreateInternship
+
+@{
+    ViewData["Title"] = "Internship Cards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 80%;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #f8f9fa;
+        position: relative;
+        height: 500px;
+        overflow-y: auto; /* Enable vertical scroll */
+    }
+
+    .card-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #dc3545;
+    }
+
+    .label {
+        font-weight: bold;
+        color: #000000;
+    }
+
+    .card-text {
+        margin-bottom: 10px;
+        font-weight: normal;
+        color: #343a40;
+    }
+
+    .apply-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
+        <h5 class="card-title">@Model.TitleOfInternship</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label">Company Name:</span>
+                <p class="card-text">@Model.NameOfCompany</p>
+            </div>
+            <div class="col-md-6">
+                <span class="label">Address:</span>
+                <p class="card-text">@Model.Address</p>
+            </div>
+            <div class="col-md-6">
+                <span class="label">Offered-Salary:</span>
+                <p class="card-text">@Model.OfferedSalary</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label">Type:</span>
+                <p class="card-text">@EnumHelper.GetDisplayName((TypeOfInternship)Model.SelectedType)</p>
+            </div>
+            <div class="col-md-6">
+                <span class="label">Location:</span>
+                @{
+                    LocationType location;
+                    Enum.TryParse(Model.Location, out location);
+                }
+                <p class="card-text">@EnumHelper.GetDisplayName(location)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label">Duration:</span>
+                <p class="card-text">@Model.Duration</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="label">Job Description:</span>
+                <p class="card-text">@Html.Raw(Model.JobDescription)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="label">Responsibility:</span>
+                <p class="card-text">@Html.Raw(Model.Responsiblity)</p>
+            </div>
+        </div>
+       
+    </div>
+</div>

@@ -6,7 +6,7 @@ namespace InternshipForm.Service.Interface
     {
     
         public int saveCreateCompanyProfile(CompanyProfile company);
-        public int getInternshipForm();
+        public int getInternshipForm(int Id);
         public int saveCreateInternship(CreateInternship create);
 
     }

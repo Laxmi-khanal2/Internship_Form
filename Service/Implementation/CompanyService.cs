@@ -16,7 +16,7 @@ namespace InternshipForm.Service.Implementation
             _context = context;
         }
 
-        public int getInternshipForm()
+        public int getInternshipForm(int Id)
         {
             throw new NotImplementedException();
         }
@@ -43,6 +43,7 @@ namespace InternshipForm.Service.Implementation
             {
                 var addedInternship = _context.CreateInternship.Add(create);
                 _context.SaveChanges();
+                return addedInternship.Entity.Id;
             }
            catch (Exception ex)
             {

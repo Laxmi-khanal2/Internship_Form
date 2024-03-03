@@ -16,6 +16,7 @@ namespace InternshipForm.Data
         public DbSet<RegisterUser> RegisterUser { get; set; }
         public DbSet<CompanyProfile> CompanyProfile { get; set; }
         public DbSet<CreateInternship> CreateInternship { get; set; }
+        public DbSet<RegisterCompany> RegisterCompany { get; set; }
         //public DbSet<InternshipForm.ViewModel.InternshipFormViewModel> InternshipFormViewModel { get; set; } = default!;
     }
        

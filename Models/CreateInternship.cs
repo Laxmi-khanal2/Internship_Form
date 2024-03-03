@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace InternshipForm.Models
 {
@@ -17,7 +18,7 @@ namespace InternshipForm.Models
         
         [Display(Name = "Offered Salary")]
         public int OfferedSalary { get; set; }
-        public int Location { get; set; }
+        public string Location { get; set; }
 
        
         public  string Level { get; set; }
@@ -39,4 +40,16 @@ namespace InternshipForm.Models
         Onsite=1,
         Remote=2
     }
+    public static class EnumHelper
+    {
+        public static string GetDisplayName(Enum value)
+        {
+            return value.GetType()
+                        .GetMember(value.ToString())
+                        .First()
+                        .GetCustomAttribute<DisplayAttribute>()
+                        ?.GetName() ?? value.ToString();
+        }
+    }
+
 }
