@@ -35,20 +35,28 @@ namespace InternshipForm.Controllers
         }
 
         //View Internship
-        public IActionResult ViewInternship(int? Id)
+        public IActionResult ViewInternship()
         
      {
             CreateInternship createInternship = new CreateInternship();
-            createInternship = _context.CreateInternship.FirstOrDefault(i => i.Id == Id);
 
-                //if (createInternship == null)
-                //{
-                //    return NotFound();
-                //}
+            List<CreateInternship> Internship = _context.CreateInternship.ToList();
+           // createInternship = _context.CreateInternship.FirstOrDefault(i => i.Id == Id);
+            
 
-                return View(createInternship);
+            //if (createInternship == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return View(Internship);
             
             
+        }
+        public IActionResult GetInternshipForm(CreateInternship createInternship)
+        {
+          
+            return View(createInternship);
         }
 
 
@@ -101,6 +109,7 @@ namespace InternshipForm.Controllers
             model.PersonalInformation = new PersonalInformation();
             model.Education = new List<Education> { new Education() };
             model.References = new References();
+            model.OfficalUse = new OfficalUse();
             model.GuardianDetails = new GuardianDetails();
                 if (Id.HasValue && Id.Value > 0)
             {
@@ -141,6 +150,7 @@ namespace InternshipForm.Controllers
                 new SelectListItem{ Value = "firstName", Text="FirstName"},
                 new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
                 new SelectListItem{ Value = "email", Text="Email"},
+                new SelectListItem{Value ="internshipFor",Text="InternshipFor"},
             };
             ViewData["Filter"] = FilterOptions;
             return View();
@@ -152,6 +162,7 @@ namespace InternshipForm.Controllers
                         join E in _context.Education on PI.InternId equals E.InternId
                         join GD in _context.GuardianDetails on PI.InternId equals GD.InternId
                         join R in _context.References on PI.InternId equals R.InternId
+                        join O in _context.OfficalUse on PI.InternId equals O.InternId
                         select new
                         {
                             InternId = PI.InternId,
@@ -159,6 +170,7 @@ namespace InternshipForm.Controllers
                             LastName = PI.LastName,
                             Mobile = PI.Mobile,
                             Email = PI.Email,
+                            InternshipFor = O.InternshipFor,
                             HasLicence = PI.HasLicence,
                             SchoolOrCollegeName = E.SchoolOrCollegeName,
                             Major = E.Major,
@@ -180,6 +192,10 @@ namespace InternshipForm.Controllers
                 if (filterType == "schoolOrCollegeName")
                 {
                     query = query.Where(item => item.SchoolOrCollegeName.Contains(filterValue));
+                }
+                if (filterType == "internshipFor")
+                {
+                    query = query.Where(item => item.InternshipFor.Contains(filterValue));
                 }
             }
 
@@ -220,6 +236,7 @@ namespace InternshipForm.Controllers
 
                 if (Id > 0)
                 {
+
                     model.PersonalInformation = (from PersonalInformation in _context.PersonalInformation where PersonalInformation.InternId == Id select PersonalInformation).FirstOrDefault();
 
                     model.Education = _context.Education.Where(p => p.InternId == Id).ToList();
@@ -228,6 +245,7 @@ namespace InternshipForm.Controllers
                         model.Education = new List<Education> { new Education() };
                     }
                     model.GuardianDetails = (from GuardianDetails in _context.GuardianDetails where GuardianDetails.InternId == Id select GuardianDetails).FirstOrDefault();
+                    model.OfficalUse = (from OfficalUse in _context.OfficalUse where OfficalUse.InternId == Id select OfficalUse).FirstOrDefault();
                     model.References = (from References in _context.References where References.InternId == Id select References).FirstOrDefault();
                 }
                 return View(model);
@@ -264,6 +282,10 @@ namespace InternshipForm.Controllers
             model.GuardianDetails.InternId = model.PersonalInformation.InternId;
             _context.Entry(model.GuardianDetails).State = EntityState.Deleted;
             _context.SaveChanges(true);
+
+            model.OfficalUse.InternId = model.PersonalInformation.InternId;
+            _context.Entry(model.OfficalUse).State = EntityState.Deleted;
+            _context.SaveChanges();
             //UPDATE rEFERENCES
 
             model.References.InternId = model.PersonalInformation.InternId;
@@ -285,10 +307,10 @@ namespace InternshipForm.Controllers
             InternshipFormViewModel model = new InternshipFormViewModel();
             model.OfficalUse = new OfficalUse();
 
-            model.OfficalUse.Internship_For = "Dot Net";
-            model.OfficalUse.Intern_Id = 0;
-            model.OfficalUse.Duration_of_Internship = " 3 Months";
-            model.OfficalUse.Authorized_Signature = "";
+            model.OfficalUse.InternshipFor = "Dot Net";
+            //model.OfficalUse.Intern_Id = 0;
+            //model.OfficalUse.Duration_of_Internship = " 3 Months";
+            //model.OfficalUse.Authorized_Signature = "";
 
 
 

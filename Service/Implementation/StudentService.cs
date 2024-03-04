@@ -35,6 +35,7 @@ namespace InternshipForm.Service.Implementation
                 }
 
                 model.GuardianDetails = _context.GuardianDetails.FirstOrDefault(p => p.InternId == id);
+                model.OfficalUse = _context.OfficalUse.FirstOrDefault(p => p.InternId == id);
                 model.References = _context.References.FirstOrDefault(p => p.InternId == id);
             }
 
@@ -66,6 +67,10 @@ namespace InternshipForm.Service.Implementation
                     _context.GuardianDetails.Add(model.GuardianDetails);
                     _context.SaveChanges();
 
+                    model.OfficalUse.InternId = personalinformation.Entity.InternId;
+                    _context.OfficalUse.Add(model.OfficalUse);
+                    _context.SaveChanges();
+
                     model.References.InternId = personalinformation.Entity.InternId;
                     _context.References.Add(model.References);
                     _context.SaveChanges();
@@ -84,6 +89,9 @@ namespace InternshipForm.Service.Implementation
 
                     model.GuardianDetails.InternId = model.PersonalInformation.InternId;
                     _context.Entry(model.GuardianDetails).State = EntityState.Modified;
+
+                    model.OfficalUse.InternId = model.PersonalInformation.InternId;
+                    _context.Entry(model.OfficalUse).State = EntityState.Modified;
 
                     model.References.InternId = model.PersonalInformation.InternId;
                     _context.Entry(model.References).State = EntityState.Modified;

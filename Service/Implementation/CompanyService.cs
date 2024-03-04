@@ -27,6 +27,7 @@ namespace InternshipForm.Service.Implementation
             {
                 var addedCompany = _context.CompanyProfile.Add(company);
                 _context.SaveChanges();
+                return addedCompany.Entity.Id;
             }
             catch (Exception ex)
             {

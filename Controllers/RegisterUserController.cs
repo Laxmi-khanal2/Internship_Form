@@ -32,7 +32,7 @@ namespace InternshipForm.Controllers
         {
 
 
-            if (ModelState.IsValid)
+           // if (ModelState.IsValid)
             {
                 _context.RegisterUser.Add(registerUser);
                 _context.SaveChanges();

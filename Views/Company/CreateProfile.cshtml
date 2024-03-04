@@ -20,6 +20,7 @@
 <h4 style="text-align:center"><strong>Create Company Profile</strong></h4>
 <div class="card">
 <form method="post" enctype="multipart/form-data" asp-controller="Company" asp-action="CreateProfile">
+  @Html.HiddenFor(x=>x.Id)
     @Html.LabelFor(x=>x.Name)
     @Html.TextBoxFor(x=>x.Name , new{@class="form-control"})
 

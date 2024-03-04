@@ -94,13 +94,22 @@
                                     </button>
                                 </div>
                                 <div class="line"></div>
+                                <div class="step" data-target="#OfficialUse-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="OfficialUse-part" id="OfficialUse-part-trigger">
+                                        <span class="bs-stepper-circle">4</span>
+                                        <span class="bs-stepper-label">OfficialUse</span>
+                                    </button>
+
+                                </div>
+                                <div class="line"></div>
                                 <div class="step" data-target="#References-part">
                                     <button type="button" class="step-trigger" role="tab" aria-controls="References-part" id="References-part-trigger">
-                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-circle">5</span>
                                         <span class="bs-stepper-label">References</span>
                                     </button>
 
                                 </div>
+                                
                             </div>
                             <div class="bs-stepper-content">
                                 <!-- your steps content here -->
@@ -323,8 +332,40 @@
                                 </table>
                                 <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
                                 <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
-                                @*   <button type="submit" class="btn btn-primary">Submit</button> *@
+                              
                             </div>
+                            <div id="OfficialUse-part" class="content " role="tabpanel" aria-labelledby="OfficialUse-part-trigger">
+
+                                <table style="width:100%" class="table table-hover">
+
+                                    <tr>
+                                        <th class="MainHeading" colspan="6"> Official Use</th>
+
+                                    </tr>
+                                </table>
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(x => x.OfficalUse.Id)
+                                        @Html.LabelFor(x => x.OfficalUse.InternshipFor)
+                                        @Html.TextBoxFor(x => x.OfficalUse.InternshipFor, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.OfficalUse.InternshipFor, "", new { @class = "text-red" })
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(X => X.OfficalUse.certilice)
+                                        @Html.TextBoxFor(x => x.OfficalUse.certilice, new { @class = "form-control" })
+
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
+                                <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
+                            </div>
+
+
 
                             <div id="References-part" class="content" role="tabpanel" aria-labelledby="References-part-trigger">
                                 <div class="form-group">
@@ -354,6 +395,9 @@
                                             <td> @Html.TextBoxFor(x => x.References.Signature)</td>
                                         </tr>
                                     </table>
+
+
+
                                     <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
 
                                     <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />

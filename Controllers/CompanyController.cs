@@ -21,9 +21,31 @@ namespace InternshipForm.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
+
+        public IActionResult ViewCreatedInternship()
+        {
+            CreateInternship createInternship = new CreateInternship();
+            List<CreateInternship> Internship= _context.CreateInternship.ToList();
+            return View(Internship);
+        }
+
+
+
+        public IActionResult ViewCompanyProfile(int Id)
+        {
+            CompanyProfile createProfile = new CompanyProfile();
+            createProfile = _context.CompanyProfile.FirstOrDefault(i => i.Id == Id);
+
+
+            if (createProfile == null)
+            {
+                return NotFound();
+            }
+            return View(createProfile);
+        }
+
         [HttpGet]
         public IActionResult CreateProfile(int Id)
         {

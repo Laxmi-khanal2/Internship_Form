@@ -46,14 +46,26 @@
                         </p>
                     </a>
                 </li>
-                @*  <li class="nav-item ">
-                <a asp-controller="Home" asp-action="Privacy" class="nav-link @Url.MakeActiveClass("home","privacy")">
+
+               @*  <li class="nav-item">
+                    <a asp-controller="Student" asp-action="ViewInternship" asp-route-id="20" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            Internships
+                        </p>
+                    </a>
+                    </li>
+ *@
+
+                
+                <li class="nav-item ">
+                    <a asp-controller="Student" asp-action="ViewInternship" class="nav-link @Url.MakeActiveClass("Student","ViewInternship")">
                 <i class="nav-icon fas fa-lock"></i>
                 <p>
-                Privacy
+                Internships
                 </p>
                 </a>
-                </li> *@
+                </li> 
                 <li class="nav-item">
                     <a asp-controller="Student" asp-action="CreatePost" class="nav-link @Url.MakeActiveClass("Student","CreatePost")">
                         <i class="nav-icon fas fa-edit"></i>
