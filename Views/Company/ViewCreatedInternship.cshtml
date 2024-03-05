@@ -5,62 +5,81 @@
     Layout = "~/Views/Shared/AdminLTECompany/_Layout.cshtml";
 }
 <style>
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 50px;
-    }
+.card {
+    width: 80%;
+    max-width: 350px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 350px;
-        margin: auto;
-        margin-top: 50px;
-        padding: 20px;
-        border-radius: 15px;
-        background-color: #f8f9fa;
-        height: 350px;
-        position: relative;
-        overflow-y: auto; /* Enable vertical scroll */
-    }
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
 
-    .card-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-        color: #dc3545;
-    }
+.card::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom right, white,white);
+    opacity: 0.5;
+    z-index: 1;
+}
 
-    .label {
-        font-weight: bold;
-        color: #000000;
-    }
+.card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
 
-    .card-text {
-        margin-bottom: 10px;
-        font-weight: normal;
-        color: #343a40;
-    }
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color:red;
+}
 
-    .apply-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
+.label {
+    font-weight: bold;
+    color: #000000;
+}
 
-    .btnn {
-        position: absolute;
-        top: 10px;
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
+.card-text {
+    margin-bottom: 10px;
+    font-weight: normal;
+    color: #343a40;
+}
+
+.apply-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border-color: #dc3545;
+    z-index: 2;
+}
+
+.btnn {
+    position: absolute;
+    top: 10px;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    z-index: 2;
+}
 </style>
+
 <div class="card-container">
     @foreach (var Internship in Model)
     {
-        <div class="card">
+        <div class="card" onclick="showFullView('@Internship.TitleOfInternship')">
 
             <div class="card-body">
 
@@ -117,11 +136,45 @@
                         <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
                     </div>
                 </div>
-                
+
+               
 
             </div>
-
+         
         </div>
 
     }
 </div>
+
+<div class="full-view-container" id="fullViewContainer">
+</div>
+@* <script>
+    var internships = @Html.Raw(Json.Serialize(Model)); // Serialize the Model here
+
+    function showFullView(title) {
+        var selectedInternship = internships.find(function (internship) {
+            return internship.TitleOfInternship === title;
+        });
+
+        var fullViewContainer = document.getElementById("fullViewContainer");
+        fullViewContainer.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${selectedInternship ? selectedInternship.TitleOfInternship : ''}</h5>
+                        <!-- Add other details of the selected internship -->
+                        <p>Company Name: ${selectedInternship ? selectedInternship.NameOfCompany : ''}</p>
+                        <p>Address: ${selectedInternship ? selectedInternship.Address : ''}</p>
+                        <p>Offered Salary: ${selectedInternship ? selectedInternship.OfferedSalary : ''}</p>
+                        <!-- Add other details here -->
+                        <button class="btn btn-secondary" onclick="hideFullView()">Close</button>
+                    </div>
+                </div>
+            `;
+        fullViewContainer.style.display = "block";
+    }
+
+    function hideFullView() {
+        document.getElementById("fullViewContainer").style.display = "none";
+    }
+</script> *@
+

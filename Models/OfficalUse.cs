@@ -7,9 +7,10 @@ namespace InternshipForm.Models
     {
         public int Id { get; set; }
         [Display (Name ="Internship For : ")]
+        [Required(ErrorMessage = "Internship Topic Is Necessary")]
         public string? InternshipFor { get; set; }
-      
 
+        
         [Display(Name = "Other Training, Certification or Licience held:")]
         public string? certilice { get; set; }
         [ForeignKey(nameof(PersonalInformation))]

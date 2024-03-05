@@ -123,7 +123,7 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(InternshipFormViewModel model)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 
                 var result = _student.saveStudentRecord(model);

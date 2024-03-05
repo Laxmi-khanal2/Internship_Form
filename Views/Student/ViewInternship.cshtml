@@ -5,29 +5,46 @@
     Layout = "~/Views/Shared/AdminLTEStudent/_Layout.cshtml";
 }
 <style>
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 20px;
-    }
     .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 350px;
-        margin: auto;
-        margin-top: 50px;
-        padding: 20px;
-        border-radius: 15px;
-        background-color: #f8f9fa;
-        height:350px;
+        width: 100%;
+        max-width: 1500px;
+        height: 400px;
         position: relative;
-        overflow-y: auto; /* Enable vertical scroll */
+        overflow-y: auto; /* Make the card scrollable */
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .card::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom right, white, white);
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+    .card-body {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
     }
 
     .card-title {
         font-size: 24px;
-        margin-bottom: 20px;
-        color: #dc3545;
+        margin-bottom: 10px;
+        color: red;
     }
 
     .label {
@@ -45,83 +62,77 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        background-color: #dc3545;
+        background-color: red;
         border-color: #dc3545;
+        z-index: 2;
     }
 
     .btnn {
         position: absolute;
         top: 10px;
-        
         background-color: #dc3545;
         border-color: #dc3545;
+        z-index: 2;
     }
 </style>
-<div class="card-container">
-@foreach (var Internship in Model)
-{
-<div class="card">
-          
-    <div class="card-body">
-              
-        <div class="row">
-                   
-            <div class="col-md-12">
-                    <h5 class="card-title">@Internship.TitleOfInternship</h5>
-            </div>
-            <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
-               
-            
-                <div class="col-md-6">
-                    <span class="label">Company Name:</span>
-                    <p class="card-text">@Internship.NameOfCompany</p>
-                </div>
-                <div class="col-md-6">
-                    <span class="label">Address:</span>
-                    <p class="card-text">@Internship.Address</p>
-                </div>
-                <div class="col-md-6">
-                    <span class="label">Offered-Salary:</span>
-                    <p class="card-text">@Internship.OfferedSalary</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label">Type:</span>
-                    <p class="card-text">@EnumHelper.GetDisplayName((TypeOfInternship)Internship.SelectedType)</p>
-                </div>
-                <div class="col-md-6">
-                    <span class="label">Location:</span>
-                    @{
-                        LocationType location;
-                        Enum.TryParse(Internship.Location, out location);
-                    }
-                    <p class="card-text">@EnumHelper.GetDisplayName(location)</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label">Duration:</span>
-                    <p class="card-text">@Internship.Duration</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="label">Job Description:</span>
-                    <p class="card-text">@Html.Raw(Internship.JobDescription)</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="label">Responsibility:</span>
-                    <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
-                </div>
-            </div>
-                <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="17" class="btn btn-primary">Company Profile</a>
 
+<div class="card-container">
+    @foreach (var Internship in Model)
+    {
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="card-title">@Internship.TitleOfInternship</h5>
+                    </div>
+                    <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
+                    <div class="col-md-6">
+                        <span class="label">Company Name:</span>
+                        <p class="card-text">@Internship.NameOfCompany</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label">Address:</span>
+                        <p class="card-text">@Internship.Address</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label">Offered-Salary:</span>
+                        <p class="card-text">@Internship.OfferedSalary</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="label">Type:</span>
+                        <p class="card-text">@EnumHelper.GetDisplayName((TypeOfInternship)Internship.SelectedType)</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label">Location:</span>
+                        @{
+                            LocationType location;
+                            Enum.TryParse(Internship.Location, out location);
+                        }
+                        <p class="card-text">@EnumHelper.GetDisplayName(location)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="label">Duration:</span>
+                        <p class="card-text">@Internship.Duration</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="label">Job Description:</span>
+                        <p class="card-text">@Html.Raw(Internship.JobDescription)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="label">Responsibility:</span>
+                        <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
+                    </div>
+                </div>
+                <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="17" class="btn btn-primary">Company Profile</a>
+            </div>
         </div>
-           
-    </div>
-        
     }
-    </div>
+</div>

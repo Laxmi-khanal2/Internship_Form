@@ -96,7 +96,7 @@ namespace InternshipForm.Controllers
             return View();
         }
 
-
+        
         
         [HttpGet]
         public IActionResult CompanyLogin()
