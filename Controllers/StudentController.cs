@@ -16,15 +16,17 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Security.Claims;
 using InternshipForm.Service.Interface;
 
+
 namespace InternshipForm.Controllers
 {
     public class StudentController : Controller
     {
         private readonly ApplicationDBContext _context;
         private readonly IStudentService _student;
+
         // creating the constructor for class form controller
-        
-        public StudentController(ApplicationDBContext context,IStudentService student)
+
+        public StudentController(ApplicationDBContext context, IStudentService student)
         {
             _context = context;
             _student = student;
@@ -34,20 +36,20 @@ namespace InternshipForm.Controllers
             return View();
         }
 
+
+
+        //view companies
+        public IActionResult viewCompanyProfile()
+        {
+            List<CompanyProfile> companyProfiles = _context.CompanyProfile.ToList();
+            return View(companyProfiles);
+        }
         //View Internship
         public IActionResult ViewInternship()
-        
-     {
+            {
             CreateInternship createInternship = new CreateInternship();
-
-            List<CreateInternship> Internship = _context.CreateInternship.ToList();
-           // createInternship = _context.CreateInternship.FirstOrDefault(i => i.Id == Id);
             
-
-            //if (createInternship == null)
-            //{
-            //    return NotFound();
-            //}
+            List<CreateInternship> Internship = _context.CreateInternship.ToList();
 
             return View(Internship);
             

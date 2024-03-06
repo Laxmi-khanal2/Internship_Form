@@ -5,9 +5,15 @@
     Layout = "~/Views/Shared/AdminLTEStudent/_Layout.cshtml";
 }
 <style>
+    .card-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        flex-wrap: wrap; /* Allow cards to wrap if they exceed container width */
+    }
     .card {
         width: 100%;
-        max-width: 1500px;
+        max-width: 1000px;
         height: 400px;
         position: relative;
         overflow-y: auto; /* Make the card scrollable */
@@ -74,7 +80,16 @@
         border-color: #dc3545;
         z-index: 2;
     }
+
+    .btn:hover {
+        background-color: #c82333;
+    }
 </style>
+
+<div class="input-group mb-3 mt-2">
+    <span class=" label">Search:</span>
+    <input type="text" class="form-control" placeholder="search by name" id="searchInput">
+</div>
 
 <div class="card-container">
     @foreach (var Internship in Model)
@@ -131,8 +146,27 @@
                         <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
                     </div>
                 </div>
-                <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="17" class="btn btn-primary">Company Profile</a>
+                <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="1017" class="btn btn-primary">Company Profile</a>
             </div>
         </div>
     }
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", function () {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                const cardTitle = card.querySelector(".card-title").textContent.toLowerCase();
+                if (cardTitle.includes(searchTerm)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+

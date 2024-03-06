@@ -50,20 +50,37 @@
                 <li class="active btn-group "><a href="#">Home</a></li>
                 
             </ul>
-            <ul>
+            
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("UserLogin", "RegisterUser")">Login as Student</a>
+                        <a class="dropdown-item" href="@Url.Action("CompanyLogin", "RegisterUser")">Login as Company</a>
+                        <a class=" dropdown-item" href="@Url.Action("UserLogin", "RegisterUser")">Login as College</a>
+                    </div>
+                </div>
+
+
+            
+
+            
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        SignIn
+                        Register
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="@Url.Action("UserRegister", "RegisterUser")">Register as Student</a>
                         <a class="dropdown-item" href="@Url.Action("CompanyRegister", "RegisterUser")">Register as Company</a>
+                        <a class=" dropdown-item" href="@Url.Action("UserRegister", "RegisterUser")">Register as College</a>
                     </div>
                 </div>
 
                    
-            </ul>
+            
         </div>
     </nav>
 

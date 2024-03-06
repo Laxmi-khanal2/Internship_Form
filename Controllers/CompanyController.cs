@@ -32,35 +32,21 @@ namespace InternshipForm.Controllers
         }
 
 
-
-        public IActionResult ViewCompanyProfile(int Id)
-        {
-            CompanyProfile createProfile = new CompanyProfile();
-            createProfile = _context.CompanyProfile.FirstOrDefault(i => i.Id == Id);
-
-
-            if (createProfile == null)
-            {
-                return NotFound();
-            }
-            return View(createProfile);
-        }
-
+      
         [HttpGet]
         public IActionResult CreateProfile(int Id)
         {
-            CompanyProfile company = new CompanyProfile();
-
-            return View(company);
+            CompanyProfile companyProfile = new CompanyProfile();
+            return View(companyProfile);
         }
-        [HttpPost]
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateProfile(CompanyProfile company)
         {
             //if(ModelState.IsValid)
             {
                 var result = _companyService.saveCreateCompanyProfile(company);
-              //  return RedirectToAction("");
+               
             }
             return View();
         }
