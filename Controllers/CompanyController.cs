@@ -46,6 +46,7 @@ namespace InternshipForm.Controllers
             //if(ModelState.IsValid)
             {
                 var result = _companyService.saveCreateCompanyProfile(company);
+                return RedirectToAction("Index");
                
             }
             return View();
@@ -67,7 +68,7 @@ namespace InternshipForm.Controllers
         public IActionResult CreateInternship(CreateInternship create)
         {
             var result = _companyService.saveCreateInternship(create);
-            if (result != null) // Ensure result is not null
+            if (result != null) 
             {
                 return RedirectToAction("ViewInternship", new { Id = result});
             }

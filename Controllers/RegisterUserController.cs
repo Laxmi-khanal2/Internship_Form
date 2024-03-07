@@ -36,6 +36,7 @@ namespace InternshipForm.Controllers
             {
                 _context.RegisterUser.Add(registerUser);
                 _context.SaveChanges();
+                ViewBag.Message = "User Details Saved";
                 return RedirectToAction("Index", "Home");
             }
             return View();
