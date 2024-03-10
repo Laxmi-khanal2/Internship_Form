@@ -13,13 +13,7 @@ namespace InternshipForm.Controllers
         }
         public IActionResult Index()
         {
-            //;var FilterOptions = new List<SelectListItem>
-            //{
-            //    new SelectListItem{Value ="student", Text=" Register as Student"},
-            //    new SelectListItem{Value ="college", Text=" Register as College"},
-            //    new SelectListItem{Value ="company", Text="Register as Company"},
-            //};
-            //ViewData["Filter"] = FilterOptions
+          
             return View();
         }
     }

@@ -82,6 +82,9 @@
             background-color:beige;
         }
         .dropdown-item{
+            font-size:12px;
+        }
+        .dropdown-toggle{
             font-size:18px;
         }
     </style>
@@ -132,16 +135,14 @@
                 <div class="navbar-item">
                     
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Login
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("UserLogin", "RegisterUser")">Login as Student</a>
-                                <a class="dropdown-item" href="@Url.Action("CompanyLogin", "RegisterUser")">Login as Company</a>
+                           
+                          
+                                <a class="" href="@Url.Action("UserLogin", "RegisterUser")">Login </a>
+                                
 
                             </div>
                         </div>
-
+ 
                         <div class="btn-group">
 
                             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
