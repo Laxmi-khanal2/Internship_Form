@@ -39,10 +39,10 @@ namespace InternshipForm.Service.Implementation
                 model.References = _context.References.FirstOrDefault(p => p.InternId == id);
             }
 
-            return model ;
+            return model;
         }
-    
-    
+
+
 
 
         public int saveStudentRecord(InternshipFormViewModel model)
@@ -50,6 +50,7 @@ namespace InternshipForm.Service.Implementation
 
             try
             {
+
                 if (model.PersonalInformation.InternId == 0)
                 {
                     var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
@@ -109,5 +110,5 @@ namespace InternshipForm.Service.Implementation
             }
         }
     }
-    
+
 }

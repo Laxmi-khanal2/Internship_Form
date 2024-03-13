@@ -126,6 +126,7 @@
                                     <div class="row">
 
                                         <div class="col-md-4">
+                                            @Html.HiddenFor(x=>x.PersonalInformation.RegisterUserId)
                                             @Html.HiddenFor(x => x.PersonalInformation.InternId)
                                             @Html.LabelFor(x => x.PersonalInformation.FirstName)
                                             @Html.TextBoxFor(x => x.PersonalInformation.FirstName, new { @class = "form-control" })

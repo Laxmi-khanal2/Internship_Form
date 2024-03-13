@@ -92,7 +92,7 @@
         <p class="row register-form">
         <p class="col-md-6">
         <p class="form-group">
-            @Html.HiddenFor(x=>x.Id)
+                                         @Html.HiddenFor(x=>x.Id)
                                         @Html.LabelFor(X => X.Email, new { @class = "text" })
                                         @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
                                         @Html.ValidationMessageFor(e => e.Email, "", new { @class = "text-red" })

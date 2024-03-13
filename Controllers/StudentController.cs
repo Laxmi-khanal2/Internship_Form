@@ -15,7 +15,8 @@ using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using System.Security.Claims;
 using InternshipForm.Service.Interface;
-
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace InternshipForm.Controllers
 {
@@ -123,15 +124,19 @@ namespace InternshipForm.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public IActionResult Create(InternshipFormViewModel model)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
-                
+                var userId = HttpContext.Session.GetInt32("UserId");
+                model.PersonalInformation.RegisterUserId = userId.Value;
+
                 var result = _student.saveStudentRecord(model);
+
                 if(result > 0)
                 {
-                    return RedirectToAction("Details");
+                    return RedirectToAction("ViewInternship");
                 }
                
               
@@ -140,9 +145,7 @@ namespace InternshipForm.Controllers
             
         }
 
-
         
-
         //  action controller datatable
         [HttpGet]
         public IActionResult Details()
@@ -150,7 +153,7 @@ namespace InternshipForm.Controllers
             var FilterOptions = new List<SelectListItem>
             {
                 new SelectListItem{ Value = "firstName", Text="FirstName"},
-                new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
+                //new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
                 new SelectListItem{ Value = "email", Text="Email"},
                 new SelectListItem{Value ="internshipFor",Text="InternshipFor"},
             };
@@ -373,35 +376,6 @@ namespace InternshipForm.Controllers
 
 
 
-//    [HttpPost]
-//    [ValidateAntiForgeryToken]
-//    public IActionResult  Create(InternshipFormViewModel model)
-//    {
-//        if (ModelState.IsValid)
-//        {
-//            var personalInfo = _context.PersonalInformation.Add(model.PersonalInformation);
-//            _context.SaveChanges();
-//            //    var PersonalId = personalInfo.Entity.Id;
-//            //    model.Education.PersonalID = PersonalId;
-//            //    model.GuardianDetails.PersonalID = PersonalId;
-//            //    model.References.PersonalID = PersonalId;
-//            //    SaveEducation(model.Education);
-//        }
-//        return View(model);
-//    }
 
-//    private Education SaveEducation(Education model)
-//    {
-//        _context.Education.Add(model);
-//        _context.SaveChanges();
-//        return model;
-//    }
-//    private Education SaveGuardian(Education model)
-//    {
-//        _context.Education.Add(model);
-//        _context.SaveChanges();
-//        return model;
-//    }
-//}
 
 

@@ -14,6 +14,7 @@ namespace InternshipForm.ViewModel
         public GuardianDetails GuardianDetails { get; set; }
         //public Education Education { get; set; }
         public List<Education> Education { get; set; }
+        
         //public CertiLice certiLice { get; set; }
 
      

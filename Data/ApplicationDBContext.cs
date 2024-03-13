@@ -1,10 +1,11 @@
 ﻿using InternshipForm.Models;
 using Microsoft.EntityFrameworkCore;
 using InternshipForm.ViewModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace InternshipForm.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : IdentityDbContext
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
         public DbSet<OfficalUse> OfficalUse { get; set; }
@@ -17,9 +18,22 @@ namespace InternshipForm.Data
         public DbSet<CompanyProfile> CompanyProfile { get; set; }
         public DbSet<CreateInternship> CreateInternship { get; set; }
         public DbSet<RegisterCompany> RegisterCompany { get; set; }
-        //public DbSet<InternshipForm.ViewModel.InternshipFormViewModel> InternshipFormViewModel { get; set; } = default!;
-    }
-       
-    
 
-}
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Define the relationship between PersonalInformation and RegisterUser
+            modelBuilder.Entity<PersonalInformation>()
+                .HasOne(pi => pi.RegisterUser)
+                .WithMany()
+                .HasForeignKey(pi => pi.RegisterUserId)
+                .IsRequired();
+        }
+    }
+
+
+    }
+

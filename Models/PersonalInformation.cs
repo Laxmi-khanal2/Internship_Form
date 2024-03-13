@@ -57,7 +57,13 @@ namespace InternshipForm.Models
         [Display(Name = "Do you have Driving  Licience")]
         public bool HasLicence { get; set; }
         [NotMapped]
-        public bool isSubmitted { get; set; } = false;
+       // public bool isSubmitted { get; set; } = false;
+
+
+        [ForeignKey(nameof(RegisterUser))]
+        [Column("RegisterUserId")] 
+        public int RegisterUserId { get; set; }
+        public RegisterUser RegisterUser { get; set; }
 
 
     }

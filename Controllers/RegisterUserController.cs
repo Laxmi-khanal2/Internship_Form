@@ -58,7 +58,7 @@ namespace InternshipForm.Controllers
         public IActionResult UserRegister(RegisterUser registerUser)
         {
 
-
+            RegisterUser registerUser1 = new RegisterUser();
             // if (ModelState.IsValid)
             {
                 _context.RegisterUser.Add(registerUser);
@@ -66,6 +66,7 @@ namespace InternshipForm.Controllers
                 ViewBag.Message = "User Details Saved";
 
                 //  Set session variables to indicate user authentication
+                HttpContext.Session.SetInt32("UserId", registerUser.Id);
                 HttpContext.Session.SetString("UserEmail", registerUser.Email);
                 HttpContext.Session.SetString("UserRole", "User");
                 return RedirectToAction("Index", "Home");
@@ -84,22 +85,25 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UserLogin(RegisterUser registerUser)
         {
-
-
             var user = _context.RegisterUser.FirstOrDefault(x => x.Email == registerUser.Email && x.Password == registerUser.Password);
 
             if (user != null)
             {
                 //check if the user is already registered
+
+                HttpContext.Session.SetInt32("UserId", user.Id);
                 HttpContext.Session.SetString("UserEmail", user.Email);
                 HttpContext.Session.SetString("UserRole", "User");
+
+                
+              
+
                 return RedirectToAction("Index", "Home");
             }
 
-
             ModelState.AddModelError("", "Invalid email and password");
 
-            return View("UserLogin",registerUser);
+            return View("UserLogin", registerUser);
         }
 
         [HttpGet]

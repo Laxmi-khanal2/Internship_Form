@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-
 var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connString));
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connString)); // Corrected the DbContext name
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDBContext>()
+    .AddDefaultTokenProviders();
 
 // Registering the IStudentService and its implementation
 builder.Services.AddScoped<IStudentService, StudentService>();
