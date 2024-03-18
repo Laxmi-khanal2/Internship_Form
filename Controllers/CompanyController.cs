@@ -11,8 +11,15 @@ namespace InternshipForm.Controllers
         private readonly ApplicationDBContext _context;
             private readonly ICompanyService _companyService;
 
-        
 
+
+        public IActionResult AppliedStudent(int internshipId)
+        {
+            var appliedStudents = _companyService.GetAppliedStudents(internshipId);
+            return View(appliedStudents);
+        }
+
+       
         public CompanyController(ApplicationDBContext context, ICompanyService companyService)
         {
             _context = context;

@@ -1,0 +1,27 @@
+﻿@model List<InternshipForm.Models.PersonalInformation>
+
+<h2>Applied Students for Internship</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var student in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@student.FirstName</h5>
+                        <p class="card-text">Email: @student.Email</p>
+                        <p class="card-text">Phone: @student.HomePhoneNumber</p>
+                        <p class="card-text">Education: @student.LastName</p>
+                     
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No students have applied for this internship yet.</p>
+}

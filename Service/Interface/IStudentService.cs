@@ -7,6 +7,8 @@ namespace InternshipForm.Service.Interface
         public InternshipFormViewModel getStudentRecord(int id);
         public int saveStudentRecord(InternshipFormViewModel model);
 
-
+        public bool HasFilledForm(int userId);
+        public List<int> GetAppliedInternshipId(int userId);
+        public int GetInternId(int userId);
     }
 }

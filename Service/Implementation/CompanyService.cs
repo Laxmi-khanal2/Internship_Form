@@ -1,5 +1,6 @@
 ﻿using InternshipForm.Controllers;
 using InternshipForm.Data;
+
 using InternshipForm.Models;
 using InternshipForm.Service.Interface;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,8 +11,11 @@ namespace InternshipForm.Service.Implementation
     public class CompanyService: ICompanyService
     {
         private readonly ApplicationDBContext _context;
+       
 
-        public CompanyService(ApplicationDBContext context)
+
+
+    public CompanyService(ApplicationDBContext context)
         {
             _context = context;
         }
@@ -36,6 +40,21 @@ namespace InternshipForm.Service.Implementation
                 throw ex;
             }
             return company.Id;
+        }
+        public List<PersonalInformation> GetAppliedStudents(int internshipId)
+        {
+            var appliedStudents = (from ai in _context.AppliedInternships
+                                   join pi in _context.PersonalInformation on ai.RegisterUserId equals pi.RegisterUserId
+                                   where ai.InternshipId == internshipId
+                                   select new PersonalInformation
+                                   {
+                                       InternId = pi.InternId,
+                                       FirstName = pi.FirstName,
+                                       Email = pi.Email
+                                   })
+                                   .ToList();
+
+            return appliedStudents;
         }
 
         public int saveCreateInternship(CreateInternship create)

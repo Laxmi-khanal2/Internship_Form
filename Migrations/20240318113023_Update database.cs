@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InternshipForm.Migrations
 {
     /// <inheritdoc />
-    public partial class Database : Migration
+    public partial class Updatedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -245,14 +245,53 @@ namespace InternshipForm.Migrations
                     CitizenshipNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HasLicence = table.Column<bool>(type: "bit", nullable: false),
-                    RegisterUserId1 = table.Column<int>(type: "int", nullable: false)
+                    RegisterUserId = table.Column<int>(type: "int", nullable: false),
+                    CreateInternshipId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersonalInformation", x => x.InternId);
                     table.ForeignKey(
-                        name: "FK_PersonalInformation_RegisterUser_RegisterUserId1",
-                        column: x => x.RegisterUserId1,
+                        name: "FK_PersonalInformation_CreateInternship_CreateInternshipId",
+                        column: x => x.CreateInternshipId,
+                        principalTable: "CreateInternship",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PersonalInformation_RegisterUser_RegisterUserId",
+                        column: x => x.RegisterUserId,
+                        principalTable: "RegisterUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppliedInternships",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RegisterUserId = table.Column<int>(type: "int", nullable: false),
+                    InternshipId = table.Column<int>(type: "int", nullable: false),
+                    InternId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppliedInternships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppliedInternships_CreateInternship_InternshipId",
+                        column: x => x.InternshipId,
+                        principalTable: "CreateInternship",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppliedInternships_PersonalInformation_InternId",
+                        column: x => x.InternId,
+                        principalTable: "PersonalInformation",
+                        principalColumn: "InternId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppliedInternships_RegisterUser_RegisterUserId",
+                        column: x => x.RegisterUserId,
                         principalTable: "RegisterUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -352,6 +391,21 @@ namespace InternshipForm.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppliedInternships_InternId",
+                table: "AppliedInternships",
+                column: "InternId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppliedInternships_InternshipId",
+                table: "AppliedInternships",
+                column: "InternshipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppliedInternships_RegisterUserId",
+                table: "AppliedInternships",
+                column: "RegisterUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -406,9 +460,14 @@ namespace InternshipForm.Migrations
                 column: "InternId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonalInformation_RegisterUserId1",
+                name: "IX_PersonalInformation_CreateInternshipId",
                 table: "PersonalInformation",
-                column: "RegisterUserId1");
+                column: "CreateInternshipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalInformation_RegisterUserId",
+                table: "PersonalInformation",
+                column: "RegisterUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_References_InternId",
@@ -419,6 +478,9 @@ namespace InternshipForm.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppliedInternships");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -436,9 +498,6 @@ namespace InternshipForm.Migrations
 
             migrationBuilder.DropTable(
                 name: "CompanyProfile");
-
-            migrationBuilder.DropTable(
-                name: "CreateInternship");
 
             migrationBuilder.DropTable(
                 name: "Education");
@@ -463,6 +522,9 @@ namespace InternshipForm.Migrations
 
             migrationBuilder.DropTable(
                 name: "PersonalInformation");
+
+            migrationBuilder.DropTable(
+                name: "CreateInternship");
 
             migrationBuilder.DropTable(
                 name: "RegisterUser");

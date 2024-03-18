@@ -27,6 +27,8 @@ namespace InternshipForm.Models
         public string JobDescription { get; set; }
         [Display(Name = "Responsbility of Candidate")]
         public string Responsiblity { get; set; }
+        public List<AppliedInternships> AppliedInternships { get; set; }
+
     }
 
     public enum TypeOfInternship

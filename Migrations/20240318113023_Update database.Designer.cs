@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternshipForm.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240313105357_UpdateRelationships")]
-    partial class UpdateRelationships
+    [Migration("20240318113023_Update database")]
+    partial class Updatedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,34 @@ namespace InternshipForm.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("InternshipForm.Models.AppliedInternships", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("InternId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InternshipId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RegisterUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InternId");
+
+                    b.HasIndex("InternshipId");
+
+                    b.HasIndex("RegisterUserId");
+
+                    b.ToTable("AppliedInternships");
+                });
 
             modelBuilder.Entity("InternshipForm.Models.CompanyProfile", b =>
                 {
@@ -217,6 +245,9 @@ namespace InternshipForm.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CreateInternshipId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DistrictId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -265,6 +296,8 @@ namespace InternshipForm.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("InternId");
+
+                    b.HasIndex("CreateInternshipId");
 
                     b.HasIndex("RegisterUserId");
 
@@ -562,6 +595,33 @@ namespace InternshipForm.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("InternshipForm.Models.AppliedInternships", b =>
+                {
+                    b.HasOne("InternshipForm.Models.PersonalInformation", "PersonalInformation")
+                        .WithMany()
+                        .HasForeignKey("InternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InternshipForm.Models.CreateInternship", "CreateInternship")
+                        .WithMany("AppliedInternships")
+                        .HasForeignKey("InternshipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InternshipForm.Models.RegisterUser", "RegisterUser")
+                        .WithMany("AppliedInternships")
+                        .HasForeignKey("RegisterUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreateInternship");
+
+                    b.Navigation("PersonalInformation");
+
+                    b.Navigation("RegisterUser");
+                });
+
             modelBuilder.Entity("InternshipForm.Models.Education", b =>
                 {
                     b.HasOne("InternshipForm.Models.PersonalInformation", "PersonalInformation")
@@ -597,6 +657,10 @@ namespace InternshipForm.Migrations
 
             modelBuilder.Entity("InternshipForm.Models.PersonalInformation", b =>
                 {
+                    b.HasOne("InternshipForm.Models.CreateInternship", null)
+                        .WithMany("PersonalInformation")
+                        .HasForeignKey("CreateInternshipId");
+
                     b.HasOne("InternshipForm.Models.RegisterUser", "RegisterUser")
                         .WithMany()
                         .HasForeignKey("RegisterUserId")
@@ -666,6 +730,18 @@ namespace InternshipForm.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("InternshipForm.Models.CreateInternship", b =>
+                {
+                    b.Navigation("AppliedInternships");
+
+                    b.Navigation("PersonalInformation");
+                });
+
+            modelBuilder.Entity("InternshipForm.Models.RegisterUser", b =>
+                {
+                    b.Navigation("AppliedInternships");
                 });
 #pragma warning restore 612, 618
         }

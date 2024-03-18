@@ -17,6 +17,8 @@ using System.Security.Claims;
 using InternshipForm.Service.Interface;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.SqlServer.Server;
+
 
 namespace InternshipForm.Controllers
 {
@@ -108,7 +110,10 @@ namespace InternshipForm.Controllers
         [HttpGet]
         public IActionResult Create(int? Id)
         {
-            InternshipFormViewModel model = new InternshipFormViewModel();
+            var userId = HttpContext.Session.GetInt32("UserId");
+            
+           
+                InternshipFormViewModel model = new InternshipFormViewModel();
             model.PersonalInformation = new PersonalInformation();
             model.Education = new List<Education> { new Education() };
             model.References = new References();
@@ -122,16 +127,79 @@ namespace InternshipForm.Controllers
             return View(model);
         }
 
+        public IActionResult Apply(int internshipId)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+          
+            // Check if the user has already applied for this internship
+            var appliedInternshipIds = _student.GetAppliedInternshipId(userId.Value).ToList();
+
+            if (appliedInternshipIds.Contains(internshipId))
+            {
+                TempData["Message"] = "You have already applied for this internship.";
+                TempData["ShowMessage"] = true;
+            }
+            else
+            {
+                try
+                {
+
+                    InternshipFormViewModel model = new InternshipFormViewModel();
+                    model.PersonalInformation = new PersonalInformation();
+                    model.Education = new List<Education> { new Education() };
+                    model.References = new References();
+                    model.OfficalUse = new OfficalUse();
+                    model.GuardianDetails = new GuardianDetails();
+                    int internId = _student.GetInternId(userId.Value);
+                    if (internId > 0)
+                    {
+
+
+                        // Add logic to store the application in the database
+                        AppliedInternships application = new AppliedInternships();
+
+                        application.RegisterUserId = userId.Value;
+                        application.InternshipId = internshipId;
+
+
+
+                        _context.AppliedInternships.Add(application);
+
+                        _context.SaveChanges();
+
+                        TempData["Message"] = "You have successfully applied for this internship.";
+                        TempData["ShowMessage"] = true;
+                    }
+                    else
+                    {
+                        return View("Create",model);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    TempData["Message"] = "An error occurred while applying for the internship.";
+                    TempData["ShowMessage"] = true;
+
+                }
+            }
+
+            return RedirectToAction("ViewInternship");
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         
         public IActionResult Create(InternshipFormViewModel model)
         {
+
             //if (ModelState.IsValid)
             {
+
                 var userId = HttpContext.Session.GetInt32("UserId");
                 model.PersonalInformation.RegisterUserId = userId.Value;
-
+              
                 var result = _student.saveStudentRecord(model);
 
                 if(result > 0)

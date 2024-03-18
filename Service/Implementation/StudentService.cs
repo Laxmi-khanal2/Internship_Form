@@ -13,9 +13,24 @@ namespace InternshipForm.Service.Implementation
         {
             _context = context;
         }
+        public int GetInternId(int userId)
+        {
+            return _context.PersonalInformation
+                                           .Where(a => a.RegisterUserId == userId)
+                                           .Select(a => a.InternId).FirstOrDefault();
+                                           
+
+        }
 
 
+        public List<int> GetAppliedInternshipId(int userId)
+        {
+            return _context.AppliedInternships
+                                           .Where(a => a.RegisterUserId == userId)
+                                           .Select(a => a.InternshipId)
+                                           .ToList();
 
+        }
 
         public InternshipFormViewModel getStudentRecord(int id)
         {
@@ -42,8 +57,11 @@ namespace InternshipForm.Service.Implementation
             return model;
         }
 
-
-
+        public bool HasFilledForm(int userId)
+        {
+            var hasFilledForm = _context.PersonalInformation.Any(p => p.RegisterUserId == userId);
+            return hasFilledForm;
+        }
 
         public int saveStudentRecord(InternshipFormViewModel model)
         {
@@ -53,6 +71,8 @@ namespace InternshipForm.Service.Implementation
 
                 if (model.PersonalInformation.InternId == 0)
                 {
+
+
                     var personalinformation = _context.PersonalInformation.Add(model.PersonalInformation);
                     _context.SaveChanges();
 
@@ -75,6 +95,7 @@ namespace InternshipForm.Service.Implementation
                     model.References.InternId = personalinformation.Entity.InternId;
                     _context.References.Add(model.References);
                     _context.SaveChanges();
+
 
                     return personalinformation.Entity.InternId;
                 }

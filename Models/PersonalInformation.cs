@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipForm.Models
 {
-  //interface IPersonalInformation
+ 
   public class PersonalInformation
     {
         [Key]
@@ -57,13 +57,16 @@ namespace InternshipForm.Models
         [Display(Name = "Do you have Driving  Licience")]
         public bool HasLicence { get; set; }
         [NotMapped]
-       // public bool isSubmitted { get; set; } = false;
+        // public bool isSubmitted { get; set; } = false;
 
+        public List<AppliedInternships> AppliedInternships { get; set; }
+       
 
         [ForeignKey(nameof(RegisterUser))]
         [Column("RegisterUserId")] 
         public int RegisterUserId { get; set; }
         public RegisterUser RegisterUser { get; set; }
+
 
 
     }

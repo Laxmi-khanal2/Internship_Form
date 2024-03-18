@@ -85,6 +85,10 @@
         background-color: #c82333;
     }
 </style>
+@if (TempData["Message"] != null)
+{
+    <div id="alertMessage" class="alert alert-info">@TempData["Message"]</div>
+}
 
 <div class="input-group mb-3 mt-2">
     <span class=" label">Search:</span>
@@ -98,9 +102,26 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
+                  
                         <h5 class="card-title">@Internship.TitleOfInternship</h5>
                     </div>
-                    <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
+                    @if (ViewBag.AppliedInternshipIds != null && ViewBag.AppliedInternshipIds.Contains(Internship.Id))
+                    {
+                        <div class="alert alert-info">You have already applied for this internship.</div>
+                    }
+                    @* else
+                    {
+                        <input type="hidden" name="internshipId" value="@Internship.Id" />
+                        <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
+                    }  *@
+                   else
+                    {
+                        <form asp-controller="Student" asp-action="Apply" method="post">
+                            <input type="hidden" name="internshipId" value="@Internship.Id" />
+                            <button type="submit" class="btn btn-primary apply-button">Apply</button>
+                        </form>
+                    } 
+           @*          <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a> *@
                     <div class="col-md-6">
                         <span class="label">Company Name:</span>
                         <p class="card-text">@Internship.NameOfCompany</p>
@@ -146,10 +167,12 @@
                         <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
                     </div>
                 </div>
+           
                 <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="1017" class="btn btn-primary">Company Profile</a>
             </div>
         </div>
     }
+    <input type="hidden" id="createInternshipId" name="createInternshipId" value=""/>
 </div>
 
 <script>
@@ -168,5 +191,10 @@
             });
         });
     });
+    setTimeout(function () {
+        document.getElementById("alertMessage").style.display = "none";
+    }, 3000);
+
+   
 </script>
 

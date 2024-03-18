@@ -109,7 +109,11 @@
                         <div class="col-md-12">
                             <h5 class="card-title">@Internship.TitleOfInternship</h5>
                         </div>
-                        <a asp-controller="Student" asp-action="Details" class="btn btn-primary apply-button">Applied Student</a>
+                        
+                            
+                            <a href="@Url.ActionLink("AppliedStudent","Company",new{internshipId=Internship.Id})" class="btn btn-primary apply-button">Applied Students</a>
+                        
+                       @*  <a asp-controller="Company" asp-action="AppliedStudent" class="btn btn-primary apply-button">Applied Student</a> *@ 
                         <div class="col-md-6">
                             <span class="label">Company Name:</span>
                             <p class="card-text">@Internship.NameOfCompany</p>
