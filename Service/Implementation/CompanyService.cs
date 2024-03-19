@@ -45,12 +45,16 @@ namespace InternshipForm.Service.Implementation
         {
             var appliedStudents = (from ai in _context.AppliedInternships
                                    join pi in _context.PersonalInformation on ai.RegisterUserId equals pi.RegisterUserId
+                                 
                                    where ai.InternshipId == internshipId
                                    select new PersonalInformation
                                    {
                                        InternId = pi.InternId,
                                        FirstName = pi.FirstName,
-                                       Email = pi.Email
+                                       LastName = pi.LastName,
+                                       Email = pi.Email,
+                                       HomePhoneNumber = pi.HomePhoneNumber,
+                                       
                                    })
                                    .ToList();
 

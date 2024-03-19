@@ -1,6 +1,7 @@
 ﻿using Humanizer;
 using InternshipForm.Data;
 using InternshipForm.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -15,6 +16,11 @@ namespace InternshipForm.Controllers
         public RegisterUserController(ApplicationDBContext context)
         {
             _context = context;
+        }
+        private string HashPassword(string password)
+        {
+            var passwordHasher = new PasswordHasher<string>();
+            return passwordHasher.HashPassword(null, password);
         }
         public IActionResult Index()
         {
@@ -58,7 +64,8 @@ namespace InternshipForm.Controllers
         public IActionResult UserRegister(RegisterUser registerUser)
         {
 
-            RegisterUser registerUser1 = new RegisterUser();
+            
+            registerUser.Password= HashPassword(registerUser.Password);
             // if (ModelState.IsValid)
             {
                 _context.RegisterUser.Add(registerUser);
@@ -119,6 +126,7 @@ namespace InternshipForm.Controllers
         {
             if (ModelState.IsValid)
             {
+                registerCompany.Password = HashPassword(registerCompany.Password);
                 _context.RegisterCompany.Add(registerCompany);
                 _context.SaveChanges();
                 ViewBag.Message = "Company Details Saved";
