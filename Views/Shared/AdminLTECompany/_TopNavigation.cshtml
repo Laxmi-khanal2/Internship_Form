@@ -17,8 +17,11 @@
         <a href="https://localhost:44356/RegisterUser/UserLogin">Login</a>
         </li> *@
     </ul>
+    @* // logout button for company *@
 
-
+    <form method="post" asp-controller="RegisterUser" asp-action="CompanyLogout" style="text-align: right;">
+        <input type="submit" value="Logout" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
+    </form>
 
 
 

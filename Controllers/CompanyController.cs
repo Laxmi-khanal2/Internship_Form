@@ -77,7 +77,7 @@ namespace InternshipForm.Controllers
             var result = _companyService.saveCreateInternship(create);
             if (result != null) 
             {
-                return RedirectToAction("ViewInternship", new { Id = result});
+                return RedirectToAction("CreatedInternship", new { Id = result});
             }
         
             return View();

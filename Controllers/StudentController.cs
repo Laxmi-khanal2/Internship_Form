@@ -136,7 +136,7 @@ namespace InternshipForm.Controllers
 
             if (appliedInternshipIds.Contains(internshipId))
             {
-                TempData["Message"] = "You have already applied for this internship.";
+                TempData["Message"] = "You have already applied for this Internship.";
                 TempData["ShowMessage"] = true;
             }
             else

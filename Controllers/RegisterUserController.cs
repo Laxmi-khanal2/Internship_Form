@@ -64,8 +64,8 @@ namespace InternshipForm.Controllers
         public IActionResult UserRegister(RegisterUser registerUser)
         {
 
-            
-            registerUser.Password= HashPassword(registerUser.Password);
+
+            registerUser.Password = HashPassword(registerUser.Password);
             // if (ModelState.IsValid)
             {
                 _context.RegisterUser.Add(registerUser);
@@ -102,8 +102,8 @@ namespace InternshipForm.Controllers
                 HttpContext.Session.SetString("UserEmail", user.Email);
                 HttpContext.Session.SetString("UserRole", "User");
 
-                
-              
+
+
 
                 return RedirectToAction("Index", "Home");
             }
@@ -162,8 +162,21 @@ namespace InternshipForm.Controllers
             }
 
             ModelState.AddModelError("", "Invalid email and password");
-            return View("CompanyLogin",registerCompany);
+            return View("CompanyLogin", registerCompany);
         }
 
+        public IActionResult UserLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("UserLogin");
+        }
+
+
+        public IActionResult CompanyLogout()
+
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("CompanyLogin");
+        }
     }
 }
