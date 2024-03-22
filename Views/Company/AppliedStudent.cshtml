@@ -1,9 +1,30 @@
 ﻿@model List<InternshipForm.Models.PersonalInformation>
 
+    <style>
+    .card {
+        width: 100%;
+        max-width: 800px; /* Adjusted max-width */
+        height: 400px; /* Adjusted card height */
+        position: relative;
+        overflow: hidden;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: height 0.3s ease, width 0.3s ease; /* Transition for smooth height and width change */
+    }
+    .card-text{
+        font-weight:bold;
+        text-decoration-color:red;
+    }
+    /*
+</style>
 <h2>Applied Students for Internship</h2>
+<div class="card">
 
 @if (Model != null && Model.Any())
 {
+ 
     <div class="row">
         @foreach (var student in Model)
         {
@@ -25,3 +46,4 @@ else
 {
     <p>No students have applied for this internship yet.</p>
 }
+</div>

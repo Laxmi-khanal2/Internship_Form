@@ -221,7 +221,7 @@ namespace InternshipForm.Controllers
             var FilterOptions = new List<SelectListItem>
             {
                 new SelectListItem{ Value = "firstName", Text="FirstName"},
-                //new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
+                new SelectListItem{ Value = "schoolOrCollegeName", Text="SchoolOrCollegeName"},
                 new SelectListItem{ Value = "email", Text="Email"},
                 new SelectListItem{Value ="internshipFor",Text="InternshipFor"},
             };

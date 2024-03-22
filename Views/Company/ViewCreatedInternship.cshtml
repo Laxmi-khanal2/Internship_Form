@@ -13,7 +13,7 @@
     .card {
         width: 100%;
         max-width: 300px; /* Adjusted max-width */
-        height: 400px; /* Adjusted card height */
+        height: 200px; /* Adjusted card height */
         position: relative;
         overflow: hidden;
         margin-right: 20px;
@@ -22,12 +22,12 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: height 0.3s ease, width 0.3s ease; /* Transition for smooth height and width change */
     }
-
+/* 
         .card.expanded {
             height:auto; /* Allow card to expand to fit content */
             width: 80%; /* Adjust card width after expansion */
             margin-right: 0; /* Remove right margin after expansion */
-        }
+        } */
 
         .card:hover {
             transform: scale(1.05);
@@ -69,7 +69,7 @@
         font-weight: normal;
         color: #343a40;
     }
-
+/* 
     .apply-button {
         position: absolute;
         top: 10px;
@@ -77,8 +77,8 @@
         background-color: red;
         border-color: #dc3545;
         z-index: 2;
-    }
-
+    } */
+/* 
     .view-more-button {
         background-color: #dc3545;
         border-color: #dc3545;
@@ -87,7 +87,7 @@
         bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
-    }
+    } */
 
     .right-div {
         flex-grow: 5;
@@ -111,23 +111,26 @@
                         </div>
                         
                             
-                            <a href="@Url.ActionLink("AppliedStudent","Company",new{internshipId=Internship.Id})" class="btn btn-primary apply-button">Applied Students</a>
+                         
                         
-                       @*  <a asp-controller="Company" asp-action="AppliedStudent" class="btn btn-primary apply-button">Applied Student</a> *@ 
+                    
                         <div class="col-md-6">
                             <span class="label">Company Name:</span>
                             <p class="card-text">@Internship.NameOfCompany</p>
                         </div>
-                        <div class="col-md-6">
+
+
+                        <a href="@Url.ActionLink("AppliedStudent","Company",new{internshipId=Internship.Id})" class="btn btn-primary apply-button">Applied Students</a>
+                        @* <div class="col-md-6">
                             <span class="label">Address:</span>
                             <p class="card-text">@Internship.Address</p>
                         </div>
                         <div class="col-md-6">
                             <span class="label">Offered-Salary:</span>
                             <p class="card-text">@Internship.OfferedSalary</p>
-                        </div>
+                        </div> *@
                     </div>
-                    <div class="row">
+                   @*  <div class="row">
                         <div class="col-md-6">
                             <span class="label">Type:</span>
                             <p class="card-text">@EnumHelper.GetDisplayName((TypeOfInternship)Internship.SelectedType)</p>
@@ -140,8 +143,8 @@
                             }
                             <p class="card-text">@EnumHelper.GetDisplayName(location)</p>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> *@
+                   @*  <div class="row">
                         <div class="col-md-6">
                             <span class="label">Duration:</span>
                             <p class="card-text">@Internship.Duration</p>
@@ -158,8 +161,8 @@
                             <span class="label">Responsibility:</span>
                             <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
                         </div>
-                    </div>
-                    <button class="btn view-more-button">View More</button>
+                    </div> *@
+                   @*  <button class="btn view-more-button">View More</button> *@
                 </div>
             </div>
         }
@@ -169,7 +172,7 @@
     </div>
 </div>
 
-<script>
+@* <script>
     function toggleCard(card) {
         var expandedCards = document.querySelectorAll('.card.expanded');
         expandedCards.forEach(function (expandedCard) {
@@ -192,4 +195,4 @@
             cardContainer.appendChild(card);
         }
     }
-</script>
+</script> *@
