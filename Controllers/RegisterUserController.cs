@@ -167,7 +167,10 @@ namespace InternshipForm.Controllers
 
         public IActionResult UserLogout()
         {
+          
+            
             HttpContext.Session.Clear();
+            
             return RedirectToAction("UserLogin");
         }
 

@@ -1,43 +1,90 @@
-﻿
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <!-- head content -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Confirmation</title>
+    <style>
+        /* Styles for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
 </head>
 <body>
-    <!-- navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Your Application</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        @if (!string.IsNullOrEmpty(ViewBag.UserEmail))
-                        {
-                            <form method="post" action="@Url.Action("Logout", "RegisterUser")" class="form-inline">
-                                <button type="submit" class="btn btn-link navbar-btn">Logout</button>
-                            </form>
-                        }
-                    </li>
-                </ul>
-            </div>
+
+    <!-- The logout confirmation modal -->
+    <div id="logoutModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!-- Close button -->
+            <span class="close">&times;</span>
+            <!-- Confirmation message -->
+            <p>Are you sure you want to logout?</p>
+            <!-- Confirm and cancel buttons -->
+            <form method="post" action="@Url.Action("UserLogoutConfirmed", "RegisterUser")">
+                <button type="submit">Yes</button>
+            </form>
+            <button id="cancelLogout">No</button>
         </div>
-    </nav>
+    </div>
 
-    <!-- other content -->
-    @RenderBody()
+    <!-- JavaScript to control the modal -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("logoutModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-    <!-- footer content -->
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Your footer content here.</span>
-        </div>
-    </footer>
+        // When the user clicks on <span> (x) or "No", close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
 
-    <!-- Scripts -->
-    @RenderSection("Scripts", required: false)
+        // When the user clicks "Yes" to confirm logout
+        document.getElementById("confirmLogout").onclick = function () {
+            // Redirect to the logout action
+            window.location.href = "/RegisterUser/UserLogout";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
