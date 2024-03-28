@@ -3,6 +3,7 @@ using InternshipForm.Models;
 using InternshipForm.Data;
 using InternshipForm.ViewModel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 namespace InternshipForm.Service.Implementation
 {
     public class StudentService : IStudentService
@@ -129,6 +130,24 @@ namespace InternshipForm.Service.Implementation
                 // Logging, error handling, etc.
                 throw ex;
             }
+        }
+
+        public int SaveContactUs(ContactUs contactUs)
+        {
+
+            try
+            {
+                var addedContactUs = _context.ContactUs.Add(contactUs);
+                _context.SaveChanges();
+                return addedContactUs.Entity.Id;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception appropriately
+                // Logging, error handling, etc.
+                throw ex;
+            }
+            return contactUs.Id;
         }
     }
 

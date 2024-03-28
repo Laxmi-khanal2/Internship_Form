@@ -119,11 +119,7 @@
                     {
                         <div class="alert alert-info">You have already applied for this internship.</div>
                     }
-                    @* else
-                    {
-                        <input type="hidden" name="internshipId" value="@Internship.Id" />
-                        <a asp-controller="Student" asp-action="Create" class="btn btn-primary apply-button">Apply</a>
-                    }  *@
+                 
                    else
                     {
                         <form asp-controller="Student" asp-action="Apply" method="post">
@@ -198,7 +194,7 @@
             } else if (card.msRequestFullscreen) {
                 card.msRequestFullscreen();
             } else {
-                console.error("Fullscreen API is not supported");
+                console.error(" This Card doesnot support Fullscreen");
             }
         } else {
             console.error("Parent card element not found");

@@ -39,7 +39,18 @@ namespace InternshipForm.Controllers
             return View();
         }
 
-
+        //controller for contact us
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ContactUs(ContactUs contactUs)
+        {
+            var result = _student.SaveContactUs(contactUs);
+            return RedirectToAction("Index");
+        }
 
         //view companies
         public IActionResult viewCompanyProfile()

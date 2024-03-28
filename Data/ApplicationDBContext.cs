@@ -19,6 +19,7 @@ namespace InternshipForm.Data
         public DbSet<CreateInternship> CreateInternship { get; set; }
         public DbSet<RegisterCompany> RegisterCompany { get; set; }
         public DbSet<AppliedInternships>AppliedInternships { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
 
 

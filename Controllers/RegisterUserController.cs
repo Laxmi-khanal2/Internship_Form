@@ -171,7 +171,7 @@ namespace InternshipForm.Controllers
             
             HttpContext.Session.Clear();
             
-            return RedirectToAction("UserLogin");
+            return RedirectToAction("UserLogin","RegisterUser");
         }
 
 
