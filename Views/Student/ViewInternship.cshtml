@@ -22,11 +22,11 @@
         flex-wrap: wrap; /* Allow cards to wrap if they exceed container width */
     }
     .card {
-        width: 100%;
-        max-width: 1000px;
-        height: 400px;
+        width: 90%;
+        /* max-width: 1000px;*/
+        height: 250px;
         position: relative;
-        overflow-y: auto; /* Make the card scrollable */
+       overflow:hidden;  /* Make the card scrollable */
         margin-right: 20px;
         margin-bottom: 20px;
         border-radius: 15px;
@@ -174,7 +174,7 @@
                     </div>
                 </div>
            
-                <a asp-controller="Company" asp-action="ViewCompanyProfile" asp-route-id="1017" class="btn btn-primary">Company Profile</a>
+               
             </div>
         </div>
     }
@@ -200,18 +200,23 @@
             console.error("Parent card element not found");
         }
     }
-
+    document.addEventListener("fullscreenchange", function () {
+        const fullscreenElement = document.fullscreenElement || document.webkitExitFullscreen || document.msFullscreenElement;
+        if (!fullscreenElement) {
+            closeFullscreen();
+        }
+    });
 
     function closeFullscreen(card) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
+        if (card.exitFullscreen) {
+            card.exitFullscreen();
 
         }
-        else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
+        else if (card.webkitExitFullscreen) {
+            card.webkitExitFullscreen();
         }
-        else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
+        else if (card.msExitFullscreen) {
+            card.msExitFullscreen();
         }
     }
 

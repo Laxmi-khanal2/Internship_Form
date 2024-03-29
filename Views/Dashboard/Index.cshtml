@@ -1,6 +1,7 @@
 ﻿@* @using InternshipForm.ViewModel *@
 @{
-   Layout = null;
+    Layout = null;
+    bool showAdminLTEStudent = false;
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!DOCTYPE html>
@@ -69,10 +70,7 @@
         .body{
             background-color:aqua;
         }
-          
-          
-
-
+       
         .container {
             text-align: center; 
             max-width: 1000px; 
@@ -88,11 +86,6 @@
             font-size:18px;
         }
     </style>
-
-
-
-
-
 
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -111,16 +104,19 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="@Url.Action()">
                     Home
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="@Url.Action(Path)">
                     About
                 </a>
-                <a class="navbar-item" href="">
-                    Jobs
-                </a>
-                <a class="navbar-item">
+                @if (!showAdminLTEStudent)
+                {
+                    <a class="navbar-item" href="@Url.ActionLink("ViewInternship","Student")">
+                        Internships
+                    </a>
+                }
+                <a class="navbar-item" href="@Url.ActionLink("ContactUs","Student")">
                     Contact
                 </a>
                 <hr class="navbar-divider">

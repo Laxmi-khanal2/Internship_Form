@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Security.Policy;
+using System.Text;
 
 namespace InternshipForm.Controllers
 {
@@ -19,8 +21,19 @@ namespace InternshipForm.Controllers
         }
         private string HashPassword(string password)
         {
-            var passwordHasher = new PasswordHasher<string>();
-            return passwordHasher.HashPassword(null, password);
+            using (var sha256 = SHA256.Create())
+            {
+                // Compute hash from the password bytes
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert hashed bytes to string (hexadecimal representation)
+                var builder = new StringBuilder();
+                foreach (var b in hashedBytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
         public IActionResult Index()
         {
@@ -92,6 +105,7 @@ namespace InternshipForm.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UserLogin(RegisterUser registerUser)
         {
+            registerUser.Password = HashPassword(registerUser.Password);
             var user = _context.RegisterUser.FirstOrDefault(x => x.Email == registerUser.Email && x.Password == registerUser.Password);
 
             if (user != null)
