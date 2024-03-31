@@ -180,11 +180,9 @@ namespace InternshipForm.Controllers
         }
 
         public IActionResult UserLogout()
-        {
-          
-            
+        { 
             HttpContext.Session.Clear();
-            
+            TempData["Message"] = "You have been logged out Successfully";
             return RedirectToAction("UserLogin","RegisterUser");
         }
 
