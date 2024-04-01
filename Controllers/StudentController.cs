@@ -18,6 +18,7 @@ using InternshipForm.Service.Interface;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.SqlServer.Server;
+using InternshipForm.Views.ViewModel;
 
 
 namespace InternshipForm.Controllers
@@ -59,13 +60,19 @@ namespace InternshipForm.Controllers
             return View(companyProfiles);
         }
         //View Internship
-        public IActionResult ViewInternship()
+        public IActionResult ViewInternship(CompanyFormViewModel viewModel)
             {
             CreateInternship createInternship = new CreateInternship();
             
+            
             List<CreateInternship> Internship = _context.CreateInternship.ToList();
-
-            return View(Internship);
+            List<CompanyProfile> companyProfile = _context.CompanyProfile.ToList();
+            viewModel = new CompanyFormViewModel
+            {
+                CreateInternship = Internship,
+                CompanyProfile = companyProfile
+            };
+            return View(viewModel);
             
             
         }

@@ -1,4 +1,6 @@
-﻿@model List<CreateInternship>
+﻿@using InternshipForm.Views.ViewModel
+@model CompanyFormViewModel
+
 
 @{
     ViewData["Title"] = "Internship Cards";
@@ -94,6 +96,69 @@
     .btn:hover {
         background-color: #c82333;
     }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .card {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        width: 700px;
+        max-width: 100%;
+        background-color: #fff;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: Red;
+        margin-bottom: 10px;
+    }
+
+
+
+    .label {
+        font-weight: bold;
+        color: black;
+    }
+
+    .card-text {
+        color: #444;
+    }
+
+    .btn {
+        background-color: #dc3545;
+        border: none;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .apply-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        border-color: #dc3545;
+        z-index: 2;
+    }
+
+
+    .btn:hover {
+        background-color: #c82333;
+    }
 </style>
 @if (TempData["Message"] != null)
 {
@@ -106,7 +171,7 @@
 </div>
 
 <div class="card-container">
-    @foreach (var Internship in Model)
+    @foreach (var Internship in Model.CreateInternship)
     {
         <div class="card" onclick="openFullScreen(this)">
             <div class="card-body">
@@ -173,12 +238,50 @@
                         <p class="card-text">@Html.Raw(Internship.Responsiblity)</p>
                     </div>
                 </div>
-           
                
+                <div class="card-container">
+                    @foreach (var companyProfile in Model.CompanyProfile)
+                    {
+                        <div class="card" onclick="openFullScreen(this)">
+                        
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5 class="card-title">@companyProfile.Name</h5>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <span class="label">Company Address:</span>
+                                        <p class="card-text">@companyProfile.Address</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="label">Contact:</span>
+                                        <p class="card-text">@companyProfile.Contact</p>
+                                    </div>
+                                </div>
+
+                                <div class="card-info">
+                                    <span class="label">Mission and Values:</span>
+                                    <p class="card-text">@Html.Raw(companyProfile.MissionsandValues)</p>
+                                </div>
+                                <div class="card-info">
+                                    <span class="label">Description:</span>
+                                    <p class="card-text">@Html.Raw(companyProfile.Description)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+
             </div>
         </div>
     }
     <input type="hidden" id="createInternshipId" name="createInternshipId" value=""/>
+
 </div>
 
 <script>

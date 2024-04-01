@@ -180,10 +180,20 @@ namespace InternshipForm.Controllers
         }
 
         public IActionResult UserLogout()
-        { 
+        {
+            //// Check if the user really wants to logout
+            //if (!string.IsNullOrEmpty(HttpContext.Session.GetString("LogoutPrompt")))
+            //{
+            //    TempData["Message"] = "Are you sure you want to logout?";
+            //    return RedirectToAction("UserLogin", "RegisterUser");
+            //}
+            TempData["Message"] = "Are you sure want to logout";
+            // Clear session and set prompt flag
             HttpContext.Session.Clear();
+            HttpContext.Session.SetString("LogoutPrompt", "true");
+
             TempData["Message"] = "You have been logged out Successfully";
-            return RedirectToAction("UserLogin","RegisterUser");
+            return RedirectToAction("UserLogin", "RegisterUser");
         }
 
 
