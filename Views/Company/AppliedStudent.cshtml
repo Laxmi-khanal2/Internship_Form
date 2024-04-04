@@ -36,9 +36,23 @@
                         <p class="card-text">Phone: @student.LastName</p>
                         <p class="card-text">Number: @student.HomePhoneNumber</p>
                      
-                    </div>
+
+
+                        <!--Add BUTTONS FOR SHORTLISTED AND REJECTED CANDIDATE -->
+
+                          
+                         <form method="post" action="@Url.Action("UpdateApplicationStatus", "Internship")">
+                   
+                            <input type="hidden" name="studentId" value="@student.InternId" />
+                            <button type="submit" name="status" value="Shortlisted">Shortlist</button>
+                            <button type="submit" name="status" value="Rejected">Reject</button>
+                        </form>
+                         
+                         
+                         </div>
                 </div>
             </div>
+            
         }
     </div>
 }
