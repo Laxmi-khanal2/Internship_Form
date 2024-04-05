@@ -27,30 +27,30 @@ namespace InternshipForm.Controllers
         }
 
 
-        
+
         public IActionResult Index()
         {
             return View();
+
         }
 
-        //public IActionResult UpdateApplicationStatus(int studentId, string status)
-        //{
-        //    var student = _context.AppliedInternships.Find(studentId);
-        //    if (student != null)
-        //    {
-        //        student.Status = status;
-        //        _context.SaveChanges();
-        //        TempData["Message"] = "Application status updated successfully";
-        //    }
-        //    else
-        //    {
-        //        TempData["ErrorMessage"] = "Student not found";
+        public IActionResult UpdateApplicationStatus(int InternId, string status)
+        {
+            var student = _context.PersonalInformation.Find(InternId);
+            if (student != null)
+            {
+                student.Status = status;
+                _context.SaveChanges();
+                TempData["Message"] = "Application status updated successfully";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Student not found";
+            }
 
-        //    }
-        //        return RedirectToAction("Index");
-            
-        //    return View();
-        //}
+            return RedirectToAction("Index");
+        }
+
         public IActionResult ViewCreatedInternship()
         {
             CreateInternship createInternship = new CreateInternship();

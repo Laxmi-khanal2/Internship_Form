@@ -1,63 +1,43 @@
 ﻿@model List<InternshipForm.Models.PersonalInformation>
 
-    <style>
-    .card {
-        width: 100%;
-        max-width: 800px; /* Adjusted max-width */
-        height: 400px; /* Adjusted card height */
-        position: relative;
-        overflow: hidden;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: height 0.3s ease, width 0.3s ease; /* Transition for smooth height and width change */
-    }
-    .card-text{
-        font-weight:bold;
-        text-decoration-color:red;
-    }
-    /*
-</style>
 <h2>Applied Students for Internship</h2>
 <div class="card">
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var student in Model)
+            {
+                var cardColorClass = "";
+                if (student.Status == "Shortlisted")
+                {
+                    cardColorClass = "shortlisted";
+                }
+                else if (student.Status == "Rejected")
+                {
+                    cardColorClass = "rejected";
+                }
 
-@if (Model != null && Model.Any())
-{
- 
-    <div class="row">
-        @foreach (var student in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">@student.FirstName @student.LastName</h5>
-                        <p class="card-text">Email: @student.Email</p>
-                        <p class="card-text">Phone: @student.LastName</p>
-                        <p class="card-text">Number: @student.HomePhoneNumber</p>
-                     
-
-
-                        <!--Add BUTTONS FOR SHORTLISTED AND REJECTED CANDIDATE -->
-
-                          
-                         <form method="post" action="@Url.Action("UpdateApplicationStatus", "Internship")">
-                   
-                            <input type="hidden" name="studentId" value="@student.InternId" />
-                            <button type="submit" name="status" value="Shortlisted">Shortlist</button>
-                            <button type="submit" name="status" value="Rejected">Reject</button>
-                        </form>
-                         
-                         
-                         </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card @cardColorClass">
+                        <div class="card-body">
+                            <h5 class="card-title">@student.FirstName @student.LastName</h5>
+                            <p class="card-text">Email: @student.Email</p>
+                            <p class="card-text">Phone: @student.HomePhoneNumber</p>
+                            <!-- Other student details -->
+                            <!-- Form to update application status -->
+                            <form method="post" action="@Url.Action("UpdateApplicationStatus", "Company")">
+                                <input type="hidden" name="InternId" value="@student.InternId" />
+                                <button type="submit" name="status" value="Shortlisted">Shortlist</button>
+                                <button type="submit" name="status" value="Rejected">Reject</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-        }
-    </div>
-}
-else
-{
-    <p>No students have applied for this internship yet.</p>
-}
+            }
+        </div>
+    }
+    else
+    {
+        <p>No students have applied for this internship yet.</p>
+    }
 </div>

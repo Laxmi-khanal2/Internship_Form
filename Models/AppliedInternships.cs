@@ -20,6 +20,7 @@ namespace InternshipForm.Models
         public int InternId { get; set; }
         public PersonalInformation PersonalInformation { get; set; }
 
+        public string Status { get; set; }
 
     }
 }
