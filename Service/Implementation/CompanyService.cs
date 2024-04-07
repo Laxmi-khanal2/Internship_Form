@@ -49,6 +49,7 @@ namespace InternshipForm.Service.Implementation
                                    where ai.InternshipId == internshipId
                                    select new PersonalInformation
                                    {
+
                                        InternId = pi.InternId,
                                        FirstName = pi.FirstName,
                                        LastName = pi.LastName,

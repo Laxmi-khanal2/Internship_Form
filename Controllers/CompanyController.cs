@@ -1,6 +1,7 @@
 ﻿using InternshipForm.Data;
 using InternshipForm.Models;
 using InternshipForm.Service.Interface;
+using InternshipForm.Views.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -16,10 +17,17 @@ namespace InternshipForm.Controllers
         public IActionResult AppliedStudent(int internshipId)
         {
             var appliedStudents = _companyService.GetAppliedStudents(internshipId);
+
+            //var viewModel = new CompanyFormViewModel
+            //{
+            //     // Assuming AppliedInternships is not relevant here
+            //    PersonalInformation = appliedStudents
+            //};
+
             return View(appliedStudents);
         }
 
-       
+
         public CompanyController(ApplicationDBContext context, ICompanyService companyService)
         {
             _context = context;
@@ -36,7 +44,7 @@ namespace InternshipForm.Controllers
 
         public IActionResult UpdateApplicationStatus(int InternId, string status)
         {
-            var student = _context.PersonalInformation.Find(InternId);
+            var student = _context.AppliedInternships.Find(InternId);
             if (student != null)
             {
                 student.Status = status;

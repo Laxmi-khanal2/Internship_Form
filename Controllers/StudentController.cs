@@ -39,6 +39,25 @@ namespace InternshipForm.Controllers
         {
             return View();
         }
+        // controller action for student which they can view the applied internship has been shortlisted or rejected
+
+        public IActionResult ViewApplicationStatus()
+        {
+            // Assuming you have a way to retrieve data from your database or elsewhere
+            var internships = _context.CreateInternship.ToList();
+            var applications = _context.PersonalInformation.ToList();
+
+            var viewModel = new InternshipStatusViewModel
+            {
+                CreateInternship = internships,
+                PersonalInformation = applications,
+                // Other properties initialization if needed
+            };
+
+            return View(viewModel);
+        }
+
+
 
         //controller for contact us
         [HttpGet]
@@ -60,18 +79,14 @@ namespace InternshipForm.Controllers
             return View(companyProfiles);
         }
         //View Internship
-        public IActionResult ViewInternship(CompanyFormViewModel viewModel)
+        public IActionResult ViewInternship(CreateInternship viewModel)
             {
             CreateInternship createInternship = new CreateInternship();
             
             
             List<CreateInternship> Internship = _context.CreateInternship.ToList();
-            List<CompanyProfile> companyProfile = _context.CompanyProfile.ToList();
-            viewModel = new CompanyFormViewModel
-            {
-                CreateInternship = Internship,
-                CompanyProfile = companyProfile
-            };
+         
+           
             return View(viewModel);
             
             

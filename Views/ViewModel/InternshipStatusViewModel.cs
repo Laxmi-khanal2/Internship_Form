@@ -1,13 +1,12 @@
 ﻿using InternshipForm.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace InternshipForm.Views.ViewModel
 {
-    public class CompanyFormViewModel
-    {
-        [Key]
+    public class InternshipStatusViewModel
+
+    { 
         public int Id { get; set; }
-        public AppliedInternships AppliedInternships { get; set; }
         public List<PersonalInformation> PersonalInformation { get; set; }
+        public List<CreateInternship> CreateInternship { get; set; }
     }
 }

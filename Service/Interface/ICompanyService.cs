@@ -1,5 +1,6 @@
 ﻿using InternshipForm.Models;
 using InternshipForm.ViewModel;
+using InternshipForm.Views.ViewModel;
 
 namespace InternshipForm.Service.Interface
 {

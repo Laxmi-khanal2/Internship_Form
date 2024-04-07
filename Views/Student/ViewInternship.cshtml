@@ -1,5 +1,5 @@
-﻿@using InternshipForm.Views.ViewModel
-@model CompanyFormViewModel
+﻿
+@model List<CreateInternship>
 
 
 
@@ -172,7 +172,7 @@
 </div>
 
 <div class="card-container">
-    @foreach (var Internship in Model.CreateInternship)
+    @foreach (var Internship in Model)
     {
         <div class="card" onclick="openFullScreen(this)">
             <div class="card-body">
