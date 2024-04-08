@@ -28,6 +28,7 @@ namespace InternshipForm.Models
         [Display(Name = "Responsbility of Candidate")]
         public string Responsiblity { get; set; }
         public List<AppliedInternships> AppliedInternships { get; set; }
+        public string Status { get; set; }
 
     }
 

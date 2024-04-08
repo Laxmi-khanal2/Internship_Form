@@ -1,41 +1,21 @@
 ﻿@using InternshipForm.Views.ViewModel
 @model InternshipStatusViewModel
 
-@* <h2>Available Internships</h2>
-<div class="card-container">
-    @foreach (var internship in Model.CreateInternship)
-    {
-        <div class="card">System.NullReferenceException: 'Object reference not set to an instance of an object.'
-            <div class="card-body">
-                <h5 class="card-title">@internship.TitleOfInternship</h5>
-                <p class="card-text">Company Name: @internship.NameOfCompany</p>
-                <p class="card-text">Address: @internship.Address</p>
-                <!-- Other internship details -->
-                @if (ViewBag.AppliedInternshipIds != null && ViewBag.AppliedInternshipIds.Contains(internship.Id))
-                {
-                    <div class="alert alert-info">You have already applied for this internship.</div>
-                }
-         
-            </div>
-        </div>
-    }
-</div> *@
 
 
 <h2>Application Status</h2>
 <div class="card-container">
-    @foreach (var application in Model.PersonalInformation)
-    {
+   
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">@application.FirstName @application.LastName</h5>
-                <p class="card-text">Email: @application.Email</p>
-                <p class="card-text">Phone: @application.HomePhoneNumber</p>
+                <h5 class="card-title">PersonalInformation.FirstName PersonalInformation.LastName</h5>
+                <p class="card-text">Email: PersonalInformation.Email</p>
+                <p class="card-text">Internship: CreateInternship.TitleOfInternship</p>
                @*  <p class="card-text">Internship Title: @application.CreateInternship.TitleOfInternship</p> *@
-                <p class="card-text">Status: @application.Status</p>
+                <p class="card-text">Status: PersonalInformation.Status</p>
             </div>
         </div>
-    }
+    
 </div>
 
 @if (TempData["Message"] != null)

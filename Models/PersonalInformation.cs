@@ -68,7 +68,6 @@ namespace InternshipForm.Models
         public RegisterUser RegisterUser { get; set; }
 
         public string Status {  get; set; }
-
-
+      
     }
 }

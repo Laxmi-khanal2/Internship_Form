@@ -18,13 +18,13 @@ namespace InternshipForm.Controllers
         {
             var appliedStudents = _companyService.GetAppliedStudents(internshipId);
 
-            //var viewModel = new CompanyFormViewModel
-            //{
-            //     // Assuming AppliedInternships is not relevant here
-            //    PersonalInformation = appliedStudents
-            //};
+            var viewModel = new CompanyFormViewModel
+            {
+                // Assuming AppliedInternships is not relevant here
+                PersonalInformation = appliedStudents
+            };
 
-            return View(appliedStudents);
+            return View(viewModel);
         }
 
 
@@ -45,6 +45,8 @@ namespace InternshipForm.Controllers
         public IActionResult UpdateApplicationStatus(int InternId, string status)
         {
             var student = _context.AppliedInternships.Find(InternId);
+         
+
             if (student != null)
             {
                 student.Status = status;

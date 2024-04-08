@@ -4,6 +4,7 @@ using InternshipForm.Data;
 using InternshipForm.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using InternshipForm.Views.ViewModel;
 namespace InternshipForm.Service.Implementation
 {
     public class StudentService : IStudentService
@@ -149,6 +150,27 @@ namespace InternshipForm.Service.Implementation
             }
             return contactUs.Id;
         }
+        //public InternshipStatusViewModel GetApplicationStatus(int internId)
+        //{
+        //    // Retrieve personal information
+        //    var personalInfo = _context.PersonalInformation
+        //        .FirstOrDefault(pi => pi.InternId == internId);
+
+        //    // Retrieve applied internships
+        //    var appliedInternships = _context.AppliedInternships
+        //        .Where(ai => ai.RegisterUserId == internId)
+        //        .ToList();
+
+        //    // Retrieve internship details for applied internships
+        //    var internshipDetails = appliedInternships
+        //        .Select(ai => _context.CreateInternship.FirstOrDefault(ci => ci.Id == ai.InternshipId))
+        //        .ToList();
+
+        //    // Create ViewModel
+           
+
+        //    return viewModel;
+        
     }
 
 }

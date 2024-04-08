@@ -1,13 +1,15 @@
-﻿﻿
-@model List<PersonalInformation>
+﻿@using InternshipForm.Views.ViewModel﻿
+@model CompanyFormViewModel
 
 <h2>Applied Students for Internship</h2>
 <div class="card">
-    @if (Model != null && Model.Any())
+    @if (Model != null &&  Model.PersonalInformation.Any())
     {
         <div class="row">
-            @foreach (var student in Model)
+            @for(var i=0; i< Model.PersonalInformation.Count; i++)
             {
+                var student = Model.PersonalInformation[i];
+                var internship = Model.CreateInternship;
                 var cardColorClass = "";
                 if (student.Status == "Shortlisted")
                 {
@@ -21,6 +23,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card @cardColorClass">
                         <div class="card-body">
+                           @*  <h5 class="card-title"> @internship.TitleOfInternship</h5> *@
                             <h5 class="card-title">@student.FirstName @student.LastName</h5>
                             <p class="card-text">Email: @student.Email</p>
                             <p class="card-text">Phone: @student.HomePhoneNumber</p>

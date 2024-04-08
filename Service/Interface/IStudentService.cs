@@ -1,5 +1,6 @@
 ﻿using InternshipForm.Models;
 using InternshipForm.ViewModel;
+using InternshipForm.Views.ViewModel;
 
 namespace InternshipForm.Service.Interface
 {
@@ -13,5 +14,6 @@ namespace InternshipForm.Service.Interface
         public int GetInternId(int userId);
 
         public int SaveContactUs(ContactUs contactUs);
+        //public InternshipStatusViewModel GetApplicationStatus(int internId);
     }
 }
