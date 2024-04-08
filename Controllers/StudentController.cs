@@ -41,27 +41,15 @@ namespace InternshipForm.Controllers
         }
         // controller action for student which they can view the applied internship has been shortlisted or rejected
 
-        public IActionResult ViewApplicationStatus(int InternId)
+        public IActionResult ViewApplicationStatus()
         {
             // Assuming you have a way to retrieve data from your database or elsewhere
             var internships = _context.CreateInternship.ToList();
             var applications = _context.PersonalInformation.ToList();
-            var personalInfo = _context.PersonalInformation
-            .FirstOrDefault(pi => pi.InternId == InternId);
-
-            // Retrieve applied internships
-            var appliedInternships = _context.AppliedInternships
-                .Where(ai => ai.RegisterUserId == InternId)
-                .ToList();
-
-            // Retrieve internship details for applied internships
-            var internshipDetails = appliedInternships
-                .Select(ai => _context.CreateInternship.FirstOrDefault(ci => ci.Id == ai.InternshipId))
-                .ToList();
 
             var viewModel = new InternshipStatusViewModel
             {
-                CreateInternship = internships,
+             //   CreateInternship = internships,
                 PersonalInformation = applications,
                 // Other properties initialization if needed
             };

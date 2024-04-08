@@ -69,5 +69,6 @@ namespace InternshipForm.Models
 
         public string Status {  get; set; }
       
+
     }
 }

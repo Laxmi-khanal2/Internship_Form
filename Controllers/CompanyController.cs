@@ -44,7 +44,7 @@ namespace InternshipForm.Controllers
 
         public IActionResult UpdateApplicationStatus(int InternId, string status)
         {
-            var student = _context.AppliedInternships.Find(InternId);
+            var student = _context.PersonalInformation.Find(InternId);
          
 
             if (student != null)
