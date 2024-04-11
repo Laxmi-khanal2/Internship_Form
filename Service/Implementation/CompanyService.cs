@@ -64,6 +64,14 @@ namespace InternshipForm.Service.Implementation
                                            Email = x.pi.Email,
                                            HomePhoneNumber = x.pi.HomePhoneNumber
                                        }).ToList(),
+                                       AppliedInternships = g.Select(x => new AppliedInternships
+                                       {
+                                           Id =x.ai.Id,
+                                           InternId=x.ai.InternId,
+                                           InternshipId = x.ai.InternshipId,
+
+                                      }).ToList(),
+
                                        CreateInternship = g.Select(x => new CreateInternship
                                        {
                                            Id = x.ci.Id,

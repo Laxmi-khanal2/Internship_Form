@@ -7,14 +7,15 @@
     {
         var personalInfo = Model.PersonalInformation[i];
         var internship = Model.CreateInternship[i];
-        
+        var appliedStudent = Model.AppliedInternships[i];
+
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Internship Title: @internship.TitleOfInternship</h5> 
                 <p class="card-text">@personalInfo.FirstName @personalInfo.LastName</p>
                 <p class="card-text">Email: @personalInfo.Email</p>
                  
-                <h6 class="card-text">Status: @internship.Status</h6>
+                <h6 class="card-text">Status: @appliedStudent.Status</h6>
             </div>
         </div>
     }

@@ -10,13 +10,14 @@
             {
                 var personalInfo = Model.PersonalInformation[i];
                 var internship = Model.CreateInternship[i]; // Access the corresponding internship for the current personalInfo
+                var appliedStudent = Model.AppliedInternships[i];
 
                 var cardColorClass = "";
-                if (personalInfo.Status == "Shortlisted")
+                if (appliedStudent.Status == "Shortlisted")
                 {
                     cardColorClass = "shortlisted";
                 }
-                else if (personalInfo.Status == "Rejected")
+                else if (appliedStudent.Status == "Rejected")
                 {
                     cardColorClass = "rejected";
                 }
@@ -34,7 +35,7 @@
                             <p class="card-text">Offered Salary: @internship.OfferedSalary</p>
                             <!-- Form to update application status -->
                             <form method="post" action="@Url.Action("UpdateApplicationStatus", "Company")">
-                                <input type="hidden" name="Id" value="@internship.Id" />
+                                <input type="hidden" name="Id" value="@appliedStudent.Id" />
                                 <button type="submit" name="status" value="Shortlisted">Shortlist</button>
                                 <button type="submit" name="status" value="Rejected">Reject</button>
                             </form>

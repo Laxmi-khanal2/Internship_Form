@@ -20,15 +20,18 @@ namespace InternshipForm.Controllers
 
             var personalInformationList = new List<PersonalInformation>();
             var createInternshipList = new List<CreateInternship>();    
+            var appliedStudent = new List<AppliedInternships>();
             foreach( var student in appliedStudents)
             {
                 personalInformationList.AddRange(student.PersonalInformation);
                 createInternshipList.AddRange(student.CreateInternship);
+                appliedStudent.AddRange(student.AppliedInternships);
             }
             var viewModel = new CompanyFormViewModel
             {
                 PersonalInformation = personalInformationList,
                 CreateInternship = createInternshipList,
+                AppliedInternships = appliedStudent,
             };
 
             return View(viewModel);
@@ -51,7 +54,7 @@ namespace InternshipForm.Controllers
 
         public IActionResult UpdateApplicationStatus(int Id, string status)
         {
-            var student = _context.CreateInternship.Find(Id);
+            var student = _context.AppliedInternships.Find(Id);
          
 
             if (student != null)

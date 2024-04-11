@@ -46,11 +46,13 @@ namespace InternshipForm.Controllers
             // Assuming you have a way to retrieve data from your database or elsewhere
             var internships = _context.CreateInternship.ToList();
             var applications = _context.PersonalInformation.ToList();
+            var appliedStudent = _context.AppliedInternships.ToList();
 
             var viewModel = new InternshipStatusViewModel
             {
                  CreateInternship = internships,
                 PersonalInformation = applications,
+                AppliedInternships = appliedStudent,
                 // Other properties initialization if needed
             };
 

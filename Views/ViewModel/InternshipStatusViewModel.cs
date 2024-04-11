@@ -8,6 +8,6 @@ namespace InternshipForm.Views.ViewModel
         public int Id { get; set; }
         public List<PersonalInformation> PersonalInformation { get; set; }
         public List<CreateInternship> CreateInternship { get; set; }
-        public AppliedInternships AppliedInternships { get; set;}
+        public List<AppliedInternships> AppliedInternships { get; set;}
     }
 }
