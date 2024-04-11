@@ -49,7 +49,7 @@ namespace InternshipForm.Controllers
 
             var viewModel = new InternshipStatusViewModel
             {
-             //   CreateInternship = internships,
+                 CreateInternship = internships,
                 PersonalInformation = applications,
                 // Other properties initialization if needed
             };
@@ -81,13 +81,13 @@ namespace InternshipForm.Controllers
         //View Internship
         public IActionResult ViewInternship(CreateInternship viewModel)
             {
-            CreateInternship createInternship = new CreateInternship();
+            //CreateInternship createInternship = new CreateInternship();
             
             
             List<CreateInternship> Internship = _context.CreateInternship.ToList();
          
            
-            return View(viewModel);
+            return View(Internship);
             
             
         }

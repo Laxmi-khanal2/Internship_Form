@@ -7,7 +7,7 @@ namespace InternshipForm.Views.ViewModel
     {
         [Key]
         public int Id { get; set; }
-        public CreateInternship CreateInternship { get; set; }
+        public  List<CreateInternship> CreateInternship { get; set; }
         public List<PersonalInformation> PersonalInformation { get; set; }
     }
 }

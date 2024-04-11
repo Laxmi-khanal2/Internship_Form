@@ -1,39 +1,20 @@
 ﻿@using InternshipForm.Views.ViewModel
 @model InternshipStatusViewModel
 
-@* <h2>Available Internships</h2>
-<div class="card-container">
-    @foreach (var internship in Model.CreateInternship)
-    {
-        <div class="card">System.NullReferenceException: 'Object reference not set to an instance of an object.'
-            <div class="card-body">
-                <h5 class="card-title">@internship.TitleOfInternship</h5>
-                <p class="card-text">Company Name: @internship.NameOfCompany</p>
-                <p class="card-text">Address: @internship.Address</p>
-                <!-- Other internship details -->
-                @if (ViewBag.AppliedInternshipIds != null && ViewBag.AppliedInternshipIds.Contains(internship.Id))
-                {
-                    <div class="alert alert-info">You have already applied for this internship.</div>
-                }
-         
-            </div>
-        </div>
-    }
-</div> *@
-
-
 <h2>Application Status</h2>
 <div class="card-container">
-    @foreach (var application in Model.PersonalInformation)
+    @for (int i = 0; i < Model.PersonalInformation.Count; i++)
     {
+        var personalInfo = Model.PersonalInformation[i];
+        var internship = Model.CreateInternship[i];
         
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">@application.FirstName @application.LastName</h5>
-                <p class="card-text">Email: @application.Email</p>
-                <p class="card-text">Phone: @application.HomePhoneNumber</p>
-               @*  <p class="card-text">Internship Title: @application.CreateInternship.TitleOfInternship</p> *@
-                <p class="card-text">Status: @application.Status</p>
+                <h5 class="card-title">Internship Title: @internship.TitleOfInternship</h5> 
+                <p class="card-text">@personalInfo.FirstName @personalInfo.LastName</p>
+                <p class="card-text">Email: @personalInfo.Email</p>
+                 
+                <h6 class="card-text">Status: @internship.Status</h6>
             </div>
         </div>
     }
