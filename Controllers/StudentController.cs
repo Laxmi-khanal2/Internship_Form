@@ -195,6 +195,7 @@ namespace InternshipForm.Controllers
 
                         application.RegisterUserId = userId.Value;
                         application.InternshipId = internshipId;
+                        application.Status = "Pending";
 
 
 

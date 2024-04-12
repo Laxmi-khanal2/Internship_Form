@@ -29,7 +29,7 @@ namespace InternshipForm.Models
         public string Responsiblity { get; set; }
         public List<AppliedInternships> AppliedInternships { get; set; }
        
-        public string Status { get; set; }
+       
     }
 
     public enum TypeOfInternship

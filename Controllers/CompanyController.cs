@@ -54,22 +54,26 @@ namespace InternshipForm.Controllers
 
         public IActionResult UpdateApplicationStatus(int Id, string status)
         {
-            var student = _context.AppliedInternships.Find(Id);
-         
-
-            if (student != null)
+            if (status != null)
             {
-                student.Status = status;
-                _context.SaveChanges();
-                TempData["Message"] = "Application status updated successfully";
+                var student = _context.AppliedInternships.Find(Id);
+
+
+                if (student != null)
+                {
+                    student.Status = status;
+                    _context.SaveChanges();
+                    TempData["Message"] = "Application status updated successfully";
+                }
             }
             else
             {
                 TempData["ErrorMessage"] = "Student not found";
             }
 
-            return RedirectToAction("Index");
-        }
+                return RedirectToAction("Index");
+            }
+        
 
         public IActionResult ViewCreatedInternship()
         {
