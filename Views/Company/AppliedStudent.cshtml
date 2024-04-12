@@ -1,6 +1,10 @@
 ﻿@using InternshipForm.Views.ViewModel
 @model CompanyFormViewModel
 
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/AdminLTECompany/_Layout.cshtml";
+    }
 <h2>Applied Students for Internship</h2>
 <div class="card">
     @if (Model != null && Model.PersonalInformation != null && Model.CreateInternship != null)

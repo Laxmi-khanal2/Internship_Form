@@ -1,7 +1,12 @@
 ﻿@using InternshipForm.Views.ViewModel
 @model InternshipStatusViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/AdminLTEStudent/_Layout.cshtml";
+    }
 
-<h2>Application Status</h2>
+
+@* <h2>Application Status</h2>
 <div class="card-container">
     @for (int i = 0; i < Model.PersonalInformation.Count; i++)
     {
@@ -24,4 +29,87 @@
 @if (TempData["Message"] != null)
 {
     <div class="alert alert-info">@TempData["Message"]</div>
-}
+} *@
+
+
+<style>
+    .card {
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 80%;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<h2>Application Status</h2>
+
+<div class="card" style="margin-top:40px;">
+    <div class="table-responsive">
+        <div style="width:90%; margin:0 auto;">
+            <table id="myTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>TitleOfInternship</th>
+                        <th>NameOfCompany</th>
+                        
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+
+<script>
+
+    var table = $('#myTable').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "processing": true,
+       "serverSide": true,
+        "lengthMenu": [2, 5],
+        "bFilter": false,
+        "ajax": {
+            "url": "/Student/GetApplicationStatus",
+            "type": "POST",
+            "dataType": "json",
+
+            "data": function (d) {
+                d.filterValue = $('#FilterTextbox').val();
+                d.filterType = $('#FilterDropdown').val();
+            },
+            "error": function (xhr, error, thrown) {
+                console.log("DataTables error:", error);
+            }
+
+        },
+
+        "columns": [
+            { data: "titleOfInternship", "name": "TitleOfInternship", "autoWidth": true },
+            { data: "nameOfCompany", "name": "NameOfCompany", "autoWidth": true },
+          
+            
+             { data: "address", "name": "Address", "autoWidth": true },
+
+            { data: "email", "name": "Email", "autoWidth": true },
+            { data: "status", "name": "Status", "autoWidth": true },
+        ]
+    });
+    </script>

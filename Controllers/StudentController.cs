@@ -40,7 +40,7 @@ namespace InternshipForm.Controllers
             return View();
         }
         // controller action for student which they can view the applied internship has been shortlisted or rejected
-
+        [HttpGet]
         public IActionResult ViewApplicationStatus()
         {
             // Assuming you have a way to retrieve data from your database or elsewhere
@@ -50,7 +50,7 @@ namespace InternshipForm.Controllers
 
             var viewModel = new InternshipStatusViewModel
             {
-                 CreateInternship = internships,
+                CreateInternship = internships,
                 PersonalInformation = applications,
                 AppliedInternships = appliedStudent,
                 // Other properties initialization if needed
@@ -58,6 +58,47 @@ namespace InternshipForm.Controllers
 
             return View(viewModel);
         }
+        [HttpPost]
+        public IActionResult GetApplicationStatus(int draw, int start, int length)
+        {
+            var query = (from ai in _context.AppliedInternships
+                         join pi in _context.PersonalInformation on ai.RegisterUserId equals pi.RegisterUserId
+                         join ci in _context.CreateInternship on ai.InternshipId equals ci.Id
+
+
+                         select new
+                         {
+                              
+                                 TitleOfInternship = ci.TitleOfInternship,
+                                 NameOfCompany = ci.NameOfCompany,
+                                 Address = ci.Address,
+                                 Email = pi.Email,
+                                 Status = ai.Status,
+                                
+                            
+                         });
+                                    
+
+
+            // Count total records before applying pagination
+            int recordsTotal = query.Count();
+
+            // Apply pagination
+            var data = query.Skip(start).Take(length).ToList();
+
+            // Prepare the response
+            var response = new
+            {
+                draw = draw,
+                recordsTotal = recordsTotal,
+                recordsFiltered = recordsTotal,
+
+                data = data
+            };
+
+            return Json(response);
+        }
+    
 
 
 
